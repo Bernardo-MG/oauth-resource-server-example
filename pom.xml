@@ -250,6 +250,7 @@
       <javassist.version>3.28.0-GA</javassist.version>
       <jsonpath.version>2.6.0</jsonpath.version>
       <junit.jupiter.version>5.7.2</junit.jupiter.version>
+      <liquibase.version>3.10.2</liquibase.version>
       <log4j.version>2.14.1</log4j.version>
       <mockito.version>3.11.2</mockito.version>
       <reactiveStreams.version>1.0.3</reactiveStreams.version>
@@ -457,6 +458,21 @@
          <groupId>com.h2database</groupId>
          <artifactId>h2</artifactId>
          <version>${h2.version}</version>
+      </dependency>
+      <!-- ============================================== -->
+      <!-- ================ LIQUIBASE =================== -->
+      <!-- ============================================== -->
+      <dependency>
+         <!-- Liquibase -->
+         <groupId>org.liquibase</groupId>
+         <artifactId>liquibase-core</artifactId>
+         <version>${liquibase.version}</version>
+         <exclusions>
+            <exclusion>
+               <groupId>ch.qos.logback</groupId>
+               <artifactId>logback-classic</artifactId>
+            </exclusion>
+         </exclusions>
       </dependency>
       <!-- ============================================== -->
       <!-- ================ SERVLET ===================== -->
