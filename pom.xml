@@ -234,31 +234,30 @@
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
-      <aspectj.version>1.9.6</aspectj.version>
+      <aspectj.version>1.9.7</aspectj.version>
       <caffeine.version>2.6.2</caffeine.version>
-      <classgraph.version>4.8.104</classgraph.version>
-      <commons.lang.version>3.10</commons.lang.version>
+      <classgraph.version>4.8.114</classgraph.version>
+      <commons.lang.version>3.12.0</commons.lang.version>
       <glassfish.el.version>2.2</glassfish.el.version>
       <guava.version>30.1.1-jre</guava.version>
       <hamcrest.version>2.2</hamcrest.version>
       <hibernate.validator.version>5.4.3.Final</hibernate.validator.version>
-      <hibernate.version>5.4.21.Final</hibernate.version>
+      <hibernate.version>5.5.6.Final</hibernate.version>
       <hikari.version>3.4.5</hikari.version>
-      <jackson.version>2.12.2</jackson.version>
+      <jackson.version>2.12.4</jackson.version>
       <jpa.version>2.2</jpa.version>
-      <javassist.version>3.25.0-GA</javassist.version>
-      <jsonpath.version>2.5.0</jsonpath.version>
-      <junit.jupiter.version>5.7.1</junit.jupiter.version>
+      <javassist.version>3.28.0-GA</javassist.version>
+      <jsonpath.version>2.6.0</jsonpath.version>
+      <junit.jupiter.version>5.7.2</junit.jupiter.version>
       <log4j.version>2.14.1</log4j.version>
-      <mockito.version>3.9.0</mockito.version>
-      <neo4j.test.version>4.1.1</neo4j.test.version>
+      <mockito.version>3.11.2</mockito.version>
       <reactiveStreams.version>1.0.3</reactiveStreams.version>
-      <reactor.version>3.4.6</reactor.version>
+      <reactor.version>3.4.9</reactor.version>
       <servlet.version>4.0.1</servlet.version>
-      <slf4j.version>1.7.30</slf4j.version>
-      <spring.boot.version>2.4.4</spring.boot.version>
+      <slf4j.version>1.7.32</slf4j.version>
+      <spring.boot.version>2.5.3</spring.boot.version>
       <spring.data.train.version>2020.0.7</spring.data.train.version>
-      <spring.version>5.3.5</spring.version>
+      <spring.version>5.3.9</spring.version>
       <webappRunner.version>8.5.30.0</webappRunner.version>
       <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
@@ -377,12 +376,6 @@
          <!-- Spring Boot Starter: Web -->
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-web</artifactId>
-         <version>${spring.boot.version}</version>
-      </dependency>
-      <dependency>
-         <!-- Spring Boot Starter: Neo4J -->
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-data-neo4j</artifactId>
          <version>${spring.boot.version}</version>
       </dependency>
       <dependency>
@@ -618,19 +611,6 @@
             <exclusion>
                <groupId>org.junit.vintage</groupId>
                <artifactId>junit-vintage-engine</artifactId>
-            </exclusion>
-         </exclusions>
-      </dependency>
-      <dependency>
-         <!-- Neo4j Test Harness -->
-         <groupId>org.neo4j.test</groupId>
-         <artifactId>neo4j-harness</artifactId>
-         <version>${neo4j.test.version}</version>
-         <scope>test</scope>
-         <exclusions>
-            <exclusion>
-               <groupId>org.slf4j</groupId>
-               <artifactId>slf4j-nop</artifactId>
             </exclusion>
          </exclusions>
       </dependency>
