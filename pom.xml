@@ -398,6 +398,12 @@
          <artifactId>spring-boot-starter-log4j2</artifactId>
          <version>${spring.boot.version}</version>
       </dependency>
+      <dependency>
+         <!-- Spring Boot Starter: OAuth2 Resource Server -->
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+         <version>${spring.boot.version}</version>
+      </dependency>
       <!-- ============================================== -->
       <!-- ================= ASPECTJ ==================== -->
       <!-- ============================================== -->
