@@ -11,27 +11,27 @@
    <parent>
       <groupId>com.bernardomg.maven</groupId>
       <artifactId>base-pom</artifactId>
-      <version>1.4.0</version>
+      <version>1.4.3</version>
    </parent>
 
    <!-- ********************************************** -->
    <!-- **************** PROJECT INFO **************** -->
    <!-- ********************************************** -->
 
-   <groupId>com.bernardomg.darksouls</groupId>
-   <artifactId>darksouls-explorer</artifactId>
-   <version>1.1.0-SNAPSHOT</version>
+   <groupId>com.bernardomg.example.oauth</groupId>
+   <artifactId>oauth2-resource-server-example</artifactId>
+   <version>1.0.0</version>
    <packaging>war</packaging>
 
-   <name>Spring MVC Project</name>
-   <description>No-SQL experiment using Dark Souls data taken from the wiki.</description>
+   <name>OAuth 2 Resource Server Example</name>
+   <description>Example OAUTH 2 resource server with Spring.</description>
    <url>https://github.com/bernardo-mg/darksouls-explorer</url>
    <inceptionYear>2021</inceptionYear>
 
    <licenses>
       <license>
-         <name>Apache v2 License</name>
-         <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+         <name>MIT License</name>
+         <url>http://www.opensource.org/licenses/mit-license.php</url>
          <distribution>repo</distribution>
       </license>
    </licenses>
@@ -240,6 +240,7 @@
       <commons.lang.version>3.12.0</commons.lang.version>
       <glassfish.el.version>2.2</glassfish.el.version>
       <guava.version>30.1.1-jre</guava.version>
+      <h2.version>1.4.200</h2.version>
       <hamcrest.version>2.2</hamcrest.version>
       <hibernate.validator.version>5.4.3.Final</hibernate.validator.version>
       <hibernate.version>5.5.6.Final</hibernate.version>
@@ -249,6 +250,7 @@
       <javassist.version>3.28.0-GA</javassist.version>
       <jsonpath.version>2.6.0</jsonpath.version>
       <junit.jupiter.version>5.7.2</junit.jupiter.version>
+      <liquibase.version>3.10.2</liquibase.version>
       <log4j.version>2.14.1</log4j.version>
       <mockito.version>3.11.2</mockito.version>
       <reactiveStreams.version>1.0.3</reactiveStreams.version>
@@ -396,6 +398,12 @@
          <artifactId>spring-boot-starter-log4j2</artifactId>
          <version>${spring.boot.version}</version>
       </dependency>
+      <dependency>
+         <!-- Spring Boot Starter: OAuth2 Resource Server -->
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+         <version>${spring.boot.version}</version>
+      </dependency>
       <!-- ============================================== -->
       <!-- ================= ASPECTJ ==================== -->
       <!-- ============================================== -->
@@ -447,6 +455,30 @@
          <groupId>com.zaxxer</groupId>
          <artifactId>HikariCP</artifactId>
          <version>${hikari.version}</version>
+      </dependency>
+      <!-- ============================================== -->
+      <!-- ==================== H2 ====================== -->
+      <!-- ============================================== -->
+      <dependency>
+         <!-- H2 database -->
+         <groupId>com.h2database</groupId>
+         <artifactId>h2</artifactId>
+         <version>${h2.version}</version>
+      </dependency>
+      <!-- ============================================== -->
+      <!-- ================ LIQUIBASE =================== -->
+      <!-- ============================================== -->
+      <dependency>
+         <!-- Liquibase -->
+         <groupId>org.liquibase</groupId>
+         <artifactId>liquibase-core</artifactId>
+         <version>${liquibase.version}</version>
+         <exclusions>
+            <exclusion>
+               <groupId>ch.qos.logback</groupId>
+               <artifactId>logback-classic</artifactId>
+            </exclusion>
+         </exclusions>
       </dependency>
       <!-- ============================================== -->
       <!-- ================ SERVLET ===================== -->

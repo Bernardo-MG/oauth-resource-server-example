@@ -1,8 +1,8 @@
-# Dark Souls Explorer
+# OAuth 2 Resource Server Example
 
-No-SQL experiment using Dark Souls data taken from the wiki.
+OAuth 2 Resource Server Example. Requires the [OAuth 2 Authorization Server Example](https://github.com/Bernardo-MG/oauth-authorization-server-example) to be running, as it will handle request authorization.
 
-Currently the data is not included in the project.
+Just get both projects runnings and make a request query to http://localhost:8080/rest/entity.
 
 [![Release docs](https://img.shields.io/badge/docs-release-blue.svg)][site-release]
 [![Development docs](https://img.shields.io/badge/docs-develop-blue.svg)][site-develop]
