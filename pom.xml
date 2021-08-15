@@ -18,13 +18,13 @@
    <!-- **************** PROJECT INFO **************** -->
    <!-- ********************************************** -->
 
-   <groupId>com.bernardomg.darksouls</groupId>
-   <artifactId>darksouls-explorer</artifactId>
+   <groupId>com.bernardomg.example.oauth</groupId>
+   <artifactId>oauth2-resource-server-example</artifactId>
    <version>1.0.0-SNAPSHOT</version>
    <packaging>war</packaging>
 
-   <name>Spring MVC Project</name>
-   <description>No-SQL experiment using Dark Souls data taken from the wiki.</description>
+   <name>OAuth 2 Resource Server Example</name>
+   <description>Example OAUTH 2 resource server with Spring.</description>
    <url>https://github.com/bernardo-mg/darksouls-explorer</url>
    <inceptionYear>2021</inceptionYear>
 
