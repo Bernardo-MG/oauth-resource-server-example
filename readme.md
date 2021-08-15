@@ -1,8 +1,6 @@
-# Dark Souls Explorer
+# OAuth 2 Resource Server Example
 
-No-SQL experiment using Dark Souls data taken from the wiki.
-
-Currently the data is not included in the project.
+OAuth 2 Resource Server Example.
 
 [![Release docs](https://img.shields.io/badge/docs-release-blue.svg)][site-release]
 [![Development docs](https://img.shields.io/badge/docs-develop-blue.svg)][site-develop]
