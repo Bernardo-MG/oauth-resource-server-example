@@ -1,3 +1,5 @@
-# Dark Souls Explorer
+# OAuth 2 Resource Server Example
 
-Spring MVC application making use of a Neo4j database. The data is read from a GraphQL endpoint and displayed in an Angular frontend, with the help of Angular and d3. The dataset consist on the solar planet.
+OAuth 2 Resource Server Example. Requires the [OAuth 2 Authorization Server Example](https://github.com/Bernardo-MG/oauth-authorization-server-example) to be running, as it will handle request authorization.
+
+Just get both projects runnings and make a request query to http://localhost:8080/rest/entity.
