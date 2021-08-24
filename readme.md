@@ -15,11 +15,7 @@ Just get both projects runnings and make a request query to http://localhost:808
 Several technologies are combined to make this work:
 
 - [Spring MVC](https://spring.io/)
-- [Neo4j](https://neo4j.com/)
-- [GraphQL](https://graphql.org/) endpoint
-- [Angular](https://angular.io/)
-- [Apollo GraphQL](https://www.apollographql.com/)
-- [d3](https://d3js.org/)
+- [OAuth2](https://oauth.net/2/)
 
 ## Documentation
 
@@ -43,32 +39,13 @@ The verify phase is required, otherwise some of the reports won't be generated.
 
 ## Usage
 
-The application is coded in Java, using Maven to manage the project.
-
-### Profiles
-
-Maven profiles are included for setting up the database.
-
-| Profile     | Server                   |
-|-------------|--------------------------|
-| development | Development settings     |
-| production  | Production settings      |
-
-### Database
-
-Before running, start a local Neo4j database. This will be populated with the dataset.
-
-The database should accept the username neo4j with password secret.
-
-### Running
-
-To run the project locally use the following Maven command:
+Just run it:
 
 ```
-mvn spring-boot:run -P development
+mvn spring-boot:run
 ```
 
-It will be accessible at [http://localhost:8080/](http://localhost:8080/).
+And the endpoint will be accessible at [http://localhost:8080/](http://localhost:8080/). You may check it for example by querying [http://localhost:8080/rest/entity](http://localhost:8080/rest/entity).
 
 ### Running the tests
 
