@@ -39,7 +39,9 @@ The verify phase is required, otherwise some of the reports won't be generated.
 
 ## Usage
 
-Just run it:
+First of all, run the [OAuth 2 Authorization Server Example](https://github.com/Bernardo-MG/oauth-authorization-server-example), as the resource server need to connect to it.
+
+hen just run the resource server:
 
 ```
 mvn spring-boot:run
