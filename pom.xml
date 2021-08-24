@@ -642,12 +642,6 @@
 
    <build>
       <defaultGoal>clean package</defaultGoal>
-      <resources>
-         <resource>
-            <directory>src/main/resources</directory>
-            <filtering>true</filtering>
-         </resource>
-      </resources>
       <plugins>
          <plugin>
             <!-- Changes -->
@@ -675,21 +669,6 @@
                   </configuration>
                </execution>
             </executions>
-         </plugin>
-         <plugin>
-            <!-- Resources -->
-            <!-- Handles the project resources. -->
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <configuration>
-               <!-- Variables to to override will be delimited with a @. -->
-               <!-- This avoids collisions with Spring variables. -->
-               <!-- So instead of replacing ${project.name} Maven will replace @project.name@. -->
-               <useDefaultDelimiters>false</useDefaultDelimiters>
-               <delimiters>
-                  <delimiter>@</delimiter>
-               </delimiters>
-            </configuration>
          </plugin>
          <plugin>
             <!-- Site -->
