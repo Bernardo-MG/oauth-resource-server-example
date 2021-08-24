@@ -59,6 +59,15 @@ Just like running the project, an embedded server with an in-memory database can
 mvn verify -P development
 ```
 
+### Keycloak
+
+The included docker-compose file will set up and run keycloak:
+
+
+```
+docker-compose -f docker/docker-compose.yml up
+```
+
 ## Collaborate
 
 Any kind of help with the project will be well received, and there are two main ways to give such help:
