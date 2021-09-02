@@ -66,6 +66,10 @@ Send a post request to [http://localhost:8090/auth/realms/bmg/protocol/openid-co
 
 The value for grant_type is password. All the other fields should match the user which you want to authenticate.
 
+### Using Postman
+
+The file at src/test/resources/Oauth.postman_collection.json contains queries for all the operations supported by the project. Including authenticating and reading.
+
 ### Running the tests
 
 The project requires a database and a server for being able to run the integration tests.
@@ -74,15 +78,6 @@ Just like running the project, an embedded server with an in-memory database can
 
 ```
 mvn verify -P development
-```
-
-### Keycloak
-
-The included docker-compose file will set up and run keycloak:
-
-
-```
-docker-compose -f docker/docker-compose.yml up
 ```
 
 ## Collaborate
