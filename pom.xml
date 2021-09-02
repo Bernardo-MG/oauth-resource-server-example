@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
    <modelVersion>4.0.0</modelVersion>
@@ -80,8 +81,10 @@
    <profiles>
       <profile>
          <!-- Profile for the Eclipse Maven plugin -->
-         <!-- Sets the POM so this plugin does not give the usual unregistered goals errors -->
-         <!-- It will be activated automatically on Eclipse if this has the m2e plugin, by detecting the version property -->
+         <!-- Sets the POM so this plugin does not give the usual unregistered 
+            goals errors -->
+         <!-- It will be activated automatically on Eclipse if this has the 
+            m2e plugin, by detecting the version property -->
          <id>eclipse-maven</id>
          <activation>
             <property>
@@ -93,17 +96,23 @@
                <plugins>
                   <plugin>
                      <!-- m2e lifecycle mapping -->
-                     <!-- This is used to configure the Maven plugin for Eclipse. -->
-                     <!-- Among other things, it allows registering goals, which Eclipse would otherwise reject. -->
+                     <!-- This is used to configure the Maven plugin for 
+                        Eclipse. -->
+                     <!-- Among other things, it allows registering goals, 
+                        which Eclipse would otherwise reject. -->
                      <!-- It has no real effect on Maven. -->
                      <groupId>org.eclipse.m2e</groupId>
                      <artifactId>lifecycle-mapping</artifactId>
                      <version>${plugin.lifecycle.version}</version>
                      <configuration>
                         <!-- Sample fix for plugin executions -->
-                        <!-- This is to be used in case a Maven plugins gives problems in Eclipse -->
-                        <!-- <lifecycleMappingMetadata> <pluginExecutions> <pluginExecution> <pluginExecutionFilter> <groupId>org.jacoco</groupId> <artifactId>jacoco-maven-plugin</artifactId> <versionRange>[0.5,)</versionRange> 
-                           <goals> <goal>prepare-agent</goal> </goals> </pluginExecutionFilter> <action> <ignore /> </action> </pluginExecution> </pluginExecutions> </lifecycleMappingMetadata> -->
+                        <!-- This is to be used in case a Maven plugins gives 
+                           problems in Eclipse -->
+                        <!-- <lifecycleMappingMetadata> <pluginExecutions> 
+                           <pluginExecution> <pluginExecutionFilter> <groupId>org.jacoco</groupId> <artifactId>jacoco-maven-plugin</artifactId> 
+                           <versionRange>[0.5,)</versionRange> <goals> <goal>prepare-agent</goal> </goals> 
+                           </pluginExecutionFilter> <action> <ignore /> </action> </pluginExecution> 
+                           </pluginExecutions> </lifecycleMappingMetadata> -->
                         <downloadSources>true</downloadSources>
                         <downloadJavadocs>true</downloadJavadocs>
                      </configuration>
@@ -199,12 +208,6 @@
       <!-- ============================================== -->
       <manifest.name>com/bernardomg/jqassistant/test</manifest.name>
       <!-- ============================================== -->
-      <!-- =============== TEMPLATE INFO ================ -->
-      <!-- ============================================== -->
-      <view.keywords>"keywords"</view.keywords>
-      <site.url>https://application.com</site.url>
-      <social.twitter>@BernardoMartG</social.twitter>
-      <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
       <aspectj.version>1.9.7</aspectj.version>
@@ -226,6 +229,7 @@
       <liquibase.version>3.10.2</liquibase.version>
       <log4j.version>2.14.1</log4j.version>
       <mockito.version>3.11.2</mockito.version>
+      <nimbusds.version>9.15</nimbusds.version>
       <reactiveStreams.version>1.0.3</reactiveStreams.version>
       <reactor.version>3.4.9</reactor.version>
       <servlet.version>4.0.1</servlet.version>
@@ -377,14 +381,23 @@
          <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
          <version>${spring.boot.version}</version>
       </dependency>
-            <dependency>
-               <!-- Spring Boot Starter: Devtools -->
-               <groupId>org.springframework.boot</groupId>
-               <artifactId>spring-boot-devtools</artifactId>
-               <version>${spring.boot.version}</version>
-               <scope>runtime</scope>
-               <optional>true</optional>
-            </dependency>
+      <dependency>
+         <!-- Spring Boot Starter: Devtools -->
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-devtools</artifactId>
+         <version>${spring.boot.version}</version>
+         <scope>runtime</scope>
+         <optional>true</optional>
+      </dependency>
+      <!-- ============================================== -->
+      <!-- ================== NIMBUS ==================== -->
+      <!-- ============================================== -->
+      <dependency>
+         <groupId>com.nimbusds</groupId>
+         <artifactId>oauth2-oidc-sdk</artifactId>
+         <version>${nimbusds.version}</version>
+         <scope>runtime</scope>
+      </dependency>
       <!-- ============================================== -->
       <!-- ================= ASPECTJ ==================== -->
       <!-- ============================================== -->
@@ -726,7 +739,8 @@
          </plugin>
          <plugin>
             <!-- PMD -->
-            <!-- Checks that the code complies with a series of code quality rules -->
+            <!-- Checks that the code complies with a series of code quality 
+               rules -->
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-pmd-plugin</artifactId>
             <configuration>
