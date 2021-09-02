@@ -210,9 +210,7 @@
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
-      <aspectj.version>1.9.7</aspectj.version>
       <caffeine.version>2.6.2</caffeine.version>
-      <glassfish.el.version>2.2</glassfish.el.version>
       <guava.version>30.1.1-jre</guava.version>
       <h2.version>1.4.200</h2.version>
       <hamcrest.version>2.2</hamcrest.version>
@@ -227,7 +225,6 @@
       <log4j.version>2.14.1</log4j.version>
       <mockito.version>3.11.2</mockito.version>
       <reactor.version>3.4.9</reactor.version>
-      <servlet.version>4.0.1</servlet.version>
       <slf4j.version>1.7.32</slf4j.version>
       <spring.boot.version>2.5.3</spring.boot.version>
       <spring.data.train.version>2020.0.7</spring.data.train.version>
@@ -385,22 +382,6 @@
          <optional>true</optional>
       </dependency>
       <!-- ============================================== -->
-      <!-- ================= ASPECTJ ==================== -->
-      <!-- ============================================== -->
-      <dependency>
-         <!-- AspectJ Runtime -->
-         <groupId>org.aspectj</groupId>
-         <artifactId>aspectjrt</artifactId>
-         <version>${aspectj.version}</version>
-      </dependency>
-      <dependency>
-         <!-- AspectJ Weaver -->
-         <groupId>org.aspectj</groupId>
-         <artifactId>aspectjweaver</artifactId>
-         <version>${aspectj.version}</version>
-         <scope>runtime</scope>
-      </dependency>
-      <!-- ============================================== -->
       <!-- ============== JPA DEPENDENCIES ============== -->
       <!-- ============================================== -->
       <dependency>
@@ -461,16 +442,6 @@
          </exclusions>
       </dependency>
       <!-- ============================================== -->
-      <!-- ================ SERVLET ===================== -->
-      <!-- ============================================== -->
-      <dependency>
-         <!-- Servlet API -->
-         <groupId>javax.servlet</groupId>
-         <artifactId>javax.servlet-api</artifactId>
-         <version>${servlet.version}</version>
-         <scope>provided</scope>
-      </dependency>
-      <!-- ============================================== -->
       <!-- ================== LOGGING =================== -->
       <!-- ============================================== -->
       <dependency>
@@ -529,13 +500,6 @@
          <groupId>com.google.guava</groupId>
          <artifactId>guava</artifactId>
          <version>${guava.version}</version>
-      </dependency>
-      <dependency>
-         <!-- Javax EL implementation -->
-         <groupId>org.glassfish.web</groupId>
-         <artifactId>el-impl</artifactId>
-         <version>${glassfish.el.version}</version>
-         <scope>provided</scope>
       </dependency>
       <!-- ============================================== -->
       <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->
