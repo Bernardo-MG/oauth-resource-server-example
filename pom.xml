@@ -229,7 +229,6 @@
       <liquibase.version>3.10.2</liquibase.version>
       <log4j.version>2.14.1</log4j.version>
       <mockito.version>3.11.2</mockito.version>
-      <nimbusds.version>9.15</nimbusds.version>
       <reactiveStreams.version>1.0.3</reactiveStreams.version>
       <reactor.version>3.4.9</reactor.version>
       <servlet.version>4.0.1</servlet.version>
@@ -388,15 +387,6 @@
          <version>${spring.boot.version}</version>
          <scope>runtime</scope>
          <optional>true</optional>
-      </dependency>
-      <!-- ============================================== -->
-      <!-- ================== NIMBUS ==================== -->
-      <!-- ============================================== -->
-      <dependency>
-         <groupId>com.nimbusds</groupId>
-         <artifactId>oauth2-oidc-sdk</artifactId>
-         <version>${nimbusds.version}</version>
-         <scope>runtime</scope>
       </dependency>
       <!-- ============================================== -->
       <!-- ================= ASPECTJ ==================== -->

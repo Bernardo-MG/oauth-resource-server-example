@@ -733,7 +733,7 @@
       "implicitFlowEnabled": false,
       "directAccessGrantsEnabled": true,
       "serviceAccountsEnabled": false,
-      "publicClient": false,
+      "publicClient": true,
       "frontchannelLogout": false,
       "protocol": "openid-connect",
       "attributes": {
@@ -756,9 +756,11 @@
       "nodeReRegistrationTimeout": -1,
       "defaultClientScopes": [
         "web-origins",
+        "read",
         "role_list",
         "roles",
         "profile",
+        "write",
         "email"
       ],
       "optionalClientScopes": [
@@ -1161,6 +1163,15 @@
       ]
     },
     {
+      "id": "a6c53d42-5f87-4c4d-95b9-c2b256e9192f",
+      "name": "read",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true"
+      }
+    },
+    {
       "id": "8aa2a601-9c4d-4bd2-a965-d433e13f1b8d",
       "name": "role_list",
       "description": "SAML role list",
@@ -1253,6 +1264,15 @@
           "config": {}
         }
       ]
+    },
+    {
+      "id": "ea94b1a9-2390-42a7-8a99-0ea85341b69f",
+      "name": "write",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true"
+      }
     }
   ],
   "defaultDefaultClientScopes": [
