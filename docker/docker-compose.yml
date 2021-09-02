@@ -8,4 +8,6 @@ services:
             - "8090:8080"
             - "9990:9990"
         environment:
+            - KEYCLOAK_USER=admin
+            - KEYCLOAK_PASSWORD=admin
             - KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/realm-export.json

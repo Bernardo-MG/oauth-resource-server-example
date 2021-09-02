@@ -39,15 +39,21 @@ The verify phase is required, otherwise some of the reports won't be generated.
 
 ## Usage
 
-First of all, run the [OAuth 2 Authorization Server Example](https://github.com/Bernardo-MG/oauth-authorization-server-example), as the resource server need to connect to it.
+First of all, start the application environment:
 
-hen just run the resource server:
+```
+docker-compose -f docker/docker-compose.yml up
+```
+
+This will start [a keycloak server](http://localhost:8090/) ready for the project. This will include a user named test-user, with the password 1234.
+
+Afterwards you can start the resource server:
 
 ```
 mvn spring-boot:run
 ```
 
-And the endpoint will be accessible at [http://localhost:8080/](http://localhost:8080/). You may check it for example by querying [http://localhost:8080/rest/entity](http://localhost:8080/rest/entity).
+An endpoint will be accessible at [http://localhost:8080/](http://localhost:8080/). You may check it for example by querying [http://localhost:8080/rest/entity](http://localhost:8080/rest/entity).
 
 ### Running the tests
 
