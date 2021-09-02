@@ -1,0 +1,13 @@
+version: '2'
+services:
+    keycloak:
+        image: quay.io/keycloak/keycloak:11.0.3
+        volumes:
+          - ./imports:/opt/jboss/keycloak/imports
+        ports:
+            - "8090:8080"
+            - "9990:9990"
+        environment:
+            - KEYCLOAK_USER=admin
+            - KEYCLOAK_PASSWORD=admin
+            - KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/realm-export.json

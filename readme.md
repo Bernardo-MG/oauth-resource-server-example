@@ -39,15 +39,36 @@ The verify phase is required, otherwise some of the reports won't be generated.
 
 ## Usage
 
-First of all, run the [OAuth 2 Authorization Server Example](https://github.com/Bernardo-MG/oauth-authorization-server-example), as the resource server need to connect to it.
+First of all, start the application environment:
 
-hen just run the resource server:
+```
+docker-compose -f docker/docker-compose.yml up
+```
+
+This will start [a keycloak server](http://localhost:8090/) ready for the project. Go to the URL and use the user admin, with password admin, to add a new user to the bmg realm.
+
+Afterwards you can start the resource server:
 
 ```
 mvn spring-boot:run
 ```
 
-And the endpoint will be accessible at [http://localhost:8080/](http://localhost:8080/). You may check it for example by querying [http://localhost:8080/rest/entity](http://localhost:8080/rest/entity).
+An endpoint will be accessible at [http://localhost:8080/](http://localhost:8080/). You may check it for example by querying [http://localhost:8080/rest/entity](http://localhost:8080/rest/entity).
+
+### Generating tokens
+
+Send a post request to [http://localhost:8090/auth/realms/bmg/protocol/openid-connect/token](http://localhost:8090/auth/realms/bmg/protocol/openid-connect/token). The body shoul encode, as a x-www-form-urlencoded, the following information:
+
+- client_id
+- username
+- password
+- grant_type
+
+The value for grant_type is password. All the other fields should match the user which you want to authenticate.
+
+### Using Postman
+
+The file at src/test/resources/Oauth.postman_collection.json contains queries for all the operations supported by the project. Including authenticating and reading.
 
 ### Running the tests
 
