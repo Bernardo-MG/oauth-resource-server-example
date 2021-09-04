@@ -1,8 +1,6 @@
 # OAuth 2 Resource Server Example
 
-OAuth 2 Resource Server Example. Requires the [OAuth 2 Authorization Server Example](https://github.com/Bernardo-MG/oauth-authorization-server-example) to be running, as it will handle request authorization.
-
-Just get both projects runnings and make a request query to http://localhost:8080/rest/entity.
+OAuth 2 Resource Server Example. Integrates with keycloak to authenticate requests.
 
 [![Release docs](https://img.shields.io/badge/docs-release-blue.svg)][site-release]
 [![Development docs](https://img.shields.io/badge/docs-develop-blue.svg)][site-develop]
@@ -12,14 +10,9 @@ Just get both projects runnings and make a request query to http://localhost:808
 
 ## Features
 
-Several technologies are combined to make this work:
-
 - [Spring MVC](https://spring.io/)
-- [Neo4j](https://neo4j.com/)
-- [GraphQL](https://graphql.org/) endpoint
-- [Angular](https://angular.io/)
-- [Apollo GraphQL](https://www.apollographql.com/)
-- [d3](https://d3js.org/)
+- [OAuth2](https://oauth.net/2/)
+- Integrates with [Keycloak](https://www.keycloak.org/)
 
 ## Documentation
 
@@ -43,32 +36,25 @@ The verify phase is required, otherwise some of the reports won't be generated.
 
 ## Usage
 
-The application is coded in Java, using Maven to manage the project.
-
-### Profiles
-
-Maven profiles are included for setting up the database.
-
-| Profile     | Server                   |
-|-------------|--------------------------|
-| development | Development settings     |
-| production  | Production settings      |
-
-### Database
-
-Before running, start a local Neo4j database. This will be populated with the dataset.
-
-The database should accept the username neo4j with password secret.
-
-### Running
-
-To run the project locally use the following Maven command:
+First of all, start the application environment:
 
 ```
-mvn spring-boot:run -P development
+docker-compose -f docker/docker-compose.yml up
 ```
 
-It will be accessible at [http://localhost:8080/](http://localhost:8080/).
+This will start [a keycloak server](http://localhost:8090/) ready for the project. Go to the URL and use the user admin, with password admin, to add a new user to the bmg realm.
+
+Afterwards you can start the resource server:
+
+```
+mvn spring-boot:run
+```
+
+An endpoint will be accessible at [http://localhost:8080/](http://localhost:8080/). You may check it for example by querying [http://localhost:8080/rest/entity](http://localhost:8080/rest/entity).
+
+### Making requests with Postman
+
+The file at src/test/resources/Oauth.postman_collection.json contains queries for all the operations. Including authentication and reading.
 
 ### Running the tests
 
@@ -99,10 +85,10 @@ If you wish to fork or modify the code, visit the [GitHub project page][scm], wh
 
 The project has been released under the [MIT License][license].
 
-[issues]: https://github.com/bernardo-mg/darksouls-explorer/issues
-[javadoc-develop]: https://docs.bernardomg.com/development/maven/darksouls-explorer/apidocs
-[javadoc-release]: https://docs.bernardomg.com/maven/darksouls-explorer/apidocs
+[issues]: https://github.com/bernardo-mg/oauth-resource-server-example/issues
+[javadoc-develop]: https://docs.bernardomg.com/development/maven/oauth-resource-server-example/apidocs
+[javadoc-release]: https://docs.bernardomg.com/maven/oauth-resource-server-example/apidocs
 [license]: https://www.opensource.org/licenses/mit-license.php
-[scm]: https://github.com/bernardo-mg/darksouls-explorer
-[site-develop]: https://docs.bernardomg.com/development/maven/darksouls-explorer
-[site-release]: https://docs.bernardomg.com/maven/darksouls-explorer
+[scm]: https://github.com/bernardo-mg/oauth-resource-server-example
+[site-develop]: https://docs.bernardomg.com/development/maven/oauth-resource-server-example
+[site-release]: https://docs.bernardomg.com/maven/oauth-resource-server-example
