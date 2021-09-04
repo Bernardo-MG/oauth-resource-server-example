@@ -10,7 +10,10 @@
                 First release.
             </action>
         </release>
-        <release version="1.1.0" date="2021-08-15" description="">
+        <release version="1.1.0" date="2021-09-04" description="Keycloak">
+            <action dev="bmg" type="add">
+                Keycloak integration.
+            </action>
         </release>
     </body>
 </document>
