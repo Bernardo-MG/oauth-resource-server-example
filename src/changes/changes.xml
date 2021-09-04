@@ -15,5 +15,7 @@
                 Keycloak integration.
             </action>
         </release>
+        <release version="1.2.0" date="2021-09-04" description="">
+        </release>
     </body>
 </document>
