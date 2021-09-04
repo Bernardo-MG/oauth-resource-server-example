@@ -26,7 +26,7 @@
 
    <name>OAuth 2 Resource Server Example</name>
    <description>Example OAUTH 2 resource server with Spring.</description>
-   <url>https://github.com/bernardo-mg/darksouls-explorer</url>
+   <url>https://github.com/bernardo-mg/oauth-resource-server-example</url>
    <inceptionYear>2021</inceptionYear>
 
    <licenses>
@@ -42,20 +42,20 @@
    <!-- ********************************************** -->
 
    <scm>
-      <connection>scm:git:https://github.com/bernardo-mg/darksouls-explorer.git</connection>
-      <developerConnection>scm:git:https://github.com/bernardo-mg/darksouls-explorer.git</developerConnection>
+      <connection>scm:git:https://github.com/bernardo-mg/oauth-resource-server-example.git</connection>
+      <developerConnection>scm:git:https://github.com/bernardo-mg/oauth-resource-server-example.git</developerConnection>
       <tag>head</tag>
-      <url>https://www.github.com/bernardo-mg/darksouls-explorer</url>
+      <url>https://www.github.com/bernardo-mg/oauth-resource-server-example</url>
    </scm>
 
    <issueManagement>
       <system>GitHub</system>
-      <url>https://www.github.com/bernardo-mg/darksouls-explorer/issues</url>
+      <url>https://www.github.com/bernardo-mg/oauth-resource-server-example/issues</url>
    </issueManagement>
 
    <ciManagement>
       <system>Github</system>
-      <url>https://www.github.com/bernardo-mg/darksouls-explorer/actions</url>
+      <url>https://www.github.com/bernardo-mg/oauth-resource-server-example/actions</url>
       <notifiers />
    </ciManagement>
 
@@ -64,7 +64,7 @@
          <uniqueVersion>false</uniqueVersion>
          <id>releases</id>
          <name>Releases Repository</name>
-         <url>https://api.bintray.com/maven/bernardo-mg/maven/darksouls-explorer</url>
+         <url>https://api.bintray.com/maven/bernardo-mg/maven/oauth-resource-server-example</url>
       </repository>
       <snapshotRepository>
          <uniqueVersion>false</uniqueVersion>
