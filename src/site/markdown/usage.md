@@ -1,12 +1,12 @@
 # Usage
 
-First of all, start the application environment:
+Start Keycloak. It will be needed for authenticating:
 
 ```
 docker-compose -f docker/docker-compose.yml up
 ```
 
-This will start [a keycloak server](http://localhost:8090/) ready for the project. Go to the URL and use the user admin, with password admin, to add a new user to the bmg realm.
+Now you can open it at [http://localhost:8090/](http://localhost:8090/). Go there and, with the user admin/admin, add a new user to the bmg realm.
 
 Afterwards you can start the resource server:
 
