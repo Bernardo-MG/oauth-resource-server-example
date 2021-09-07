@@ -21,7 +21,7 @@
 
    <groupId>com.bernardomg.example.oauth</groupId>
    <artifactId>oauth2-resource-server-example</artifactId>
-   <version>1.1.0</version>
+   <version>1.1.1</version>
    <packaging>war</packaging>
 
    <name>OAuth 2 Resource Server Example</name>

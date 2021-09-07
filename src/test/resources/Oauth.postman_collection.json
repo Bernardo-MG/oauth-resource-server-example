@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d7ff2da9-36a0-4f2f-975f-379a203cf447",
+		"_postman_id": "ba148923-02cc-4842-8612-11e246ab11ac",
 		"name": "Oauth",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -125,6 +125,11 @@
 					"type": "oauth2",
 					"oauth2": [
 						{
+							"key": "clientSecret",
+							"value": "",
+							"type": "string"
+						},
+						{
 							"key": "tokenName",
 							"value": "test-token",
 							"type": "string"
@@ -157,11 +162,6 @@
 						{
 							"key": "clientId",
 							"value": "testClient",
-							"type": "string"
-						},
-						{
-							"key": "clientSecret",
-							"value": "e177438f-35d8-4b15-9c33-27c708ae7da4",
 							"type": "string"
 						},
 						{
