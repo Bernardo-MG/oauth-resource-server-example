@@ -196,21 +196,12 @@
 
    <properties>
       <!-- ============================================== -->
-      <!-- =============== MAVEN VERSION ================ -->
-      <!-- ============================================== -->
-      <maven.version>3.5.0</maven.version>
-      <!-- ============================================== -->
-      <!-- ================ JAVA VERSION ================ -->
-      <!-- ============================================== -->
-      <java.version>1.8</java.version>
-      <!-- ============================================== -->
       <!-- =============== MANIFEST DATA ================ -->
       <!-- ============================================== -->
-      <manifest.name>com/bernardomg/jqassistant/test</manifest.name>
+      <manifest.name>com/bernardomg/example/oauth</manifest.name>
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
-      <caffeine.version>2.6.2</caffeine.version>
       <guava.version>30.1.1-jre</guava.version>
       <h2.version>1.4.200</h2.version>
       <hamcrest.version>2.2</hamcrest.version>
@@ -224,12 +215,10 @@
       <liquibase.version>3.10.2</liquibase.version>
       <log4j.version>2.14.1</log4j.version>
       <mockito.version>3.11.2</mockito.version>
-      <reactor.version>3.4.9</reactor.version>
       <slf4j.version>1.7.32</slf4j.version>
       <spring.boot.version>2.5.3</spring.boot.version>
       <spring.data.train.version>2020.0.7</spring.data.train.version>
       <spring.version>5.3.9</spring.version>
-      <webappRunner.version>8.5.30.0</webappRunner.version>
       <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
       <!-- ============================================== -->
@@ -562,13 +551,6 @@
                <artifactId>junit-vintage-engine</artifactId>
             </exclusion>
          </exclusions>
-      </dependency>
-      <dependency>
-         <!-- Reactor core -->
-         <groupId>io.projectreactor</groupId>
-         <artifactId>reactor-core</artifactId>
-         <version>${reactor.version}</version>
-         <scope>test</scope>
       </dependency>
    </dependencies>
 
