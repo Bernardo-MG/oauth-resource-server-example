@@ -36,25 +36,19 @@ The verify phase is required, otherwise some of the reports won't be generated.
 
 ## Usage
 
-Start Keycloak. It will be needed for authenticating:
+The project requires an authorization server. For this reason a docker compose file is included, which will set up the environment:
 
 ```
 docker-compose -f docker/docker-compose.yml up
 ```
 
-Now you can open it at [http://localhost:8090/](http://localhost:8090/). Go there and, with the user admin/admin, add a new user to the bmg realm.
+It's only missing authenticated users. Open the authentication server administration panel at [http://localhost:8090/](http://localhost:8090/). Using the administrator user admin/admin add a new user to the bmg realm. After this the resource server will be accessible to that user.
 
-Afterwards you can start the resource server:
-
-```
-mvn spring-boot:run
-```
-
-An endpoint will be accessible at [http://localhost:8080/](http://localhost:8080/). You may check it for example by querying [http://localhost:8080/rest/entity](http://localhost:8080/rest/entity).
+The resource server API is located at [http://localhost:8080/rest/entity](http://localhost:8080/rest/entity).
 
 ### Making requests with Postman
 
-The file at src/test/resources/Oauth.postman_collection.json contains queries for all the operations. Including authentication and reading.
+The file src/test/resources/Oauth.postman_collection.json contains queries for all the operations. Including authentication and reading.
 
 ### Running the tests
 

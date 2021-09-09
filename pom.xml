@@ -105,14 +105,6 @@
                      <artifactId>lifecycle-mapping</artifactId>
                      <version>${plugin.lifecycle.version}</version>
                      <configuration>
-                        <!-- Sample fix for plugin executions -->
-                        <!-- This is to be used in case a Maven plugins gives 
-                           problems in Eclipse -->
-                        <!-- <lifecycleMappingMetadata> <pluginExecutions> 
-                           <pluginExecution> <pluginExecutionFilter> <groupId>org.jacoco</groupId> <artifactId>jacoco-maven-plugin</artifactId> 
-                           <versionRange>[0.5,)</versionRange> <goals> <goal>prepare-agent</goal> </goals> 
-                           </pluginExecutionFilter> <action> <ignore /> </action> </pluginExecution> 
-                           </pluginExecutions> </lifecycleMappingMetadata> -->
                         <downloadSources>true</downloadSources>
                         <downloadJavadocs>true</downloadJavadocs>
                      </configuration>
@@ -337,6 +329,16 @@
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-web</artifactId>
          <version>${spring.boot.version}</version>
+         <exclusions>
+            <exclusion>
+               <groupId>ch.qos.logback</groupId>
+               <artifactId>logback-classic</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.apache.logging.log4j</groupId>
+               <artifactId>log4j-to-slf4j</artifactId>
+            </exclusion>
+         </exclusions>
       </dependency>
       <dependency>
          <!-- Spring Boot Starter: AOP -->
@@ -560,6 +562,7 @@
 
    <build>
       <defaultGoal>clean package</defaultGoal>
+      <finalName>resource-server</finalName>
       <plugins>
          <plugin>
             <!-- Changes -->

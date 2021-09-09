@@ -23,5 +23,5 @@ services:
             - "8080:8080"
         environment:
             # Auth server
-            - spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8090/auth/realms/envira
-            - spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://host.docker.internal:8090/auth/realms/envira/protocol/openid-connect/certs
+            - spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8090/auth/realms/bmg
+            - spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://host.docker.internal:8090/auth/realms/bmg/protocol/openid-connect/certs
