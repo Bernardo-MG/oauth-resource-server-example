@@ -1,7 +1,8 @@
 version: '2'
 services:
-    keycloak:
+    auth-server:
         image: quay.io/keycloak/keycloak:11.0.3
+        container_name: oauth2-auth-server
         volumes:
           - ./imports:/opt/jboss/keycloak/imports
         ports:
@@ -11,3 +12,16 @@ services:
             - KEYCLOAK_USER=admin
             - KEYCLOAK_PASSWORD=admin
             - KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/realm-export.json
+    resource-server:
+        depends_on:
+            - auth-server
+        build:
+            context: ../
+            dockerfile: ./docker/Dockerfile
+        container_name: oauth2-resource-server
+        ports:
+            - "8080:8080"
+        environment:
+            # Auth server
+            - spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8090/auth/realms/envira
+            - spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://host.docker.internal:8090/auth/realms/envira/protocol/openid-connect/certs
