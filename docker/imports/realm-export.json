@@ -40,6 +40,21 @@
   "quickLoginCheckMilliSeconds": 1000,
   "maxDeltaTimeSeconds": 43200,
   "failureFactor": 30,
+  "users" : [
+    {
+      "username" : "test-user",
+      "enabled": true,
+      "email" : "sample-user@example",
+      "firstName": "Sample",
+      "lastName": "User",
+      "credentials" : [
+        {
+          "type" : "password",
+          "value" : "1234"
+        }
+      ]
+    }
+  ],
   "roles": {
     "realm": [
       {
