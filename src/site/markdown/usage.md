@@ -6,10 +6,12 @@ The project requires an authorization server. For this reason a docker compose f
 docker-compose -f docker/docker-compose.yml up
 ```
 
-It's only missing authenticated users. Open the authentication server administration panel at [http://localhost:8090/](http://localhost:8090/). Using the administrator user admin/admin add a new user to the bmg realm. After this the resource server will be accessible to that user.
+The resource server API is located at [http://localhost:8080/rest/entity](http://localhost:8080/rest/entity), accessible to the user test-user/1234.
 
-The resource server API is located at [http://localhost:8080/rest/entity](http://localhost:8080/rest/entity).
+## Requests with Postman
 
-### Using Postman
+Import `src/test/resources/Oauth.postman_collection.json` to get queries for all the operations. Including authentication and reading.
 
-The file at src/test/resources/Oauth.postman_collection.json contains queries for all the operations. Including authentication and reading.
+## Authentication Server
+
+A Keycloak server is taking care of the authentication. It includes [an administration panel](http://localhost:8090/), accessible to the user admin/admin. Use it to make any change as needed.
