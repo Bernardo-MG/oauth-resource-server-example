@@ -36,7 +36,7 @@ The verify phase is required, otherwise some of the reports won't be generated.
 
 ## Usage
 
-The project requires an authorization server. The Docker compose file will take care of this, and will also run the project:
+The project requires an authorization server. The Docker compose file will take care of this, while running the project:
 
 ```
 docker-compose -f docker/docker-compose.yml up

@@ -1,6 +1,6 @@
 # Usage
 
-The project requires an authorization server. For this reason a docker compose file is included, which will set up the environment:
+The project requires an authorization server. The Docker compose file will take care of this, while running the project:
 
 ```
 docker-compose -f docker/docker-compose.yml up
