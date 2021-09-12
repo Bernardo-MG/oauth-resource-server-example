@@ -21,7 +21,7 @@
 
    <groupId>com.bernardomg.example.oauth</groupId>
    <artifactId>oauth2-resource-server-example</artifactId>
-   <version>1.1.1</version>
+   <version>1.2.0</version>
    <packaging>war</packaging>
 
    <name>OAuth 2 Resource Server Example</name>
@@ -105,14 +105,6 @@
                      <artifactId>lifecycle-mapping</artifactId>
                      <version>${plugin.lifecycle.version}</version>
                      <configuration>
-                        <!-- Sample fix for plugin executions -->
-                        <!-- This is to be used in case a Maven plugins gives 
-                           problems in Eclipse -->
-                        <!-- <lifecycleMappingMetadata> <pluginExecutions> 
-                           <pluginExecution> <pluginExecutionFilter> <groupId>org.jacoco</groupId> <artifactId>jacoco-maven-plugin</artifactId> 
-                           <versionRange>[0.5,)</versionRange> <goals> <goal>prepare-agent</goal> </goals> 
-                           </pluginExecutionFilter> <action> <ignore /> </action> </pluginExecution> 
-                           </pluginExecutions> </lifecycleMappingMetadata> -->
                         <downloadSources>true</downloadSources>
                         <downloadJavadocs>true</downloadJavadocs>
                      </configuration>
@@ -196,21 +188,12 @@
 
    <properties>
       <!-- ============================================== -->
-      <!-- =============== MAVEN VERSION ================ -->
-      <!-- ============================================== -->
-      <maven.version>3.5.0</maven.version>
-      <!-- ============================================== -->
-      <!-- ================ JAVA VERSION ================ -->
-      <!-- ============================================== -->
-      <java.version>1.8</java.version>
-      <!-- ============================================== -->
       <!-- =============== MANIFEST DATA ================ -->
       <!-- ============================================== -->
-      <manifest.name>com/bernardomg/jqassistant/test</manifest.name>
+      <manifest.name>com/bernardomg/example/oauth</manifest.name>
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
-      <caffeine.version>2.6.2</caffeine.version>
       <guava.version>30.1.1-jre</guava.version>
       <h2.version>1.4.200</h2.version>
       <hamcrest.version>2.2</hamcrest.version>
@@ -224,12 +207,10 @@
       <liquibase.version>3.10.2</liquibase.version>
       <log4j.version>2.14.1</log4j.version>
       <mockito.version>3.11.2</mockito.version>
-      <reactor.version>3.4.9</reactor.version>
       <slf4j.version>1.7.32</slf4j.version>
       <spring.boot.version>2.5.3</spring.boot.version>
       <spring.data.train.version>2020.0.7</spring.data.train.version>
       <spring.version>5.3.9</spring.version>
-      <webappRunner.version>8.5.30.0</webappRunner.version>
       <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
       <!-- ============================================== -->
@@ -348,6 +329,16 @@
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-web</artifactId>
          <version>${spring.boot.version}</version>
+         <exclusions>
+            <exclusion>
+               <groupId>ch.qos.logback</groupId>
+               <artifactId>logback-classic</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.apache.logging.log4j</groupId>
+               <artifactId>log4j-to-slf4j</artifactId>
+            </exclusion>
+         </exclusions>
       </dependency>
       <dependency>
          <!-- Spring Boot Starter: AOP -->
@@ -563,13 +554,6 @@
             </exclusion>
          </exclusions>
       </dependency>
-      <dependency>
-         <!-- Reactor core -->
-         <groupId>io.projectreactor</groupId>
-         <artifactId>reactor-core</artifactId>
-         <version>${reactor.version}</version>
-         <scope>test</scope>
-      </dependency>
    </dependencies>
 
    <!-- ********************************************** -->
@@ -578,6 +562,7 @@
 
    <build>
       <defaultGoal>clean package</defaultGoal>
+      <finalName>resource-server</finalName>
       <plugins>
          <plugin>
             <!-- Changes -->

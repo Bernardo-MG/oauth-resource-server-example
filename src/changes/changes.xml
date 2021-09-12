@@ -20,5 +20,19 @@
                 Cleaned up project, reducing it to the minimal configuration.
             </action>
         </release>
+        <release version="1.2.0" date="2021-09-07" description="">
+            <action dev="bmg" type="add">
+                Added Postman requests.
+            </action>
+            <action dev="bmg" type="add">
+                Added Docker Compose file for running the project.
+            </action>
+            <action dev="bmg" type="add">
+                Added default user.
+            </action>
+            <action dev="bmg" type="update">
+                Updated Keycloak.
+            </action>
+        </release>
     </body>
 </document>
