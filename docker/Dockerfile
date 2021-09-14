@@ -26,5 +26,5 @@ COPY --from=build ./usr/src/app/target/resource-server.war ./resource-server.war
 
 EXPOSE 8080
 
-#Compile and set profile
+# Run
 CMD java -jar resource-server.war
