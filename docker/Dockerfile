@@ -6,9 +6,12 @@ FROM maven:3.8.2-jdk-11-slim as build
 # Create app directory
 WORKDIR /usr/src/app
 
+# Resolve and cache dependencies
+COPY ./pom.xml .
+RUN mvn -s /usr/share/maven/ref/settings.xml dependency:resolve
+
 # Copy and build
 COPY . .
-
 RUN mvn clean package -DskipTests
 
 # -----------------------------------------------------------------------------
@@ -23,5 +26,5 @@ COPY --from=build ./usr/src/app/target/resource-server.war ./resource-server.war
 
 EXPOSE 8080
 
-#Compile and set profile
+# Run
 CMD java -jar resource-server.war
