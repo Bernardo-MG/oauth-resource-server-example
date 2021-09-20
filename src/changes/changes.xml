@@ -20,7 +20,7 @@
                 Cleaned up project, reducing it to the minimal configuration.
             </action>
         </release>
-        <release version="1.2.0" date="2021-09-07" description="">
+        <release version="1.2.0" date="2021-09-07" description="Environment configuration">
             <action dev="bmg" type="add">
                 Added Postman requests.
             </action>
@@ -33,6 +33,8 @@
             <action dev="bmg" type="update">
                 Updated Keycloak.
             </action>
+        </release>
+        <release version="1.3.0" date="2021-09-07" description="">
         </release>
     </body>
 </document>
