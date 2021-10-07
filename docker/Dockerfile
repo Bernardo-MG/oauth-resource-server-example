@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 
 # Resolve and cache dependencies
 COPY ./pom.xml .
-RUN mvn -s /usr/share/maven/ref/settings.xml dependency:resolve
+RUN mvn dependency:resolve
 
 # Copy and build
 COPY . .
