@@ -19,12 +19,14 @@ RUN mvn clean package -DskipTests
 # -----------------------------------------------------------------------------
 FROM openjdk:14-alpine as deployment
 
+ARG WAR_NAME
+
 WORKDIR /app
 
 # Copy from build stage
-COPY --from=build ./usr/src/app/target/resource-server.war ./resource-server.war
+COPY --from=build ./usr/src/app/target/${WAR_NAME}.war ./app.war
 
 EXPOSE 8080
 
 # Run
-CMD java -jar resource-server.war
+CMD java -jar app.war
