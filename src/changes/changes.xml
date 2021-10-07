@@ -20,7 +20,7 @@
                 Cleaned up project, reducing it to the minimal configuration.
             </action>
         </release>
-        <release version="1.2.0" date="2021-09-07" description="">
+        <release version="1.2.0" date="2021-09-07" description="Environment configuration">
             <action dev="bmg" type="add">
                 Added Postman requests.
             </action>
@@ -32,6 +32,17 @@
             </action>
             <action dev="bmg" type="update">
                 Updated Keycloak.
+            </action>
+        </release>
+        <release version="1.2.1" date="2021-10-07" description="Improved Docker config">
+            <action dev="bmg" type="add">
+                Added Maven dependency caching to Docker image.
+            </action>
+            <action dev="bmg" type="add">
+                Added health check to Docker Compose image dependency.
+            </action>
+            <action dev="bmg" type="update">
+                Updated dependencies.
             </action>
         </release>
     </body>

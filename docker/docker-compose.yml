@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
     auth-server:
         image: quay.io/keycloak/keycloak:15.0.2
@@ -12,12 +12,20 @@ services:
             - KEYCLOAK_USER=admin
             - KEYCLOAK_PASSWORD=admin
             - KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/realm-export.json
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8080/auth/"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
     resource-server:
         depends_on:
-            - auth-server
+            auth-server:
+                condition: service_healthy
         build:
             context: ../
             dockerfile: ./docker/Dockerfile
+            args:
+                WAR_NAME: resource-server
         container_name: oauth2-resource-server
         ports:
             - "8080:8080"

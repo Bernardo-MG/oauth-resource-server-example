@@ -6,9 +6,12 @@ FROM maven:3.8.2-jdk-11-slim as build
 # Create app directory
 WORKDIR /usr/src/app
 
+# Resolve and cache dependencies
+COPY ./pom.xml .
+RUN mvn dependency:resolve
+
 # Copy and build
 COPY . .
-
 RUN mvn clean package -DskipTests
 
 # -----------------------------------------------------------------------------
@@ -16,12 +19,14 @@ RUN mvn clean package -DskipTests
 # -----------------------------------------------------------------------------
 FROM openjdk:14-alpine as deployment
 
+ARG WAR_NAME
+
 WORKDIR /app
 
 # Copy from build stage
-COPY --from=build ./usr/src/app/target/resource-server.war ./resource-server.war
+COPY --from=build ./usr/src/app/target/${WAR_NAME}.war ./app.war
 
 EXPOSE 8080
 
-#Compile and set profile
-CMD java -jar resource-server.war
+# Run
+CMD java -jar app.war
