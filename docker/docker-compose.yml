@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
     auth-server:
         image: quay.io/keycloak/keycloak:15.0.2
