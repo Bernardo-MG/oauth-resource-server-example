@@ -12,9 +12,15 @@ services:
             - KEYCLOAK_USER=admin
             - KEYCLOAK_PASSWORD=admin
             - KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/realm-export.json
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8080/auth/"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
     resource-server:
         depends_on:
-            - auth-server
+            auth-server:
+                condition: service_healthy
         build:
             context: ../
             dockerfile: ./docker/Dockerfile
