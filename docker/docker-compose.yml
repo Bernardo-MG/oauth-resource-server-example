@@ -33,3 +33,8 @@ services:
             # Auth server
             - spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8090/auth/realms/bmg
             - spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://host.docker.internal:8090/auth/realms/bmg/protocol/openid-connect/certs
+        healthcheck:
+            test: "curl --fail --silent localhost:8080/actuator/health | grep UP || exit 1"
+            interval: 30s
+            timeout: 10s
+            retries: 5
