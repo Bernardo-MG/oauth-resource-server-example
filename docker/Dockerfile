@@ -26,7 +26,11 @@ WORKDIR /app
 # Copy from build stage
 COPY --from=build ./usr/src/app/target/${WAR_NAME}.war ./app.war
 
+# Exposed ports
 EXPOSE 8080
+
+# Health check
+HEALTHCHECK --interval=30s --retries=5 --timeout=10s CMD curl --fail --silent localhost:8081/actuator/health | grep UP || exit 1
 
 # Run
 CMD java -jar app.war
