@@ -24,7 +24,7 @@ ARG WAR_NAME
 WORKDIR /app
 
 # Copy from build stage
-COPY --from=build ./usr/src/app/target/${WAR_NAME}.war ./app.war
+COPY --from=build ./usr/src/app/target/${WAR_NAME}*.war ./app.war
 
 # Exposed ports
 EXPOSE 8080
