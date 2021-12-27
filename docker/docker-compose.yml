@@ -29,6 +29,7 @@ services:
         container_name: oauth2-resource-server
         ports:
             - "8080:8080"
+            - "8000:8000"
         environment:
             # Auth server
             - spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8090/auth/realms/bmg
