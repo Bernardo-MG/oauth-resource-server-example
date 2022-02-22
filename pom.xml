@@ -352,6 +352,12 @@
          <scope>runtime</scope>
          <optional>true</optional>
       </dependency>
+      <dependency>
+         <!-- Spring Boot Starter: Actuator -->
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-actuator</artifactId>
+         <version>${spring.boot.version}</version>
+      </dependency>
       <!-- ============================================== -->
       <!-- ============== JPA DEPENDENCIES ============== -->
       <!-- ============================================== -->

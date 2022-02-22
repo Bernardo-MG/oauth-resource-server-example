@@ -20,12 +20,10 @@
 
       <!-- Application log -->
       <Logger name="com.bernardomg.example" level="debug" additivity="false">
-         <AppenderRef ref="file" />
          <AppenderRef ref="console" />
       </Logger>
 
       <Root level="error">
-         <AppenderRef ref="file" />
          <AppenderRef ref="console" />
       </Root>
    </Loggers>
