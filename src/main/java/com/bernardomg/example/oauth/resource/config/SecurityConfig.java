@@ -38,12 +38,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http.authorizeRequests(authz -> authz
-                .antMatchers(HttpMethod.GET, "/rest/**")
-                .hasAuthority("SCOPE_read")
-                .antMatchers(HttpMethod.POST, "/rest")
-                .hasAuthority("SCOPE_write").anyRequest().authenticated())
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt());
+        http.authorizeRequests(authz -> authz.
+        // Sets authority required for GET requests
+            antMatchers(HttpMethod.GET, "/rest/**")
+            .hasAuthority("SCOPE_read")
+            // Sets authority required for POST requests
+            .antMatchers(HttpMethod.POST, "/rest")
+            .hasAuthority("SCOPE_write")
+            // Actuators are always available
+            .antMatchers("/actuator/**")
+            .permitAll()
+            // By default all requests require authentication
+            .anyRequest()
+            .authenticated())
+            // OAUTH 2 with JWT
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt());
     }
 
 }
