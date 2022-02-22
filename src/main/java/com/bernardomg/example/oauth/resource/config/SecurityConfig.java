@@ -39,9 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http.authorizeRequests(authz -> authz.
-        // Sets authority required for GET requests
-            antMatchers(HttpMethod.GET, "/rest/**")
+        http.authorizeRequests(authz -> authz
+            // Sets authority required for GET requests
+            .antMatchers(HttpMethod.GET, "/rest/**")
             .hasAuthority("SCOPE_read")
             // Sets authority required for POST requests
             .antMatchers(HttpMethod.POST, "/rest")
