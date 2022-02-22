@@ -61,7 +61,7 @@ public class ExampleEntityController {
         super();
 
         exampleEntityService = checkNotNull(service,
-                "Received a null pointer as service");
+            "Received a null pointer as service");
     }
 
     /**

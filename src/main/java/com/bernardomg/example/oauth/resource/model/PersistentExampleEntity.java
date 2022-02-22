@@ -85,11 +85,7 @@ public class PersistentExampleEntity implements ExampleEntity {
             return true;
         }
 
-        if (obj == null) {
-            return false;
-        }
-
-        if (getClass() != obj.getClass()) {
+        if ((obj == null) || (getClass() != obj.getClass())) {
             return false;
         }
 
@@ -132,8 +128,10 @@ public class PersistentExampleEntity implements ExampleEntity {
 
     @Override
     public final String toString() {
-        return MoreObjects.toStringHelper(this).add("id", id).add("name", name)
-                .toString();
+        return MoreObjects.toStringHelper(this)
+            .add("id", id)
+            .add("name", name)
+            .toString();
     }
 
 }

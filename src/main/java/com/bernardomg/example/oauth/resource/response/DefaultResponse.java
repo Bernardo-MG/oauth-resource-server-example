@@ -114,8 +114,10 @@ public class DefaultResponse<T> implements Response<T> {
 
     @Override
     public final String toString() {
-        return MoreObjects.toStringHelper(this).add("status", status)
-                .add("content", content).toString();
+        return MoreObjects.toStringHelper(this)
+            .add("status", status)
+            .add("content", content)
+            .toString();
     }
 
 }

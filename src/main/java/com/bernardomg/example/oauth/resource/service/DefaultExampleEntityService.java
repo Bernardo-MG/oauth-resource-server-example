@@ -58,7 +58,7 @@ public class DefaultExampleEntityService implements ExampleEntityService {
         super();
 
         entityRepository = checkNotNull(repository,
-                "Received a null pointer as repository");
+            "Received a null pointer as repository");
     }
 
     @Override
