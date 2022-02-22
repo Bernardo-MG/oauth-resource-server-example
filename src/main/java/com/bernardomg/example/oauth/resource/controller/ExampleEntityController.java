@@ -24,7 +24,7 @@
 
 package com.bernardomg.example.oauth.resource.controller;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,7 +60,7 @@ public class ExampleEntityController {
     public ExampleEntityController(final ExampleEntityService service) {
         super();
 
-        exampleEntityService = checkNotNull(service,
+        exampleEntityService = Objects.requireNonNull(service,
             "Received a null pointer as service");
     }
 

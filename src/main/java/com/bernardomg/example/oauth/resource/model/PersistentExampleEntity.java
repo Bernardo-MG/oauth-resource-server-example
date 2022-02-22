@@ -24,10 +24,6 @@
 
 package com.bernardomg.example.oauth.resource.model;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,7 +32,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.google.common.base.MoreObjects;
+import lombok.Data;
 
 /**
  * Persistent entity for the example application.
@@ -47,6 +43,7 @@ import com.google.common.base.MoreObjects;
  */
 @Entity(name = "ExampleEntity")
 @Table(name = "example_entities")
+@Data
 public class PersistentExampleEntity implements ExampleEntity {
 
     /**
@@ -71,67 +68,5 @@ public class PersistentExampleEntity implements ExampleEntity {
      */
     @Column(name = "name", nullable = false, unique = true)
     private String            name             = "";
-
-    /**
-     * Constructs an example entity.
-     */
-    public PersistentExampleEntity() {
-        super();
-    }
-
-    @Override
-    public final boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if ((obj == null) || (getClass() != obj.getClass())) {
-            return false;
-        }
-
-        final PersistentExampleEntity other = (PersistentExampleEntity) obj;
-        return Objects.equals(id, other.id);
-    }
-
-    /**
-     * Returns the identifier assigned to this entity.
-     * <p>
-     * If no identifier has been assigned yet, then the value will be lower than
-     * zero.
-     *
-     * @return the entity's identifier
-     */
-    @Override
-    public Integer getId() {
-        return id;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public final int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public void setId(final Integer value) {
-        id = checkNotNull(value, "Received a null pointer as identifier");
-    }
-
-    @Override
-    public void setName(final String value) {
-        name = checkNotNull(value, "Received a null pointer as name");
-    }
-
-    @Override
-    public final String toString() {
-        return MoreObjects.toStringHelper(this)
-            .add("id", id)
-            .add("name", name)
-            .toString();
-    }
 
 }

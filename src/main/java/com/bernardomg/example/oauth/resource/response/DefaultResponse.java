@@ -24,9 +24,9 @@
 
 package com.bernardomg.example.oauth.resource.response;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import java.util.Objects;
 
-import com.google.common.base.MoreObjects;
+import lombok.Data;
 
 /**
  * Default implementation of the response.
@@ -36,6 +36,7 @@ import com.google.common.base.MoreObjects;
  * @param <T>
  *            response content type
  */
+@Data
 public class DefaultResponse<T> implements Response<T> {
 
     /**
@@ -64,7 +65,7 @@ public class DefaultResponse<T> implements Response<T> {
     public DefaultResponse(final T cont) {
         super();
 
-        content = checkNotNull(cont, "Missing content");
+        content = Objects.requireNonNull(cont, "Missing content");
     }
 
     /**
@@ -78,46 +79,8 @@ public class DefaultResponse<T> implements Response<T> {
     public DefaultResponse(final T cont, final ResponseStatus stat) {
         super();
 
-        content = checkNotNull(cont, "Missing content");
-        status = checkNotNull(stat, "Missing status");
-    }
-
-    @Override
-    public T getContent() {
-        return content;
-    }
-
-    @Override
-    public ResponseStatus getStatus() {
-        return status;
-    }
-
-    /**
-     * Sets the content.
-     * 
-     * @param value
-     *            response content
-     */
-    public void setContent(final T value) {
-        content = value;
-    }
-
-    /**
-     * Sets the status.
-     * 
-     * @param value
-     *            response status
-     */
-    public void setStatus(final ResponseStatus value) {
-        status = value;
-    }
-
-    @Override
-    public final String toString() {
-        return MoreObjects.toStringHelper(this)
-            .add("status", status)
-            .add("content", content)
-            .toString();
+        content = Objects.requireNonNull(cont, "Missing content");
+        status = Objects.requireNonNull(stat, "Missing status");
     }
 
 }

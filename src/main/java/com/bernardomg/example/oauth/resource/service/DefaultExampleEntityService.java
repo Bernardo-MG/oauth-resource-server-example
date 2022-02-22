@@ -24,7 +24,7 @@
 
 package com.bernardomg.example.oauth.resource.service;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,7 +57,7 @@ public class DefaultExampleEntityService implements ExampleEntityService {
             final ExampleEntityRepository repository) {
         super();
 
-        entityRepository = checkNotNull(repository,
+        entityRepository = Objects.requireNonNull(repository,
             "Received a null pointer as repository");
     }
 
