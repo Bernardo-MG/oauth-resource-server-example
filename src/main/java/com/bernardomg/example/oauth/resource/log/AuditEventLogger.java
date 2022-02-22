@@ -34,7 +34,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Listens for audit events and logs them.
- * 
+ *
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
@@ -48,8 +48,8 @@ public class AuditEventLogger {
         .getLogger(AuditEventLogger.class);
 
     @EventListener
-    public void
-            auditEventHappened(AuditApplicationEvent auditApplicationEvent) {
+    public void auditEventHappened(
+            final AuditApplicationEvent auditApplicationEvent) {
         final AuditEvent auditEvent;
         final Object details;
         final WebAuthenticationDetails webDetails;
@@ -66,7 +66,7 @@ public class AuditEventLogger {
             LOGGER.debug("{}", message);
         }
 
-        details = (WebAuthenticationDetails) auditEvent.getData()
+        details = auditEvent.getData()
             .get("details");
         if (details instanceof WebAuthenticationDetails) {
             webDetails = (WebAuthenticationDetails) details;
