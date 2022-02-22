@@ -11,7 +11,7 @@
    <parent>
       <groupId>com.bernardomg.maven</groupId>
       <artifactId>base-pom</artifactId>
-      <version>1.4.4</version>
+      <version>1.5.0</version>
    </parent>
 
    <!-- ********************************************** -->
@@ -161,14 +161,14 @@
       <jackson.version>2.12.4</jackson.version>
       <jpa.version>2.2</jpa.version>
       <jsonpath.version>2.6.0</jsonpath.version>
-      <junit.jupiter.version>5.7.2</junit.jupiter.version>
-      <liquibase.version>3.10.2</liquibase.version>
-      <log4j.version>2.14.1</log4j.version>
-      <mockito.version>3.11.2</mockito.version>
-      <slf4j.version>1.7.32</slf4j.version>
-      <spring.boot.version>2.5.4</spring.boot.version>
-      <spring.data.train.version>2021.0.4</spring.data.train.version>
-      <spring.version>5.3.10</spring.version>
+      <junit.jupiter.version>5.8.2</junit.jupiter.version>
+      <liquibase.version>4.8.0</liquibase.version>
+      <log4j.version>2.17.1</log4j.version>
+      <mockito.version>4.3.1</mockito.version>
+      <slf4j.version>1.7.36</slf4j.version>
+      <spring.boot.version>2.6.3</spring.boot.version>
+      <spring.data.version>2021.1.2</spring.data.version>
+      <spring.version>5.3.16</spring.version>
       <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
       <!-- ============================================== -->
@@ -176,7 +176,7 @@
       <!-- ============================================== -->
       <!-- ================= MAVEN SITE ================= -->
       <!-- ============================================== -->
-      <site.skin.version>2.2.4</site.skin.version>
+      <site.skin.version>2.2.6</site.skin.version>
    </properties>
 
    <!-- ********************************************** -->
@@ -197,7 +197,7 @@
             <!-- Spring Data BOM -->
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-bom</artifactId>
-            <version>${spring.data.train.version}</version>
+            <version>${spring.data.version}</version>
             <type>pom</type>
             <scope>import</scope>
          </dependency>
