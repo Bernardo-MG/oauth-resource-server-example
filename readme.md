@@ -13,6 +13,7 @@ OAuth 2 Resource Server Example. Integrates with keycloak to authenticate reques
 - [Spring MVC](https://spring.io/)
 - [OAuth2](https://oauth.net/2/)
 - Integrates with [Keycloak](https://www.keycloak.org/)
+- Basic Spring Boot security auditing
 
 ## Documentation
 
