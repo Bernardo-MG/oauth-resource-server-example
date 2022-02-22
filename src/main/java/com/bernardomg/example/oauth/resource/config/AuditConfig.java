@@ -24,39 +24,21 @@
 
 package com.bernardomg.example.oauth.resource.config;
 
+import org.springframework.boot.actuate.audit.AuditEventRepository;
+import org.springframework.boot.actuate.audit.InMemoryAuditEventRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class AuditConfig {
 
-    public SecurityConfig() {
+    public AuditConfig() {
         super();
     }
 
-    @Override
-    protected void configure(final HttpSecurity http) throws Exception {
-        http.authorizeRequests(authz -> authz
-            // Sets authority required for GET requests
-            .antMatchers(HttpMethod.GET, "/rest/**")
-            .hasAuthority("SCOPE_read")
-            // Sets authority required for POST requests
-            .antMatchers(HttpMethod.POST, "/rest")
-            .hasAuthority("SCOPE_write")
-            // Actuators are always available
-            .antMatchers("/actuator/**")
-            .permitAll()
-            // By default all requests require authentication
-            .anyRequest()
-            .authenticated())
-            // OAUTH 2 with JWT
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt())
-            // Stateless session
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    @Bean("auditEventRepository")
+    public AuditEventRepository getAuditEventRepository() {
+        return new InMemoryAuditEventRepository();
     }
 
 }
