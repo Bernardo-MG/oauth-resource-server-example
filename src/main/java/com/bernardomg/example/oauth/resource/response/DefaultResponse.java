@@ -24,9 +24,8 @@
 
 package com.bernardomg.example.oauth.resource.response;
 
-import java.util.Objects;
-
 import lombok.Data;
+import lombok.NonNull;
 
 /**
  * Default implementation of the response.
@@ -42,11 +41,13 @@ public class DefaultResponse<T> implements Response<T> {
     /**
      * Response content.
      */
+    @NonNull
     private T              content;
 
     /**
      * Response status.
      */
+    @NonNull
     private ResponseStatus status = ResponseStatus.SUCCESS;
 
     /**
@@ -62,10 +63,10 @@ public class DefaultResponse<T> implements Response<T> {
      * @param cont
      *            content
      */
-    public DefaultResponse(final T cont) {
+    public DefaultResponse(@NonNull final T cont) {
         super();
 
-        content = Objects.requireNonNull(cont, "Missing content");
+        content = cont;
     }
 
     /**
@@ -76,11 +77,12 @@ public class DefaultResponse<T> implements Response<T> {
      * @param stat
      *            status
      */
-    public DefaultResponse(final T cont, final ResponseStatus stat) {
+    public DefaultResponse(@NonNull final T cont,
+            @NonNull final ResponseStatus stat) {
         super();
 
-        content = Objects.requireNonNull(cont, "Missing content");
-        status = Objects.requireNonNull(stat, "Missing status");
+        content = cont;
+        status = stat;
     }
 
 }
