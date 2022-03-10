@@ -36,5 +36,6 @@ services:
             - security.server.url=http://host.docker.internal:8090/auth/
             - security.admin.username=admin
             - security.admin.password=admin
-            - security.clientId=testClient
+            - security.admin.realm=master
+            - security.clientId=admin-cli
             - security.realm=bmg

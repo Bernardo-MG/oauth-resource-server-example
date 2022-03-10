@@ -23,6 +23,8 @@ public final class DefaultUserRepository implements UserRepository {
 
     private final String realm;
 
+    private final String userRealm;
+
     private final String userName;
 
     private final String password;
@@ -33,7 +35,8 @@ public final class DefaultUserRepository implements UserRepository {
             @Value("${security.realm}") String rlm,
             @Value("${security.clientId}") String cltId,
             @Value("${security.admin.username}") String user,
-            @Value("${security.admin.password}") String pass) {
+            @Value("${security.admin.password}") String pass,
+            @Value("${security.admin.realm}") String userRlm) {
         super();
 
         serverURL = Objects.requireNonNull(url);
@@ -41,6 +44,7 @@ public final class DefaultUserRepository implements UserRepository {
         clientId = Objects.requireNonNull(cltId);
         userName = Objects.requireNonNull(user);
         password = Objects.requireNonNull(pass);
+        userRealm = Objects.requireNonNull(userRlm);
     }
 
     @Override
@@ -51,7 +55,7 @@ public final class DefaultUserRepository implements UserRepository {
 
         keycloak = KeycloakBuilder.builder()
             .serverUrl(serverURL)
-            .realm(realm)
+            .realm(userRealm)
             .grantType(OAuth2Constants.PASSWORD)
             .username(userName)
             .password(password)
