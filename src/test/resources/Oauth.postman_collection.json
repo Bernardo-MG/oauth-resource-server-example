@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e0cd6121-ff16-4bbe-9951-9ff22695431b",
+		"_postman_id": "484db6a1-6aec-41b9-ba77-63b8b5c8768a",
 		"name": "Oauth",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -214,9 +214,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "/entity",
+							"raw": "/user",
 							"path": [
-								"entity"
+								"user"
 							]
 						}
 					},
