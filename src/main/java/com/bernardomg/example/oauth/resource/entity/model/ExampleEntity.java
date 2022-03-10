@@ -22,12 +22,48 @@
  * SOFTWARE.
  */
 
-/**
- * Services.
- * <p>
- * While in the MVC architecture all the logic seems to be contained inside the
- * controllers, using an additional layer of services helps to isolate all the
- * important logic in the application.
- */
+package com.bernardomg.example.oauth.resource.entity.model;
 
-package com.bernardomg.example.oauth.resource.service;
+import java.io.Serializable;
+
+/**
+ * A simple entity to be used as an example.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ */
+public interface ExampleEntity extends Serializable {
+
+    /**
+     * Returns the identifier assigned to this entity.
+     * <p>
+     * If no identifier has been assigned yet, then the value is expected to be
+     * {@code null} or lower than zero.
+     *
+     * @return the entity's identifier
+     */
+    public Integer getId();
+
+    /**
+     * Returns the name of the entity.
+     *
+     * @return the entity's name
+     */
+    public String getName();
+
+    /**
+     * Sets the identifier assigned to this entity.
+     *
+     * @param identifier
+     *            the identifier for the entity
+     */
+    public void setId(final Integer identifier);
+
+    /**
+     * Changes the name of the entity.
+     *
+     * @param name
+     *            the name to set on the entity
+     */
+    public void setName(final String name);
+
+}

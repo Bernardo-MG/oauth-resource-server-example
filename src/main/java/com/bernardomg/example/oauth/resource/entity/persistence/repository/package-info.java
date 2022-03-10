@@ -29,4 +29,4 @@
  * read from.
  */
 
-package com.bernardomg.example.oauth.resource.persistence.repository;
+package com.bernardomg.example.oauth.resource.entity.persistence.repository;

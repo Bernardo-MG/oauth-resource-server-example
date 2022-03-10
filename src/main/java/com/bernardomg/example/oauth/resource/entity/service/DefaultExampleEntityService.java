@@ -22,48 +22,48 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.oauth.resource.model;
+package com.bernardomg.example.oauth.resource.entity.service;
 
-import java.io.Serializable;
+import java.util.Objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.bernardomg.example.oauth.resource.entity.model.PersistentExampleEntity;
+import com.bernardomg.example.oauth.resource.entity.persistence.repository.ExampleEntityRepository;
 
 /**
- * A simple entity to be used as an example.
+ * Default implementation of the example entity service.
  *
  * @author Bernardo Mart&iacute;nez Garrido
+ *
  */
-public interface ExampleEntity extends Serializable {
+@Service
+public class DefaultExampleEntityService implements ExampleEntityService {
 
     /**
-     * Returns the identifier assigned to this entity.
-     * <p>
-     * If no identifier has been assigned yet, then the value is expected to be
-     * {@code null} or lower than zero.
-     *
-     * @return the entity's identifier
+     * Repository for the domain entities handled by the service.
      */
-    public Integer getId();
+    private final ExampleEntityRepository entityRepository;
 
     /**
-     * Returns the name of the entity.
+     * Constructs an entities service with the specified repository.
      *
-     * @return the entity's name
+     * @param repository
+     *            the repository for the entity instances
      */
-    public String getName();
+    @Autowired
+    public DefaultExampleEntityService(
+            final ExampleEntityRepository repository) {
+        super();
 
-    /**
-     * Sets the identifier assigned to this entity.
-     *
-     * @param identifier
-     *            the identifier for the entity
-     */
-    public void setId(final Integer identifier);
+        entityRepository = Objects.requireNonNull(repository,
+            "Received a null pointer as repository");
+    }
 
-    /**
-     * Changes the name of the entity.
-     *
-     * @param name
-     *            the name to set on the entity
-     */
-    public void setName(final String name);
+    @Override
+    public final Iterable<PersistentExampleEntity> getAllEntities() {
+        return entityRepository.findAll();
+    }
 
 }

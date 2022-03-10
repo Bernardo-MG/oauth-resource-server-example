@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.oauth.resource.persistence.repository;
+package com.bernardomg.example.oauth.resource.entity.persistence.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.bernardomg.example.oauth.resource.model.PersistentExampleEntity;
+import com.bernardomg.example.oauth.resource.entity.model.PersistentExampleEntity;
 
 /**
  * Spring-JPA repository for {@link PersistentExampleEntity}.

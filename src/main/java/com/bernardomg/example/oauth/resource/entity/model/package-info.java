@@ -28,4 +28,4 @@
  * These represent the main sets of data which the application works with.
  */
 
-package com.bernardomg.example.oauth.resource.model;
+package com.bernardomg.example.oauth.resource.entity.model;

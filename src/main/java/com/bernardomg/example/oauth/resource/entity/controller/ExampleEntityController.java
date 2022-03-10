@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.oauth.resource.controller;
+package com.bernardomg.example.oauth.resource.entity.controller;
 
 import java.util.Objects;
 
@@ -31,10 +31,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bernardomg.example.oauth.resource.model.ExampleEntity;
+import com.bernardomg.example.oauth.resource.entity.model.ExampleEntity;
+import com.bernardomg.example.oauth.resource.entity.service.ExampleEntityService;
 import com.bernardomg.example.oauth.resource.response.DefaultResponse;
 import com.bernardomg.example.oauth.resource.response.Response;
-import com.bernardomg.example.oauth.resource.service.ExampleEntityService;
 
 /**
  * Rest controller for the example entities.

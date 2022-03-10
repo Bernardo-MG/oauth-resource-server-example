@@ -22,51 +22,25 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.oauth.resource.model;
+package com.bernardomg.example.oauth.resource.entity.service;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import lombok.Data;
+import com.bernardomg.example.oauth.resource.entity.model.ExampleEntity;
 
 /**
- * Persistent entity for the example application.
+ * Service for the example entity domain.
  * <p>
- * This makes use of JPA annotations for the persistence configuration.
+ * This is a domain service just to allow the endpoints querying the entities
+ * they are asked for.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  */
-@Entity(name = "ExampleEntity")
-@Table(name = "example_entities")
-@Data
-public class PersistentExampleEntity implements ExampleEntity {
+public interface ExampleEntityService {
 
     /**
-     * Serialization ID.
+     * Returns all the entities from the DB.
+     *
+     * @return the persisted entities
      */
-    @Transient
-    private static final long serialVersionUID = 1328776989450853491L;
-
-    /**
-     * Entity's ID.
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
-    private Integer           id               = -1;
-
-    /**
-     * Name of the entity.
-     * <p>
-     * This is to have additional data apart from the id, to be used on the
-     * tests.
-     */
-    @Column(name = "name", nullable = false, unique = true)
-    private String            name             = "";
+    public Iterable<? extends ExampleEntity> getAllEntities();
 
 }

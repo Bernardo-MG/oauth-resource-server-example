@@ -22,25 +22,8 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.oauth.resource.service;
-
-import com.bernardomg.example.oauth.resource.model.ExampleEntity;
-
 /**
- * Service for the example entity domain.
- * <p>
- * This is a domain service just to allow the endpoints querying the entities
- * they are asked for.
- *
- * @author Bernardo Mart&iacute;nez Garrido
+ * Controller classes.
  */
-public interface ExampleEntityService {
 
-    /**
-     * Returns all the entities from the DB.
-     *
-     * @return the persisted entities
-     */
-    public Iterable<? extends ExampleEntity> getAllEntities();
-
-}
+package com.bernardomg.example.oauth.resource.entity.controller;
