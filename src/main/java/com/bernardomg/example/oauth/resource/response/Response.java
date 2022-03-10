@@ -26,7 +26,7 @@ package com.bernardomg.example.oauth.resource.response;
 
 /**
  * Response to the frontend.
- * 
+ *
  * @author Bernardo Mart&iacute;nez Garrido
  *
  * @param <T>
@@ -36,14 +36,14 @@ public interface Response<T> {
 
     /**
      * Returns the response content.
-     * 
+     *
      * @return the response content
      */
     public T getContent();
 
     /**
      * Returns the response status.
-     * 
+     *
      * @return the response status
      */
     public ResponseStatus getStatus();

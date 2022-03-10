@@ -38,7 +38,7 @@ import com.bernardomg.example.oauth.resource.service.ExampleEntityService;
 
 /**
  * Rest controller for the example entities.
- * 
+ *
  * @author Bernardo Mart&iacute;nez Garrido
  */
 @RestController
@@ -52,7 +52,7 @@ public class ExampleEntityController {
 
     /**
      * Constructs a controller with the specified dependencies.
-     * 
+     *
      * @param service
      *            example entity service
      */
@@ -66,7 +66,7 @@ public class ExampleEntityController {
 
     /**
      * Returns a collection of entities.
-     * 
+     *
      * @return a collection of entities
      */
     @GetMapping

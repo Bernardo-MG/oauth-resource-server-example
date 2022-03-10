@@ -38,7 +38,7 @@ public interface ExampleEntityService {
 
     /**
      * Returns all the entities from the DB.
-     * 
+     *
      * @return the persisted entities
      */
     public Iterable<? extends ExampleEntity> getAllEntities();

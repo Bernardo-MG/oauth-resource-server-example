@@ -29,7 +29,7 @@ import lombok.NonNull;
 
 /**
  * Default implementation of the response.
- * 
+ *
  * @author Bernardo Mart&iacute;nez Garrido
  *
  * @param <T>
@@ -59,7 +59,7 @@ public class DefaultResponse<T> implements Response<T> {
 
     /**
      * Constructs a response with the specified content.
-     * 
+     *
      * @param cont
      *            content
      */
@@ -71,7 +71,7 @@ public class DefaultResponse<T> implements Response<T> {
 
     /**
      * Constructs a response with the specified content and status.
-     * 
+     *
      * @param cont
      *            content
      * @param stat

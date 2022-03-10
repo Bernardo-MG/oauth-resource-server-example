@@ -29,7 +29,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Application runnable class. This allows Spring Boot to run the application.
- * 
+ *
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
@@ -38,7 +38,7 @@ public class Application {
 
     /**
      * Runnable main method.
-     * 
+     *
      * @param args
      *            execution parameters
      */

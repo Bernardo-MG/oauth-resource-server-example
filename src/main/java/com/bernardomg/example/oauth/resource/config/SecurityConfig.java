@@ -29,6 +29,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -42,10 +44,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests(authz -> authz
             // Sets authority required for GET requests
             .antMatchers(HttpMethod.GET, "/rest/**")
-            .hasAuthority("SCOPE_read")
+            .hasAuthority("read")
             // Sets authority required for POST requests
             .antMatchers(HttpMethod.POST, "/rest")
-            .hasAuthority("SCOPE_write")
+            .hasAuthority("write")
             // Actuators are always available
             .antMatchers("/actuator/**")
             .permitAll()
@@ -53,10 +55,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest()
             .authenticated())
             // OAUTH 2 with JWT
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt())
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt()
+                .jwtAuthenticationConverter(scopeAuthenticationConverter()))
             // Stateless session
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    }
+
+    /**
+     * Automatically handles the scope prefix. So the application does not
+     * require it on the authority name.
+     * 
+     * @return authentication provider set up for the scope
+     */
+    private final JwtAuthenticationConverter scopeAuthenticationConverter() {
+        final JwtAuthenticationConverter converter;
+        final JwtGrantedAuthoritiesConverter authoritiesConverter;
+
+        converter = new JwtAuthenticationConverter();
+        authoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        // Remove scope_ Prefix of
+        authoritiesConverter.setAuthorityPrefix("");
+        // Obtain permission from the field in JWT claim, and the mode is
+        // obtained from the scope or SCP field
+        authoritiesConverter.setAuthoritiesClaimName("scope");
+        converter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
+
+        return converter;
     }
 
 }

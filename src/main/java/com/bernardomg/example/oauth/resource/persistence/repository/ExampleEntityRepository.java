@@ -43,7 +43,7 @@ public interface ExampleEntityRepository
 
     /**
      * Returns all entities with a partial match to the name.
-     * 
+     *
      * @param name
      *            name for searching
      * @param page

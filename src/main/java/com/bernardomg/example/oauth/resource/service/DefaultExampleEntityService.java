@@ -34,7 +34,7 @@ import com.bernardomg.example.oauth.resource.persistence.repository.ExampleEntit
 
 /**
  * Default implementation of the example entity service.
- * 
+ *
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */

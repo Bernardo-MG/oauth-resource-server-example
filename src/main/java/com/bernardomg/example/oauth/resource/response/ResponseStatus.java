@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Response status.
- * 
+ *
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
