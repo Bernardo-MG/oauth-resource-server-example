@@ -194,6 +194,33 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Authorized request\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/entity",
+							"path": [
+								"entity"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"auth": {
