@@ -4,6 +4,7 @@ package com.bernardomg.example.oauth.resource.user.repository;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
@@ -55,11 +56,13 @@ public final class DefaultUserRepository implements UserRepository {
 
         keycloak = KeycloakBuilder.builder()
             .serverUrl(serverURL)
-            .realm(userRealm)
             .grantType(OAuth2Constants.PASSWORD)
+            .realm(userRealm)
             .username(userName)
             .password(password)
             .clientId(clientId)
+            .resteasyClient(new ResteasyClientBuilder().connectionPoolSize(10)
+                .build())
             .build();
 
         realmResource = keycloak.realm(realm);
