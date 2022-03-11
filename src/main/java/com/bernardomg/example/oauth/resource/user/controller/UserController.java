@@ -31,8 +31,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bernardomg.example.oauth.resource.response.DefaultResponse;
-import com.bernardomg.example.oauth.resource.response.Response;
 import com.bernardomg.example.oauth.resource.user.model.User;
 import com.bernardomg.example.oauth.resource.user.service.UserService;
 
@@ -65,12 +63,8 @@ public class UserController {
     }
 
     @GetMapping
-    public Response<Iterable<? extends User>> read() {
-        final Iterable<User> result;
-
-        result = service.getUsers();
-
-        return new DefaultResponse<>(result);
+    public Iterable<? extends User> read() {
+        return service.getUsers();
     }
 
 }

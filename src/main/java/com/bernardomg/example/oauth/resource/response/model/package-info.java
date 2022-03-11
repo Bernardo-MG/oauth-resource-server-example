@@ -26,4 +26,4 @@
  * Response classes.
  */
 
-package com.bernardomg.example.oauth.resource.response;
+package com.bernardomg.example.oauth.resource.response.model;

@@ -33,8 +33,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bernardomg.example.oauth.resource.entity.model.ExampleEntity;
 import com.bernardomg.example.oauth.resource.entity.service.ExampleEntityService;
-import com.bernardomg.example.oauth.resource.response.DefaultResponse;
-import com.bernardomg.example.oauth.resource.response.Response;
 
 /**
  * Rest controller for the example entities.
@@ -70,12 +68,8 @@ public class ExampleEntityController {
      * @return a collection of entities
      */
     @GetMapping
-    public Response<Iterable<? extends ExampleEntity>> read() {
-        final Iterable<? extends ExampleEntity> result;
-
-        result = exampleEntityService.getAllEntities();
-
-        return new DefaultResponse<>(result);
+    public Iterable<? extends ExampleEntity> read() {
+        return exampleEntityService.getAllEntities();
     }
 
 }
