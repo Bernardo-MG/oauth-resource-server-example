@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2021 the original author or authors.
+ * Copyright (c) 2017-2020 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,29 @@
  * SOFTWARE.
  */
 
-/**
- * Response classes.
- */
+package com.bernardomg.example.oauth.resource.user.model;
 
-package com.bernardomg.example.oauth.resource.response;
+/**
+ * User, and all its authentication data.
+ * 
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ */
+public interface User {
+
+    /**
+     * Returns the user username.
+     * 
+     * @return the user username
+     */
+    public String getUsername();
+
+    /**
+     * Sets the user name.
+     * 
+     * @param name
+     *            the user name
+     */
+    public void setUsername(final String name);
+
+}

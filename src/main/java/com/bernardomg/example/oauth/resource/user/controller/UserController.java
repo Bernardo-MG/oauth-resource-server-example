@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.oauth.resource.entity.controller;
+package com.bernardomg.example.oauth.resource.user.controller;
 
 import java.util.Objects;
 
@@ -31,45 +31,40 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bernardomg.example.oauth.resource.entity.model.ExampleEntity;
-import com.bernardomg.example.oauth.resource.entity.service.ExampleEntityService;
+import com.bernardomg.example.oauth.resource.user.model.User;
+import com.bernardomg.example.oauth.resource.user.service.UserService;
 
 /**
- * Rest controller for the example entities.
+ * Rest controller for the users.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  */
 @RestController
-@RequestMapping("/rest/entity")
-public class ExampleEntityController {
+@RequestMapping("/rest/user")
+public class UserController {
 
     /**
      * Example entity service.
      */
-    private final ExampleEntityService exampleEntityService;
+    private final UserService service;
 
     /**
      * Constructs a controller with the specified dependencies.
      *
-     * @param service
-     *            example entity service
+     * @param userService
+     *            user service
      */
     @Autowired
-    public ExampleEntityController(final ExampleEntityService service) {
+    public UserController(final UserService userService) {
         super();
 
-        exampleEntityService = Objects.requireNonNull(service,
+        service = Objects.requireNonNull(userService,
             "Received a null pointer as service");
     }
 
-    /**
-     * Returns a collection of entities.
-     *
-     * @return a collection of entities
-     */
     @GetMapping
-    public Iterable<? extends ExampleEntity> read() {
-        return exampleEntityService.getAllEntities();
+    public Iterable<? extends User> read() {
+        return service.getUsers();
     }
 
 }

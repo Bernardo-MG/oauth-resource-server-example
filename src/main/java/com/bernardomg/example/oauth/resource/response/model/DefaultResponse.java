@@ -22,34 +22,67 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.oauth.resource.response;
+package com.bernardomg.example.oauth.resource.response.model;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Data;
+import lombok.NonNull;
 
 /**
- * Response status.
+ * Default implementation of the response.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *
+ * @param <T>
+ *            response content type
  */
-public enum ResponseStatus {
+@Data
+public class DefaultResponse<T> implements Response<T> {
 
     /**
-     * The request failed.
+     * Response content.
      */
-    FAILURE,
-    /**
-     * The request was a success.
-     */
-    SUCCESS,
-    /**
-     * The request generated warnings.
-     */
-    WARNING;
+    @NonNull
+    private T              content;
 
-    @JsonValue
-    public final String getValue() {
-        return toString().toLowerCase();
+    /**
+     * Response status.
+     */
+    @NonNull
+    private ResponseStatus status = ResponseStatus.SUCCESS;
+
+    /**
+     * Default constructor.
+     */
+    public DefaultResponse() {
+        super();
+    }
+
+    /**
+     * Constructs a response with the specified content.
+     *
+     * @param cont
+     *            content
+     */
+    public DefaultResponse(@NonNull final T cont) {
+        super();
+
+        content = cont;
+    }
+
+    /**
+     * Constructs a response with the specified content and status.
+     *
+     * @param cont
+     *            content
+     * @param stat
+     *            status
+     */
+    public DefaultResponse(@NonNull final T cont,
+            @NonNull final ResponseStatus stat) {
+        super();
+
+        content = cont;
+        status = stat;
     }
 
 }
