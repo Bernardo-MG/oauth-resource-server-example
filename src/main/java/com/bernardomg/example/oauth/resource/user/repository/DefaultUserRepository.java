@@ -34,7 +34,7 @@ public final class DefaultUserRepository implements UserRepository {
 
     public DefaultUserRepository(@Value("${security.server.url}") String url,
             @Value("${security.realm}") String rlm,
-            @Value("${security.clientId}") String cltId,
+            @Value("${security.admin.clientId}") String cltId,
             @Value("${security.admin.username}") String user,
             @Value("${security.admin.password}") String pass,
             @Value("${security.admin.realm}") String userRlm) {

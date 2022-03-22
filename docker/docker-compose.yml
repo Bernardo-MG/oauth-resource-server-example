@@ -37,5 +37,7 @@ services:
             - security.admin.username=admin
             - security.admin.password=admin
             - security.admin.realm=master
-            - security.clientId=admin-cli
+            - security.admin.clientId=admin-cli
             - security.realm=bmg
+            - security.login.clientId=testClient
+            - security.login.url=http://host.docker.internal:8090/auth/realms/bmg/protocol/openid-connect/token
