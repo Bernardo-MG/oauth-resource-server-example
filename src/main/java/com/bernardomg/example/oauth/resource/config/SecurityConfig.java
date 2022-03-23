@@ -26,8 +26,11 @@ package com.bernardomg.example.oauth.resource.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
@@ -41,22 +44,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http.authorizeRequests(authz -> authz
+        final Customizer<ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry> authorizeRequestsCustomizer;
+        final Customizer<OAuth2ResourceServerConfigurer<HttpSecurity>> oauth2ResourceServerCustomizer;
+
+        authorizeRequestsCustomizer = authz -> authz
+            // Actuators are always available
+            .antMatchers("/actuator/**", "/login", "/logout")
+            .permitAll()
             // Sets authority required for GET requests
             .antMatchers(HttpMethod.GET, "/rest/**")
             .hasAuthority("read")
             // Sets authority required for POST requests
-            .antMatchers(HttpMethod.POST, "/rest")
+            .antMatchers(HttpMethod.POST, "/rest/**")
             .hasAuthority("write")
-            // Actuators are always available
-            .antMatchers("/actuator/**")
-            .permitAll()
             // By default all requests require authentication
-            .anyRequest()
-            .authenticated())
+            .antMatchers("/rest/**")
+            .authenticated();
+
+        oauth2ResourceServerCustomizer = oauth2 -> oauth2.jwt()
+            .jwtAuthenticationConverter(scopeAuthenticationConverter());
+
+        http.anonymous()
+            .and()
+            .authorizeRequests(authorizeRequestsCustomizer)
             // OAUTH 2 with JWT
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt()
-                .jwtAuthenticationConverter(scopeAuthenticationConverter()))
+            .oauth2ResourceServer(oauth2ResourceServerCustomizer)
             // Stateless session
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

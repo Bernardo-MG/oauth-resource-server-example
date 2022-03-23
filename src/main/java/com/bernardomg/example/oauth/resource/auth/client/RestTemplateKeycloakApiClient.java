@@ -3,6 +3,7 @@ package com.bernardomg.example.oauth.resource.auth.client;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -14,7 +15,7 @@ import com.bernardomg.example.oauth.resource.auth.model.UserTokenDetails;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public final class DefaultKeycloakApiClient implements KeycloakApiClient {
+public final class RestTemplateKeycloakApiClient implements KeycloakApiClient {
 
     private final String              clientId;
 
@@ -26,15 +27,19 @@ public final class DefaultKeycloakApiClient implements KeycloakApiClient {
 
     private final Map<String, String> tokens = new HashMap<>();
 
-    public DefaultKeycloakApiClient(final String clientId,
-            final String loginEndpoint, final String logoutEndpoint,
-            final String infoEndpoint) {
+    public RestTemplateKeycloakApiClient(final String cltId,
+            final String endpoint, final String realm) {
         super();
 
-        this.clientId = clientId;
-        this.loginEndpoint = loginEndpoint;
-        this.logoutEndpoint = logoutEndpoint;
-        this.infoEndpoint = infoEndpoint;
+        clientId = Objects.requireNonNull(cltId);
+
+        Objects.requireNonNull(endpoint);
+        loginEndpoint = endpoint + "/auth/realms/" + realm
+                + "/protocol/openid-connect/token";
+        logoutEndpoint = endpoint + "/auth/realms/" + realm
+                + "/protocol/openid-connect/logout";
+        infoEndpoint = endpoint + "/auth/realms/" + realm
+                + "/protocol/openid-connect/userinfo";
     }
 
     @Override

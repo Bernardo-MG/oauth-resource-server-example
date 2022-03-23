@@ -1,5 +1,5 @@
 
-package com.bernardomg.example.oauth.resource.auth.service;
+package com.bernardomg.example.oauth.resource.login.service;
 
 import com.bernardomg.example.oauth.resource.user.model.User;
 

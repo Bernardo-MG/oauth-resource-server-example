@@ -40,4 +40,4 @@ services:
             - security.admin.clientId=admin-cli
             - security.realm=bmg
             - security.login.clientId=testClient
-            - security.login.url=http://host.docker.internal:8090/auth/realms/bmg/protocol/openid-connect/token
+            - security.endpoint=http://host.docker.internal:8090/
