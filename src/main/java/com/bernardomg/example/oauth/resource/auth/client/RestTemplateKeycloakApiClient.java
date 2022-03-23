@@ -59,7 +59,7 @@ public final class RestTemplateKeycloakApiClient implements KeycloakApiClient {
         }
 
         headers = new LinkedMultiValueMap<>();
-        headers.add("Authorization", token);
+        headers.add("Authorization", "Bearer " + token);
 
         log.debug("Calling info endpoint: {}", infoEndpoint);
         log.debug("Using headers: {}", headers);
