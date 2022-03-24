@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bernardomg.example.oauth.resource.auth.client.KeycloakApiClient;
-import com.bernardomg.example.oauth.resource.auth.model.UserTokenDetails;
+import com.bernardomg.example.oauth.resource.auth.model.KeycloakUserTokenDetails;
 import com.bernardomg.example.oauth.resource.user.model.DefaultUser;
 import com.bernardomg.example.oauth.resource.user.model.User;
 
@@ -29,7 +29,7 @@ public final class KeycloakLoginService implements LoginService {
 
     @Override
     public final User login(final String username, final String password) {
-        final UserTokenDetails token;
+        final KeycloakUserTokenDetails token;
         final DefaultUser user;
 
         token = keycloakApiClient.login(username, password);

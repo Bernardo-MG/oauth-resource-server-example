@@ -31,13 +31,13 @@ services:
         environment:
             # Auth server
             - spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8090/auth/realms/bmg
-            - spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://host.docker.internal:8090/auth/realms/bmg/protocol/openid-connect/certs
+            - spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://auth-server:8090/auth/realms/bmg/protocol/openid-connect/certs
             # Auth server
-            - security.server.url=http://host.docker.internal:8090/auth/
+            - security.server.url=http://auth-server:8090/auth/
             - security.admin.username=admin
             - security.admin.password=admin
             - security.admin.realm=master
             - security.admin.clientId=admin-cli
             - security.realm=bmg
             - security.login.clientId=testClient
-            - security.endpoint=http://host.docker.internal:8090/
+            - security.endpoint=http://auth-server:8090/

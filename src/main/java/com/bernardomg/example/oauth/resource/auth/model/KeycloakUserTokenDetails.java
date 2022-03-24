@@ -4,7 +4,7 @@ package com.bernardomg.example.oauth.resource.auth.model;
 import lombok.Data;
 
 @Data
-public class UserTokenDetails {
+public class KeycloakUserTokenDetails {
 
     private String access_token;
 
