@@ -111,7 +111,7 @@ public final class RestTemplateKeycloakApiClient implements KeycloakApiClient {
     public final KeycloakUserTokenDetails login(final String username,
             final String password) {
         final MultiValueMap<String, String> map;
-        final KeycloakUserTokenDetails details;
+        final Optional<KeycloakUserTokenDetails> details;
 
         Objects.requireNonNull(username);
         Objects.requireNonNull(password);
@@ -123,12 +123,15 @@ public final class RestTemplateKeycloakApiClient implements KeycloakApiClient {
         map.add("username", username);
         map.add("password", password);
 
-        details = post(loginEndpoint, map, null, KeycloakUserTokenDetails.class)
-            .orElseGet(KeycloakUserTokenDetails::new);
+        details = post(loginEndpoint, map, null,
+            KeycloakUserTokenDetails.class);
 
-        tokens.put(username, details.getAccess_token());
+        if (details.isPresent()) {
+            tokens.put(username, details.get()
+                .getAccess_token());
+        }
 
-        return details;
+        return details.orElse(null);
     }
 
     @Override
