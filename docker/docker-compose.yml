@@ -39,5 +39,5 @@ services:
             - security.admin.realm=master
             - security.admin.clientId=admin-cli
             - security.realm=bmg
-            - security.login.clientId=testClient
+            - security.clientId=testClient
             - security.endpoint=http://auth-server:8090/
