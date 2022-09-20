@@ -24,28 +24,29 @@
 
 package com.bernardomg.example.oauth.resource.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
 
     public SecurityConfig() {
         super();
     }
 
-    @Override
-    protected void configure(final HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
         final Customizer<ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry> authorizeRequestsCustomizer;
-        final Customizer<OAuth2ResourceServerConfigurer<HttpSecurity>> oauth2ResourceServerCustomizer;
+        final Customizer<OAuth2ResourceServerConfigurer<HttpSecurity>>                                      oauth2ResourceServerCustomizer;
 
         authorizeRequestsCustomizer = authz -> authz
             // Actuators are always available
@@ -72,16 +73,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             // Stateless session
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        return http.build();
     }
 
     /**
-     * Automatically handles the scope prefix. So the application does not
-     * require it on the authority name.
-     * 
+     * Automatically handles the scope prefix. So the application does not require it on the authority name.
+     *
      * @return authentication provider set up for the scope
      */
     private final JwtAuthenticationConverter scopeAuthenticationConverter() {
-        final JwtAuthenticationConverter converter;
+        final JwtAuthenticationConverter     converter;
         final JwtGrantedAuthoritiesConverter authoritiesConverter;
 
         converter = new JwtAuthenticationConverter();
