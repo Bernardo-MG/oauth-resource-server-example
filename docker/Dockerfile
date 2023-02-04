@@ -1,7 +1,7 @@
 # -----------------------------------------------------------------------------
 # BUILD STAGE
 # -----------------------------------------------------------------------------
-FROM maven:3.8.2-jdk-17-slim as build
+FROM maven:3.8.5-openjdk-17-slim as build
 
 # Create app directory
 WORKDIR /usr/src/app
