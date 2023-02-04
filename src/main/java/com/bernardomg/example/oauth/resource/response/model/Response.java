@@ -35,17 +35,34 @@ package com.bernardomg.example.oauth.resource.response.model;
 public interface Response<T> {
 
     /**
+     * Creates an empty response.
+     *
+     * @param <T>
+     *            response content type
+     * @return an empty response
+     */
+    public static <T> Response<T> empty() {
+        return new ImmutableResponse<>();
+    }
+
+    /**
+     * Creates a response with the specified content.
+     *
+     * @param <T>
+     *            response content type
+     * @param content
+     *            response content
+     * @return response with the received content
+     */
+    public static <T> Response<T> of(final T content) {
+        return new ImmutableResponse<>(content);
+    }
+
+    /**
      * Returns the response content.
      *
      * @return the response content
      */
     public T getContent();
-
-    /**
-     * Returns the response status.
-     *
-     * @return the response status
-     */
-    public ResponseStatus getStatus();
 
 }

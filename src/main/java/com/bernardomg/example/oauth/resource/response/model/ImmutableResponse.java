@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2021 the original author or authors.
+ * Copyright (c) 2022 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,32 +24,44 @@
 
 package com.bernardomg.example.oauth.resource.response.model;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Data;
+import lombok.NonNull;
 
 /**
- * Response status.
+ * Immutable implementation of the response.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *
+ * @param <T>
+ *            response content type
  */
-public enum ResponseStatus {
+@Data
+public class ImmutableResponse<T> implements Response<T> {
 
     /**
-     * The request failed.
+     * Response content.
      */
-    FAILURE,
-    /**
-     * The request was a success.
-     */
-    SUCCESS,
-    /**
-     * The request generated warnings.
-     */
-    WARNING;
+    private final T content;
 
-    @JsonValue
-    public final String getValue() {
-        return toString().toLowerCase();
+    /**
+     * Default constructor.
+     */
+    public ImmutableResponse() {
+        super();
+
+        content = null;
+    }
+
+    /**
+     * Constructs a response with the specified content.
+     *
+     * @param cont
+     *            content
+     */
+    public ImmutableResponse(@NonNull final T cont) {
+        super();
+
+        content = cont;
     }
 
 }
