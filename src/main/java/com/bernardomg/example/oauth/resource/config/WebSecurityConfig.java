@@ -37,9 +37,9 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtGra
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class SecurityConfig {
+public class WebSecurityConfig {
 
-    public SecurityConfig() {
+    public WebSecurityConfig() {
         super();
     }
 
@@ -50,7 +50,7 @@ public class SecurityConfig {
 
         authorizeRequestsCustomizer = authz -> authz
             // Actuators are always available
-            .antMatchers("/actuator/**", "/login", "/logout")
+            .antMatchers("/actuator/**", "/login")
             .permitAll()
             // Sets authority required for GET requests
             .antMatchers(HttpMethod.GET, "/rest/**")

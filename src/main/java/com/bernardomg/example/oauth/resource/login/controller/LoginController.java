@@ -38,7 +38,7 @@ import com.bernardomg.example.oauth.resource.login.service.LoginService;
 import com.bernardomg.example.oauth.resource.user.model.User;
 
 @RestController
-@RequestMapping("/auth/login")
+@RequestMapping("/login")
 public class LoginController {
 
     private final LoginService service;
@@ -47,8 +47,7 @@ public class LoginController {
     public LoginController(final LoginService serv) {
         super();
 
-        service = Objects.requireNonNull(serv,
-            "Received a null pointer as service");
+        service = Objects.requireNonNull(serv, "Received a null pointer as service");
     }
 
     @PostMapping
