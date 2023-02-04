@@ -20,24 +20,23 @@ import com.bernardomg.example.oauth.resource.user.model.User;
 @Component
 public final class DefaultUserRepository implements UserRepository {
 
-    private final String serverURL;
-
-    private final String realm;
-
-    private final String userRealm;
-
-    private final String userName;
+    private final String clientId;
 
     private final String password;
 
-    private final String clientId;
+    private final String realm;
 
-    public DefaultUserRepository(@Value("${security.server.url}") String url,
-            @Value("${security.realm}") String rlm,
-            @Value("${security.admin.clientId}") String cltId,
-            @Value("${security.admin.username}") String user,
-            @Value("${security.admin.password}") String pass,
-            @Value("${security.admin.realm}") String userRlm) {
+    private final String serverURL;
+
+    private final String userName;
+
+    private final String userRealm;
+
+    public DefaultUserRepository(@Value("${security.server.url}") final String url,
+            @Value("${security.realm}") final String rlm, @Value("${security.admin.clientId}") final String cltId,
+            @Value("${security.admin.username}") final String user,
+            @Value("${security.admin.password}") final String pass,
+            @Value("${security.admin.realm}") final String userRlm) {
         super();
 
         serverURL = Objects.requireNonNull(url);
@@ -50,7 +49,7 @@ public final class DefaultUserRepository implements UserRepository {
 
     @Override
     public final Iterable<User> findAll() {
-        Keycloak keycloak;
+        Keycloak      keycloak;
         RealmResource realmResource;
         UsersResource userResource;
 

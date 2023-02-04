@@ -77,8 +77,7 @@ public class DefaultResponse<T> implements Response<T> {
      * @param stat
      *            status
      */
-    public DefaultResponse(@NonNull final T cont,
-            @NonNull final ResponseStatus stat) {
+    public DefaultResponse(@NonNull final T cont, @NonNull final ResponseStatus stat) {
         super();
 
         content = cont;

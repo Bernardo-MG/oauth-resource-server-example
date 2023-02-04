@@ -39,16 +39,12 @@ public class KeycloakConfig {
     }
 
     @Bean("keycloakApiClient")
-    public KeycloakApiClient getKeycloakApiClient(
-            @Value("${security.admin.clientId}") final String adminCltId,
+    public KeycloakApiClient getKeycloakApiClient(@Value("${security.admin.clientId}") final String adminCltId,
             @Value("${security.admin.username}") final String adminUser,
             @Value("${security.admin.password}") final String adminPass,
-            @Value("${security.admin.realm}") final String adminRlm,
-            @Value("${security.clientId}") final String cltId,
-            @Value("${security.endpoint}") final String endpoint,
-            @Value("${security.realm}") final String realm) {
-        return new RestTemplateKeycloakApiClient(adminCltId, adminUser,
-            adminPass, adminRlm, cltId, endpoint, realm);
+            @Value("${security.admin.realm}") final String adminRlm, @Value("${security.clientId}") final String cltId,
+            @Value("${security.endpoint}") final String endpoint, @Value("${security.realm}") final String realm) {
+        return new RestTemplateKeycloakApiClient(adminCltId, adminUser, adminPass, adminRlm, cltId, endpoint, realm);
     }
 
 }

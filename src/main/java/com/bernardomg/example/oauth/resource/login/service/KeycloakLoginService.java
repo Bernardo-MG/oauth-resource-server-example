@@ -4,8 +4,6 @@ package com.bernardomg.example.oauth.resource.login.service;
 import java.util.Objects;
 
 import org.apache.logging.log4j.util.Strings;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.bernardomg.example.oauth.resource.auth.client.KeycloakApiClient;
 import com.bernardomg.example.oauth.resource.auth.model.KeycloakUserTokenDetails;
@@ -15,12 +13,10 @@ import com.bernardomg.example.oauth.resource.user.model.User;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Service
 public final class KeycloakLoginService implements LoginService {
 
     private final KeycloakApiClient keycloakApiClient;
 
-    @Autowired
     public KeycloakLoginService(final KeycloakApiClient client) {
         super();
 
@@ -30,7 +26,7 @@ public final class KeycloakLoginService implements LoginService {
     @Override
     public final User login(final String username, final String password) {
         final KeycloakUserTokenDetails token;
-        final DefaultUser user;
+        final DefaultUser              user;
 
         token = keycloakApiClient.login(username, password);
         log.debug("Login response: {}", token);
@@ -48,7 +44,7 @@ public final class KeycloakLoginService implements LoginService {
 
     @Override
     public final User logout(final String username) {
-        final String token;
+        final String      token;
         final DefaultUser user;
 
         log.debug("Logging out {}", username);

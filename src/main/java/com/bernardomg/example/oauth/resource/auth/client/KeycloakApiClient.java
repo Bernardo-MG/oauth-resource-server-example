@@ -10,8 +10,7 @@ public interface KeycloakApiClient {
 
     public String getUser(final String username);
 
-    public KeycloakUserTokenDetails login(final String username,
-            final String password);
+    public KeycloakUserTokenDetails login(final String username, final String password);
 
     public String logout(final String username, final String refreshToken);
 

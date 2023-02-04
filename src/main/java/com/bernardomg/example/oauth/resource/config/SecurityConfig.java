@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2021 the original author or authors.
+ * Copyright (c) 2022 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,35 +22,44 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.oauth.resource.user.controller;
+package com.bernardomg.example.oauth.resource.config;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
-import com.bernardomg.example.oauth.resource.user.model.User;
+import com.bernardomg.example.oauth.resource.auth.client.KeycloakApiClient;
+import com.bernardomg.example.oauth.resource.login.service.KeycloakLoginService;
+import com.bernardomg.example.oauth.resource.login.service.LoginService;
+import com.bernardomg.example.oauth.resource.user.repository.UserRepository;
+import com.bernardomg.example.oauth.resource.user.service.DefaultUserService;
 import com.bernardomg.example.oauth.resource.user.service.UserService;
 
-import lombok.AllArgsConstructor;
-
 /**
- * Rest controller for the users.
+ * Security configuration.
  *
  * @author Bernardo Mart&iacute;nez Garrido
+ *
  */
-@RestController
-@RequestMapping("/rest/user")
-@AllArgsConstructor
-public class UserController {
+@Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
+public class SecurityConfig {
 
     /**
-     * Example entity service.
+     * Default constructor.
      */
-    private final UserService service;
+    public SecurityConfig() {
+        super();
+    }
 
-    @GetMapping
-    public Iterable<? extends User> read() {
-        return service.getUsers();
+    @Bean("keycloakLoginService")
+    public LoginService getKeycloakLoginService(final KeycloakApiClient client) {
+        return new KeycloakLoginService(client);
+    }
+
+    @Bean("userService")
+    public UserService getUserService(final UserRepository repo) {
+        return new DefaultUserService(repo);
     }
 
 }

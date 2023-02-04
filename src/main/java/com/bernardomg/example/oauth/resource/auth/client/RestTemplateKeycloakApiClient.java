@@ -41,10 +41,8 @@ public final class RestTemplateKeycloakApiClient implements KeycloakApiClient {
 
     private final String              usersEndpoint;
 
-    public RestTemplateKeycloakApiClient(final String adminCltId,
-            final String adminUser, final String adminPass,
-            final String adminRlm, final String cltId, final String endpoint,
-            final String realm) {
+    public RestTemplateKeycloakApiClient(final String adminCltId, final String adminUser, final String adminPass,
+            final String adminRlm, final String cltId, final String endpoint, final String realm) {
         super();
 
         Objects.requireNonNull(endpoint);
@@ -52,29 +50,21 @@ public final class RestTemplateKeycloakApiClient implements KeycloakApiClient {
         adminClientId = Objects.requireNonNull(adminCltId);
         adminUsername = Objects.requireNonNull(adminUser);
         adminPassword = Objects.requireNonNull(adminPass);
-        adminLoginEndpoint = String.format(
-            "%s/auth/realms/%s/protocol/openid-connect/token", endpoint,
-            adminRlm);
+        adminLoginEndpoint = String.format("%s/auth/realms/%s/protocol/openid-connect/token", endpoint, adminRlm);
 
         clientId = Objects.requireNonNull(cltId);
 
-        loginEndpoint = String.format(
-            "%s/auth/realms/%s/protocol/openid-connect/token", endpoint, realm);
-        logoutEndpoint = String.format(
-            "%s/auth/realms/%s/protocol/openid-connect/logout", endpoint,
-            realm);
-        infoEndpoint = String.format(
-            "%s/auth/realms/%s/protocol/openid-connect/userinfo", endpoint,
-            realm);
-        usersEndpoint = String.format("%s/auth/admin/realms/%s/users", endpoint,
-            realm);
+        loginEndpoint = String.format("%s/auth/realms/%s/protocol/openid-connect/token", endpoint, realm);
+        logoutEndpoint = String.format("%s/auth/realms/%s/protocol/openid-connect/logout", endpoint, realm);
+        infoEndpoint = String.format("%s/auth/realms/%s/protocol/openid-connect/userinfo", endpoint, realm);
+        usersEndpoint = String.format("%s/auth/admin/realms/%s/users", endpoint, realm);
     }
 
     @Override
     public final Iterable<KeycloakUser> getAllUsers() {
-        final String token;
+        final String                        token;
         final MultiValueMap<String, String> headers;
-        final KeycloakUser[] users;
+        final KeycloakUser[]                users;
 
         token = getAdminToken();
 
@@ -82,15 +72,14 @@ public final class RestTemplateKeycloakApiClient implements KeycloakApiClient {
         headers.add("Authorization", "Bearer " + token);
         headers.add("cache-control", "no-cache");
 
-        users = get(usersEndpoint, null, headers, KeycloakUser[].class)
-            .orElse(new KeycloakUser[0]);
+        users = get(usersEndpoint, null, headers, KeycloakUser[].class).orElse(new KeycloakUser[0]);
 
         return Arrays.asList(users);
     }
 
     @Override
     public final String getUser(final String username) {
-        final String token;
+        final String                        token;
         final MultiValueMap<String, String> headers;
 
         Objects.requireNonNull(username);
@@ -108,9 +97,8 @@ public final class RestTemplateKeycloakApiClient implements KeycloakApiClient {
     }
 
     @Override
-    public final KeycloakUserTokenDetails login(final String username,
-            final String password) {
-        final MultiValueMap<String, String> map;
+    public final KeycloakUserTokenDetails login(final String username, final String password) {
+        final MultiValueMap<String, String>      map;
         final Optional<KeycloakUserTokenDetails> details;
 
         Objects.requireNonNull(username);
@@ -123,8 +111,7 @@ public final class RestTemplateKeycloakApiClient implements KeycloakApiClient {
         map.add("username", username);
         map.add("password", password);
 
-        details = post(loginEndpoint, map, null,
-            KeycloakUserTokenDetails.class);
+        details = post(loginEndpoint, map, null, KeycloakUserTokenDetails.class);
 
         if (details.isPresent()) {
             tokens.put(username, details.get()
@@ -135,8 +122,7 @@ public final class RestTemplateKeycloakApiClient implements KeycloakApiClient {
     }
 
     @Override
-    public final String logout(final String username,
-            final String refreshToken) {
+    public final String logout(final String username, final String refreshToken) {
         final MultiValueMap<String, String> map;
 
         Objects.requireNonNull(username);
@@ -150,13 +136,12 @@ public final class RestTemplateKeycloakApiClient implements KeycloakApiClient {
         return post(logoutEndpoint, map, null, String.class).orElse("");
     }
 
-    private final <T> Optional<T> get(final String url,
-            final MultiValueMap<String, String> body,
+    private final <T> Optional<T> get(final String url, final MultiValueMap<String, String> body,
             final MultiValueMap<String, String> headers, final Class<T> cls) {
-        final RestTemplate restTemplate;
+        final RestTemplate                              restTemplate;
         final HttpEntity<MultiValueMap<String, String>> request;
-        final T response;
-        Optional<T> result;
+        final T                                         response;
+        Optional<T>                                     result;
 
         log.debug("Get request to {}", url);
         log.debug("Request body: {}", body);
@@ -180,7 +165,7 @@ public final class RestTemplateKeycloakApiClient implements KeycloakApiClient {
 
     private final String getAdminToken() {
         final MultiValueMap<String, String> map;
-        final KeycloakUserTokenDetails details;
+        final KeycloakUserTokenDetails      details;
         final MultiValueMap<String, String> headers;
 
         map = new LinkedMultiValueMap<>();
@@ -196,20 +181,18 @@ public final class RestTemplateKeycloakApiClient implements KeycloakApiClient {
         log.debug("Calling login endpoint: {}", adminLoginEndpoint);
         log.debug("Using parameters: {}", map);
 
-        details = post(adminLoginEndpoint, map, headers,
-            KeycloakUserTokenDetails.class)
-                .orElseGet(KeycloakUserTokenDetails::new);
+        details = post(adminLoginEndpoint, map, headers, KeycloakUserTokenDetails.class)
+            .orElseGet(KeycloakUserTokenDetails::new);
 
         return details.getAccess_token();
     }
 
-    private final <T> Optional<T> post(final String url,
-            final MultiValueMap<String, String> body,
+    private final <T> Optional<T> post(final String url, final MultiValueMap<String, String> body,
             final MultiValueMap<String, String> headers, final Class<T> cls) {
-        final RestTemplate restTemplate;
+        final RestTemplate                              restTemplate;
         final HttpEntity<MultiValueMap<String, String>> request;
-        final T response;
-        Optional<T> result;
+        final T                                         response;
+        Optional<T>                                     result;
 
         log.debug("Post request to {}", url);
         log.debug("Request body: {}", body);

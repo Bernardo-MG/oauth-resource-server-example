@@ -24,13 +24,12 @@
 
 package com.bernardomg.example.oauth.resource.entity.service;
 
-import java.util.Objects;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bernardomg.example.oauth.resource.entity.model.PersistentExampleEntity;
 import com.bernardomg.example.oauth.resource.entity.persistence.repository.ExampleEntityRepository;
+
+import lombok.AllArgsConstructor;
 
 /**
  * Default implementation of the example entity service.
@@ -39,27 +38,13 @@ import com.bernardomg.example.oauth.resource.entity.persistence.repository.Examp
  *
  */
 @Service
+@AllArgsConstructor
 public class DefaultExampleEntityService implements ExampleEntityService {
 
     /**
      * Repository for the domain entities handled by the service.
      */
     private final ExampleEntityRepository entityRepository;
-
-    /**
-     * Constructs an entities service with the specified repository.
-     *
-     * @param repository
-     *            the repository for the entity instances
-     */
-    @Autowired
-    public DefaultExampleEntityService(
-            final ExampleEntityRepository repository) {
-        super();
-
-        entityRepository = Objects.requireNonNull(repository,
-            "Received a null pointer as repository");
-    }
 
     @Override
     public final Iterable<PersistentExampleEntity> getAllEntities() {

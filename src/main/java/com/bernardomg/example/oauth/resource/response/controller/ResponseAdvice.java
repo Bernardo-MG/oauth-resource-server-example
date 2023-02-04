@@ -20,16 +20,9 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
     }
 
     @Override
-    public boolean supports(MethodParameter returnType,
-            Class<? extends HttpMessageConverter<?>> converterType) {
-        return true;
-    }
-
-    @Override
-    public Object beforeBodyWrite(Object body, MethodParameter returnType,
-            MediaType selectedContentType,
-            Class<? extends HttpMessageConverter<?>> selectedConverterType,
-            ServerHttpRequest request, ServerHttpResponse response) {
+    public Object beforeBodyWrite(final Object body, final MethodParameter returnType,
+            final MediaType selectedContentType, final Class<? extends HttpMessageConverter<?>> selectedConverterType,
+            final ServerHttpRequest request, final ServerHttpResponse response) {
         final Object result;
 
         if (body instanceof Response) {
@@ -39,6 +32,12 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
         }
 
         return result;
+    }
+
+    @Override
+    public boolean supports(final MethodParameter returnType,
+            final Class<? extends HttpMessageConverter<?>> converterType) {
+        return true;
     }
 
 }

@@ -26,7 +26,7 @@ package com.bernardomg.example.oauth.resource.user.model;
 
 /**
  * User, and all its authentication data.
- * 
+ *
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
@@ -34,14 +34,14 @@ public interface User {
 
     /**
      * Returns the user username.
-     * 
+     *
      * @return the user username
      */
     public String getUsername();
 
     /**
      * Sets the user name.
-     * 
+     *
      * @param name
      *            the user name
      */

@@ -24,15 +24,14 @@
 
 package com.bernardomg.example.oauth.resource.entity.controller;
 
-import java.util.Objects;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bernardomg.example.oauth.resource.entity.model.ExampleEntity;
 import com.bernardomg.example.oauth.resource.entity.service.ExampleEntityService;
+
+import lombok.AllArgsConstructor;
 
 /**
  * Rest controller for the example entities.
@@ -41,26 +40,13 @@ import com.bernardomg.example.oauth.resource.entity.service.ExampleEntityService
  */
 @RestController
 @RequestMapping("/rest/entity")
+@AllArgsConstructor
 public class ExampleEntityController {
 
     /**
      * Example entity service.
      */
     private final ExampleEntityService exampleEntityService;
-
-    /**
-     * Constructs a controller with the specified dependencies.
-     *
-     * @param service
-     *            example entity service
-     */
-    @Autowired
-    public ExampleEntityController(final ExampleEntityService service) {
-        super();
-
-        exampleEntityService = Objects.requireNonNull(service,
-            "Received a null pointer as service");
-    }
 
     /**
      * Returns a collection of entities.

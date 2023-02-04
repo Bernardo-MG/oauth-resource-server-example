@@ -63,8 +63,7 @@ public class PersistentExampleEntity implements ExampleEntity {
     /**
      * Name of the entity.
      * <p>
-     * This is to have additional data apart from the id, to be used on the
-     * tests.
+     * This is to have additional data apart from the id, to be used on the tests.
      */
     @Column(name = "name", nullable = false, unique = true)
     private String            name             = "";
