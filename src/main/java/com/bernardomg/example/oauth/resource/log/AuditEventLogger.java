@@ -24,6 +24,8 @@
 
 package com.bernardomg.example.oauth.resource.log;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.audit.AuditEvent;
@@ -44,36 +46,50 @@ public class AuditEventLogger {
     /**
      * Logger for the event listener.
      */
-    private static final Logger LOGGER = LoggerFactory
-        .getLogger(AuditEventLogger.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuditEventLogger.class);
 
     @EventListener
-    public void auditEventHappened(
-            final AuditApplicationEvent auditApplicationEvent) {
-        final AuditEvent auditEvent;
-        final Object details;
+    public void auditEventHappened(final AuditApplicationEvent auditApplicationEvent) {
+        final AuditEvent               auditEvent;
+        final Object                   details;
         final WebAuthenticationDetails webDetails;
-        final Object message;
+        final Object                   message;
+        final Map<String, Object>      data;
+        final StringBuilder            messageBuilder;
 
         auditEvent = auditApplicationEvent.getAuditEvent();
+        data = auditEvent.getData();
 
-        LOGGER.debug("Audit event {} for {}", auditEvent.getType(),
-            auditEvent.getPrincipal());
+        messageBuilder = new StringBuilder();
 
-        message = auditEvent.getData()
-            .get("message");
-        if (message != null) {
-            LOGGER.debug("{}", message);
+        messageBuilder.append("Audit event ");
+        messageBuilder.append(auditEvent.getType());
+        messageBuilder.append(" for ");
+        messageBuilder.append(auditEvent.getPrincipal());
+
+        if (data.containsKey("details")) {
+            details = data.get("details");
+            if (details instanceof WebAuthenticationDetails) {
+                webDetails = (WebAuthenticationDetails) details;
+                if (webDetails.getSessionId() != null) {
+                    messageBuilder.append(" with session id ");
+                    messageBuilder.append(webDetails.getSessionId());
+                }
+                if (webDetails.getRemoteAddress() != null) {
+                    messageBuilder.append(" from address ");
+                    messageBuilder.append(webDetails.getRemoteAddress());
+                }
+            }
         }
 
-        details = auditEvent.getData()
-            .get("details");
-        if (details instanceof WebAuthenticationDetails) {
-            webDetails = (WebAuthenticationDetails) details;
-            LOGGER.debug("Remote IP address: {}",
-                webDetails.getRemoteAddress());
-            LOGGER.debug("Session Id: {}", webDetails.getSessionId());
+        if (data.containsKey("message")) {
+            message = data.get("message");
+            messageBuilder.append(" (");
+            messageBuilder.append(message);
+            messageBuilder.append(")");
         }
+
+        LOGGER.debug(messageBuilder.toString());
     }
 
 }
