@@ -18,7 +18,7 @@ import com.bernardomg.example.ws.security.oauth.resource.security.user.model.Def
 import com.bernardomg.example.ws.security.oauth.resource.security.user.model.User;
 
 @Component
-public final class DefaultUserRepository implements UserRepository {
+public final class KeycloakUserRepository implements UserRepository {
 
     private final String clientId;
 
@@ -32,7 +32,7 @@ public final class DefaultUserRepository implements UserRepository {
 
     private final String userRealm;
 
-    public DefaultUserRepository(@Value("${security.server.url}") final String url,
+    public KeycloakUserRepository(@Value("${security.server.url}") final String url,
             @Value("${security.realm}") final String rlm, @Value("${security.admin.clientId}") final String cltId,
             @Value("${security.admin.username}") final String user,
             @Value("${security.admin.password}") final String pass,
