@@ -2,6 +2,16 @@
 
 OAuth 2 Resource Server Example. Integrates with keycloak to authenticate requests.
 
+The project requires an authorization server. The Docker compose file will take care of this, while running the project:
+
+```
+docker-compose -f docker/docker-compose.yml up
+```
+
+The resource server API is located at [http://localhost:8080/rest/entity](http://localhost:8080/rest/entity), accessible to the user test-user/1234.
+
+Import `src/test/resources/Oauth.postman_collection.json` to get queries for all the operations. Including authentication and reading.
+
 [![Release docs](https://img.shields.io/badge/docs-release-blue.svg)][site-release]
 [![Development docs](https://img.shields.io/badge/docs-develop-blue.svg)][site-develop]
 
@@ -13,6 +23,7 @@ OAuth 2 Resource Server Example. Integrates with keycloak to authenticate reques
 - [Spring MVC](https://spring.io/)
 - [OAuth2](https://oauth.net/2/)
 - Integrates with [Keycloak](https://www.keycloak.org/)
+- Basic Spring Boot security auditing
 
 ## Documentation
 
@@ -33,20 +44,6 @@ mvn verify site
 ```
 
 The verify phase is required, otherwise some of the reports won't be generated.
-
-## Usage
-
-The project requires an authorization server. The Docker compose file will take care of this, while running the project:
-
-```
-docker-compose -f docker/docker-compose.yml up
-```
-
-The resource server API is located at [http://localhost:8080/rest/entity](http://localhost:8080/rest/entity), accessible to the user test-user/1234.
-
-### Requests with Postman
-
-Import `src/test/resources/Oauth.postman_collection.json` to get queries for all the operations. Including authentication and reading.
 
 ## Collaborate
 

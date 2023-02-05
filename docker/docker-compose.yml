@@ -24,12 +24,20 @@ services:
         build:
             context: ../
             dockerfile: ./docker/Dockerfile
-            args:
-                WAR_NAME: resource-server
         container_name: oauth2-resource-server
         ports:
             - "8080:8080"
+            - "8000:8000"
         environment:
             # Auth server
             - spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8090/auth/realms/bmg
             - spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://host.docker.internal:8090/auth/realms/bmg/protocol/openid-connect/certs
+            # Auth server
+            - security.server.url=http://host.docker.internal:8090/auth/
+            - security.admin.username=admin
+            - security.admin.password=admin
+            - security.admin.realm=master
+            - security.admin.clientId=admin-cli
+            - security.realm=bmg
+            - security.clientId=testClient
+            - security.endpoint=http://host.docker.internal:8090/
