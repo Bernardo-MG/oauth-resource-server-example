@@ -50,7 +50,7 @@ public class WebSecurityConfig {
 
         authorizeRequestsCustomizer = authz -> authz
             // Actuators are always available
-            .antMatchers("/actuator/**", "/login")
+            .antMatchers("/actuator/**", "/auth/login")
             .permitAll()
             // Sets authority required for GET requests
             .antMatchers(HttpMethod.GET, "/rest/**")
