@@ -1,54 +1,66 @@
-<document xmlns="http://maven.apache.org/changes/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
-    <properties>
-        <title>Project Changes</title>
-        <author email="programming@bernardomg.com">Bernardo Martínez Garrido</author>
-    </properties>
-    <body>
-        <release version="1.0.0" date="2021-08-15" description="First release">
-            <action dev="bmg" type="update">
-                First release.
-            </action>
-        </release>
-        <release version="1.1.0" date="2021-09-04" description="Keycloak">
-            <action dev="bmg" type="add">
-                Keycloak integration.
-            </action>
-        </release>
-        <release version="1.1.1" date="2021-09-07" description="Clean up">
-            <action dev="bmg" type="add">
-                Cleaned up project, reducing it to the minimal configuration.
-            </action>
-        </release>
-        <release version="1.2.0" date="2021-09-07" description="Environment configuration">
-            <action dev="bmg" type="add">
-                Added Postman requests.
-            </action>
-            <action dev="bmg" type="add">
-                Added Docker Compose file for running the project.
-            </action>
-            <action dev="bmg" type="add">
-                Added default user.
-            </action>
-            <action dev="bmg" type="update">
-                Updated Keycloak.
-            </action>
-        </release>
-        <release version="1.2.1" date="2021-10-07" description="Improved Docker config">
-            <action dev="bmg" type="add">
-                Added Maven dependency caching to Docker image.
-            </action>
-            <action dev="bmg" type="add">
-                Added health check to Docker Compose image dependency.
-            </action>
-            <action dev="bmg" type="update">
-                Updated dependencies.
-            </action>
-        </release>
-        <release version="1.3.0" date="2023-02-05" description="Security example homogenization">
-            <action dev="bmg" type="update">
-                Reworked project to make all the security examples more similar.
-            </action>
-        </release>
-    </body>
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+   <properties>
+      <title>Project Changes</title>
+      <author email="programming@bernardomg.com">Bernardo Martínez Garrido</author>
+   </properties>
+   <body>
+      <release version="1.0.0" date="2021-08-15"
+         description="First release">
+         <action dev="bmg" type="update">
+            First release.
+         </action>
+      </release>
+      <release version="1.1.0" date="2021-09-04"
+         description="Keycloak">
+         <action dev="bmg" type="add">
+            Keycloak integration.
+         </action>
+      </release>
+      <release version="1.1.1" date="2021-09-07"
+         description="Clean up">
+         <action dev="bmg" type="add">
+            Cleaned up project, reducing it to the minimal configuration.
+         </action>
+      </release>
+      <release version="1.2.0" date="2021-09-07"
+         description="Environment configuration">
+         <action dev="bmg" type="add">
+            Added Postman requests.
+         </action>
+         <action dev="bmg" type="add">
+            Added Docker Compose file for running the project.
+         </action>
+         <action dev="bmg" type="add">
+            Added default user.
+         </action>
+         <action dev="bmg" type="update">
+            Updated Keycloak.
+         </action>
+      </release>
+      <release version="1.2.1" date="2021-10-07"
+         description="Improved Docker config">
+         <action dev="bmg" type="add">
+            Added Maven dependency caching to Docker image.
+         </action>
+         <action dev="bmg" type="add">
+            Added health check to Docker Compose image dependency.
+         </action>
+         <action dev="bmg" type="update">
+            Updated dependencies.
+         </action>
+      </release>
+      <release version="1.3.0" date="2023-02-05"
+         description="Security example homogenization">
+         <action dev="bmg" type="update">
+            Reworked project to make all the security examples more similar.
+         </action>
+      </release>
+      <release version="1.3.1" date="2023-02-06" description="More homogenization">
+         <action dev="bmg" type="update">
+            Cleaned up code to make all the security examples more similar.
+         </action>
+      </release>
+   </body>
 </document>

@@ -33,11 +33,9 @@ services:
             - spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8090/auth/realms/bmg
             - spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://host.docker.internal:8090/auth/realms/bmg/protocol/openid-connect/certs
             # Auth server
-            - security.server.url=http://host.docker.internal:8090/auth/
-            - security.admin.username=admin
-            - security.admin.password=admin
-            - security.admin.realm=master
-            - security.admin.clientId=admin-cli
-            - security.realm=bmg
-            - security.clientId=testClient
-            - security.endpoint=http://host.docker.internal:8090/
+            - security.oauth.server.url=http://host.docker.internal:8090/auth/
+            - security.oauth.admin.username=admin
+            - security.oauth.admin.password=admin
+            - security.oauth.admin.realm=master
+            - security.oauth.admin.clientId=admin-cli
+            - security.oauth.realm=bmg

@@ -1,0 +1,32 @@
+{"properties": [
+  {
+    "name": "security.oauth.realm",
+    "type": "java.lang.String",
+    "description": "OAUTH realm"
+  },
+  {
+    "name": "security.oauth.server.url",
+    "type": "java.lang.String",
+    "description": "OAUTH server URL"
+  },
+  {
+    "name": "security.oauth.admin.clientId",
+    "type": "java.lang.String",
+    "description": "OAUTH administrator account client id"
+  },
+  {
+    "name": "security.oauth.admin.username",
+    "type": "java.lang.String",
+    "description": "OAUTH administrator account username"
+  },
+  {
+    "name": "security.oauth.admin.password",
+    "type": "java.lang.String",
+    "description": "OAUTH administrator account password"
+  },
+  {
+    "name": "security.oauth.admin.realm",
+    "type": "java.lang.String",
+    "description": "OAUTH administrator account realm"
+  }
+]}

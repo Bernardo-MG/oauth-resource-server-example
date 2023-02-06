@@ -1,6 +1,8 @@
 # OAuth 2 Resource Server Example
 
-OAuth 2 Resource Server Example. Integrates with keycloak to authenticate requests.
+Example for setting up a OAuth 2 Resource Server on a web service with Spring Boot. Using Keycloak as the OAuth server.
+
+## Usage
 
 The project requires an authorization server. The Docker compose file will take care of this, while running the project:
 
@@ -8,9 +10,17 @@ The project requires an authorization server. The Docker compose file will take 
 docker-compose -f docker/docker-compose.yml up
 ```
 
-The resource server API is located at [http://localhost:8080/rest/entity](http://localhost:8080/rest/entity), accessible to the user test-user/1234.
+And the web service be available at [http://localhost:8080/](http://localhost:8080/).
 
-Import `src/test/resources/Oauth.postman_collection.json` to get queries for all the operations. Including authentication and reading.
+## Requests with Postman
+
+To make things easier import `src/test/resources/Oauth.postman_collection.json` into Postman. It includes all the queries needed to test the project.
+
+## Users
+
+| User      | Password | Permissions |
+|-----------|----------|-------------|
+| test-user | 1234     | all         |
 
 [![Release docs](https://img.shields.io/badge/docs-release-blue.svg)][site-release]
 [![Development docs](https://img.shields.io/badge/docs-develop-blue.svg)][site-develop]

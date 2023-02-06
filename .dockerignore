@@ -1,0 +1,43 @@
+# Common
+README.md
+CHANGELOG.md
+docker-compose.yml
+Dockerfile
+
+# Git folder #
+/.git/
+
+# Compilation folders #
+/bin/
+/target/
+/build/
+
+# Log files #
+/*.log
+/*.log.*
+
+# Eclipse files #
+.buildpath
+.classpath
+.cproject
+.externalToolBuilders/
+.launch
+.loadpath
+.metadata
+.project
+.settings/
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.nak
+*.swp
+*~.nib
+*.pydevproject
+local.properties
+/src/main/resources/rebel.xml
+.springBeans
+
+# IntelliJ Idea files #
+.idea
+*.iml
