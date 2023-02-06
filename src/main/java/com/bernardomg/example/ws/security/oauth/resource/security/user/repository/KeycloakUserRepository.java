@@ -11,9 +11,9 @@ import org.keycloak.admin.client.KeycloakBuilder;
 import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.UserRepresentation;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.bernardomg.example.ws.security.oauth.resource.security.property.OauthProperties;
 import com.bernardomg.example.ws.security.oauth.resource.security.user.model.DefaultUser;
 import com.bernardomg.example.ws.security.oauth.resource.security.user.model.User;
 
@@ -32,19 +32,20 @@ public final class KeycloakUserRepository implements UserRepository {
 
     private final String userRealm;
 
-    public KeycloakUserRepository(@Value("${security.server.url}") final String url,
-            @Value("${security.realm}") final String rlm, @Value("${security.admin.clientId}") final String cltId,
-            @Value("${security.admin.username}") final String user,
-            @Value("${security.admin.password}") final String pass,
-            @Value("${security.admin.realm}") final String userRlm) {
+    public KeycloakUserRepository(final OauthProperties properties) {
         super();
 
-        serverURL = Objects.requireNonNull(url);
-        realm = Objects.requireNonNull(rlm);
-        clientId = Objects.requireNonNull(cltId);
-        userName = Objects.requireNonNull(user);
-        password = Objects.requireNonNull(pass);
-        userRealm = Objects.requireNonNull(userRlm);
+        serverURL = Objects.requireNonNull(properties.getServer()
+            .getUrl());
+        realm = Objects.requireNonNull(properties.getRealm());
+        clientId = Objects.requireNonNull(properties.getAdmin()
+            .getClientId());
+        userName = Objects.requireNonNull(properties.getAdmin()
+            .getUsername());
+        password = Objects.requireNonNull(properties.getAdmin()
+            .getPassword());
+        userRealm = Objects.requireNonNull(properties.getAdmin()
+            .getRealm());
     }
 
     @Override
