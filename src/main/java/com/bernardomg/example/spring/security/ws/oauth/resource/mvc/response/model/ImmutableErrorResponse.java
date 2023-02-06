@@ -27,7 +27,7 @@ package com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.mo
 import java.util.Collection;
 import java.util.Collections;
 
-import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model.Failure;
+import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model.Error;
 
 import lombok.Data;
 import lombok.NonNull;
@@ -36,17 +36,14 @@ import lombok.NonNull;
  * Immutable implementation of the error response.
  *
  * @author Bernardo Mart&iacute;nez Garrido
- *
- * @param <T>
- *            response content type
  */
 @Data
-public class ImmutableErrorResponse<T> implements ErrorResponse {
+public class ImmutableErrorResponse implements ErrorResponse {
 
     /**
      * Response errors.
      */
-    private final Collection<? extends Failure> errors;
+    private final Collection<? extends Error> errors;
 
     /**
      * Constructs a response with the specified errors.
@@ -54,7 +51,7 @@ public class ImmutableErrorResponse<T> implements ErrorResponse {
      * @param errs
      *            errors
      */
-    public ImmutableErrorResponse(@NonNull final Collection<? extends Failure> errs) {
+    public ImmutableErrorResponse(@NonNull final Collection<? extends Error> errs) {
         super();
 
         errors = Collections.unmodifiableCollection(errs);

@@ -22,38 +22,8 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.spring.security.ws.oauth.resource.config;
-
-import org.springframework.boot.actuate.audit.AuditEventRepository;
-import org.springframework.boot.actuate.audit.InMemoryAuditEventRepository;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 /**
- * Audit configuration.
- *
- * @author Bernardo Mart&iacute;nez Garrido
- *
+ * Audit components.
  */
-@Configuration
-public class AuditConfig {
 
-    /**
-     * Default constructor.
-     */
-    public AuditConfig() {
-        super();
-    }
-
-    /**
-     * Audit event repository, to store and read audit data. As this is just an example it will be an in-memory
-     * repository.
-     *
-     * @return audit event repository
-     */
-    @Bean("auditEventRepository")
-    public AuditEventRepository getAuditEventRepository() {
-        return new InMemoryAuditEventRepository();
-    }
-
-}
+package com.bernardomg.example.spring.security.ws.oauth.resource.security.audit;

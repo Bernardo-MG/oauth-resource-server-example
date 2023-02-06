@@ -24,51 +24,73 @@
 
 package com.bernardomg.example.spring.security.ws.oauth.resource.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.entrypoint.ErrorResponseAuthenticationEntryPoint;
+
+/**
+ * Web security configuration.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ */
 @Configuration
 public class WebSecurityConfig {
-
-    /**
-     * Authentication entry point.
-     */
-    @Autowired
-    private AuthenticationEntryPoint authenticationEntryPoint;
 
     public WebSecurityConfig() {
         super();
     }
 
+    /**
+     * Web security filter chain. Sets up all the authentication requirements for requests.
+     *
+     * @param http
+     *            HTTP security component
+     * @return web security filter chain with all authentication requirements
+     * @throws Exception
+     *             if the setup fails
+     */
     @Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
         final Customizer<ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry> authorizeRequestsCustomizer;
         final Customizer<OAuth2ResourceServerConfigurer<HttpSecurity>>                                      oauth2ResourceServerCustomizer;
+        final Customizer<FormLoginConfigurer<HttpSecurity>>                                                 formLoginCustomizer;
+        final Customizer<LogoutConfigurer<HttpSecurity>>                                                    logoutCustomizer;
 
+        // Request authorisations
         authorizeRequestsCustomizer = getAuthorizeRequestsCustomizer();
+
+        // Login form
+        // Disabled
+        formLoginCustomizer = c -> c.disable();
+
+        // Logout form
+        // Disabled
+        logoutCustomizer = c -> c.disable();
 
         oauth2ResourceServerCustomizer = oauth2 -> oauth2.jwt()
             .jwtAuthenticationConverter(scopeAuthenticationConverter());
 
         http.anonymous()
             .and()
-            .exceptionHandling()
-            .authenticationEntryPoint(authenticationEntryPoint)
-            .and()
             .authorizeRequests(authorizeRequestsCustomizer)
             // OAUTH 2 with JWT
             .oauth2ResourceServer(oauth2ResourceServerCustomizer)
+            // Login / logout
+            .formLogin(formLoginCustomizer)
+            .logout(logoutCustomizer)
             // Stateless session
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -76,21 +98,41 @@ public class WebSecurityConfig {
         return http.build();
     }
 
+    /**
+     * Returns the request authorisation configuration.
+     *
+     * @return the request authorisation configuration
+     */
     private final Customizer<ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry>
             getAuthorizeRequestsCustomizer() {
-        return c -> c
-            // Actuators are always available
-            .antMatchers("/actuator/**", "/auth/login")
-            .permitAll()
-            // Sets authority required for GET requests
-            .antMatchers(HttpMethod.GET, "/rest/**")
-            .hasAuthority("read")
-            // Sets authority required for POST requests
-            .antMatchers(HttpMethod.POST, "/rest/**")
-            .hasAuthority("write")
-            // By default all requests require authentication
-            .antMatchers("/rest/**")
-            .authenticated();
+        return c -> {
+            try {
+                c
+                    // Actuators are always available
+                    .antMatchers("/actuator/**", "/auth/login")
+                    .permitAll()
+                    // Sets authority required for GET requests
+                    .antMatchers(HttpMethod.GET, "/rest/**")
+                    .hasAuthority("read")
+                    // Sets authority required for POST requests
+                    .antMatchers(HttpMethod.POST, "/rest/**")
+                    .hasAuthority("write")
+                    // By default all requests require authentication
+                    .antMatchers("/rest/**")
+                    .authenticated()
+                    // Authentication error handling
+                    .and()
+                    .exceptionHandling()
+                    .authenticationEntryPoint(new ErrorResponseAuthenticationEntryPoint())
+                    // Stateless
+                    .and()
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+            } catch (Exception e) {
+                // TODO Handle exception
+                throw new RuntimeException(e);
+            }
+        };
     }
 
     /**

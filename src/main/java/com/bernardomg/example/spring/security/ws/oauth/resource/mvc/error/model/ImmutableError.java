@@ -24,23 +24,22 @@
 
 package com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model;
 
+import lombok.Data;
+import lombok.NonNull;
+
 /**
- * Failure object. Containing a message to tell which error ocurred.
+ * Immutable error.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
-public interface Failure {
-
-    public static Failure of(final String code) {
-        return new ImmutableFailure(code);
-    }
+@Data
+public class ImmutableError implements Error {
 
     /**
-     * Returns the error message.
-     *
-     * @return the error message.
+     * Failure message.
      */
-    public String getMessage();
+    @NonNull
+    private final String message;
 
 }

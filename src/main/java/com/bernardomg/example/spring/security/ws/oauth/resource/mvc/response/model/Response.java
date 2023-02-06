@@ -27,7 +27,7 @@ package com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.mo
 import java.util.Arrays;
 import java.util.Collection;
 
-import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model.Failure;
+import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model.Error;
 
 /**
  * Response to the frontend.
@@ -57,8 +57,8 @@ public interface Response<T> {
      *            failures which caused the error
      * @return an error response
      */
-    public static ErrorResponse error(final Collection<? extends Failure> failures) {
-        return new ImmutableErrorResponse<>(failures);
+    public static ErrorResponse error(final Collection<? extends Error> failures) {
+        return new ImmutableErrorResponse(failures);
     }
 
     /**
@@ -68,8 +68,8 @@ public interface Response<T> {
      *            failure which caused the error
      * @return an error response
      */
-    public static ErrorResponse error(final Failure failure) {
-        return new ImmutableErrorResponse<>(Arrays.asList(failure));
+    public static ErrorResponse error(final Error failure) {
+        return new ImmutableErrorResponse(Arrays.asList(failure));
     }
 
     /**

@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model.Failure;
+import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model.Error;
 import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.model.ErrorResponse;
 import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.model.Response;
 
@@ -56,13 +56,31 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         super();
     }
 
+    /**
+     * Handles authentication and authorisation exceptions.
+     *
+     * @param ex
+     *            exception to handle
+     * @param request
+     *            request
+     * @return unauthorized response
+     */
     @ExceptionHandler({ AuthenticationException.class, AccessDeniedException.class })
-    public final ResponseEntity<Object> handleAuthenticationException(final Exception ex, final WebRequest request) {
+    public final ResponseEntity<Object> handleAuthException(final Exception ex, final WebRequest request) {
         log.error(ex.getMessage(), ex);
 
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 
+    /**
+     * Handles unmapped exceptions.
+     *
+     * @param ex
+     *            exception to handle
+     * @param request
+     *            request
+     * @return internal error response
+     */
     @ExceptionHandler({ RuntimeException.class })
     public final ResponseEntity<Object> handleExceptionDefault(final Exception ex, final WebRequest request) {
         log.error(ex.getMessage(), ex);
@@ -75,7 +93,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         final ErrorResponse response;
         final String        message;
-        final Failure       failure;
+        final Error         failure;
 
         log.error(ex.getMessage());
 
@@ -85,7 +103,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             message = ex.getMessage();
         }
 
-        failure = Failure.of(message);
+        failure = Error.of(message);
         response = Response.error(failure);
 
         return super.handleExceptionInternal(ex, response, headers, status, request);

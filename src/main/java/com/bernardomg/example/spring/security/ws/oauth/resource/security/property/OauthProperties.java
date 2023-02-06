@@ -29,7 +29,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import lombok.Data;
 
 /**
- * JWT configuration properties.
+ * OAuth configuration properties.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *
@@ -38,30 +38,66 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "security.oauth")
 public final class OauthProperties {
 
+    /**
+     * Admin user properties.
+     * 
+     * @author Bernardo
+     *
+     */
     @Data
     public static final class Admin {
 
+        /**
+         * Admin client id.
+         */
         private String clientId;
 
+        /**
+         * Admin password.
+         */
         private String password;
 
+        /**
+         * Admin realm.
+         */
         private String realm;
 
+        /**
+         * Admin username.
+         */
         private String username;
 
     }
 
+    /**
+     * Server properties.
+     * 
+     * @author Bernardo
+     *
+     */
     @Data
     public static final class Server {
 
+        /**
+         * Server URL.
+         */
         private String url;
 
     }
 
+    /**
+     * Admin user properties.
+     */
     private Admin  admin;
 
+    /**
+     * Oauth realm.
+     */
     private String realm;
 
+    /**
+     * Oauth server properties.
+     */
     private Server server;
 
 }

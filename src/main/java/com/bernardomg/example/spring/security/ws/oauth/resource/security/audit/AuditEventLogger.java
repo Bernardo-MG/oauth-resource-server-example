@@ -30,6 +30,7 @@ import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.boot.actuate.audit.listener.AuditApplicationEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,11 +40,18 @@ import lombok.extern.slf4j.Slf4j;
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
+@Component
 @Slf4j
-public class AuditEventLogger {
+public final class AuditEventLogger {
 
+    /**
+     * Intercepts audit events and logs them.
+     *
+     * @param auditApplicationEvent
+     *            event to log
+     */
     @EventListener
-    public void auditEventHappened(final AuditApplicationEvent auditApplicationEvent) {
+    public final void auditEventHappened(final AuditApplicationEvent auditApplicationEvent) {
         final AuditEvent               auditEvent;
         final Object                   details;
         final WebAuthenticationDetails webDetails;

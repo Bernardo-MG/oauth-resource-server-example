@@ -26,7 +26,7 @@ package com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.mo
 
 import java.util.Collection;
 
-import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model.Failure;
+import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model.Error;
 
 /**
  * Error response to the frontend.
@@ -35,6 +35,11 @@ import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model.
  */
 public interface ErrorResponse {
 
-    public Collection<? extends Failure> getErrors();
+    /**
+     * Returns all the errors caused by the request.
+     *
+     * @return request errors
+     */
+    public Collection<? extends Error> getErrors();
 
 }
