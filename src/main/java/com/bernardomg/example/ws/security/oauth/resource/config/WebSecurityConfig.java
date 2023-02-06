@@ -24,6 +24,7 @@
 
 package com.bernardomg.example.ws.security.oauth.resource.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -34,10 +35,17 @@ import org.springframework.security.config.annotation.web.configurers.oauth2.ser
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class WebSecurityConfig {
+
+    /**
+     * Authentication entry point.
+     */
+    @Autowired
+    private AuthenticationEntryPoint authenticationEntryPoint;
 
     public WebSecurityConfig() {
         super();
@@ -48,7 +56,29 @@ public class WebSecurityConfig {
         final Customizer<ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry> authorizeRequestsCustomizer;
         final Customizer<OAuth2ResourceServerConfigurer<HttpSecurity>>                                      oauth2ResourceServerCustomizer;
 
-        authorizeRequestsCustomizer = authz -> authz
+        authorizeRequestsCustomizer = getAuthorizeRequestsCustomizer();
+
+        oauth2ResourceServerCustomizer = oauth2 -> oauth2.jwt()
+            .jwtAuthenticationConverter(scopeAuthenticationConverter());
+
+        http.anonymous()
+            .and()
+            .exceptionHandling()
+            .authenticationEntryPoint(authenticationEntryPoint)
+            .and()
+            .authorizeRequests(authorizeRequestsCustomizer)
+            // OAUTH 2 with JWT
+            .oauth2ResourceServer(oauth2ResourceServerCustomizer)
+            // Stateless session
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        return http.build();
+    }
+
+    private final Customizer<ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry>
+            getAuthorizeRequestsCustomizer() {
+        return c -> c
             // Actuators are always available
             .antMatchers("/actuator/**", "/auth/login")
             .permitAll()
@@ -61,20 +91,6 @@ public class WebSecurityConfig {
             // By default all requests require authentication
             .antMatchers("/rest/**")
             .authenticated();
-
-        oauth2ResourceServerCustomizer = oauth2 -> oauth2.jwt()
-            .jwtAuthenticationConverter(scopeAuthenticationConverter());
-
-        http.anonymous()
-            .and()
-            .authorizeRequests(authorizeRequestsCustomizer)
-            // OAUTH 2 with JWT
-            .oauth2ResourceServer(oauth2ResourceServerCustomizer)
-            // Stateless session
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        return http.build();
     }
 
     /**

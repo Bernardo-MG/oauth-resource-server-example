@@ -28,7 +28,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
+import com.bernardomg.example.ws.security.oauth.resource.security.entrypoint.ErrorResponseAuthenticationEntryPoint;
 import com.bernardomg.example.ws.security.oauth.resource.security.property.OauthProperties;
 import com.bernardomg.example.ws.security.oauth.resource.security.user.repository.KeycloakUserRepository;
 import com.bernardomg.example.ws.security.oauth.resource.security.user.repository.UserRepository;
@@ -51,6 +53,11 @@ public class SecurityConfig {
      */
     public SecurityConfig() {
         super();
+    }
+
+    @Bean("authenticationEntryPoint")
+    public AuthenticationEntryPoint getAuthenticationEntryPoint() {
+        return new ErrorResponseAuthenticationEntryPoint();
     }
 
     @Bean("userRepository")

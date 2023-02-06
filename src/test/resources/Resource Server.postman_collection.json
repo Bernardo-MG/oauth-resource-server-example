@@ -1,91 +1,42 @@
 {
 	"info": {
-		"_postman_id": "68188879-0421-4eff-a708-8e5957e802e5",
-		"name": "Resource Server",
+		"_postman_id": "580860fa-48dc-48eb-aa43-b09876de4e13",
+		"name": "LDAP",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Auth server",
+			"name": "Unauthorized",
 			"item": [
 				{
-					"name": "Generate token",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "client_id",
-									"value": "testClient",
-									"type": "text"
-								},
-								{
-									"key": "username",
-									"value": "test-user",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "1234",
-									"type": "text"
-								},
-								{
-									"key": "grant_type",
-									"value": "password",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "/auth/realms/bmg/protocol/openid-connect/token",
-							"path": [
-								"auth",
-								"realms",
-								"bmg",
-								"protocol",
-								"openid-connect",
-								"token"
-							]
+					"name": "Get data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Unauthorized request\", () => {\r",
+									"  pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response contains the error properties\", () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.errors).to.have.lengthOf(1);\r",
+									"    pm.expect(responseJson.errors[0].message).to.eql('Unauthorized');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "Refresh token",
+					],
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "client_id",
-									"value": "testClient",
-									"type": "text"
-								},
-								{
-									"key": "refresh_token",
-									"value": "",
-									"type": "text"
-								},
-								{
-									"key": "grant_type",
-									"value": "refresh_token",
-									"type": "text"
-								}
-							]
-						},
 						"url": {
-							"raw": "/auth/realms/bmg/protocol/openid-connect/token",
+							"raw": "/rest/entity",
 							"path": [
-								"auth",
-								"realms",
-								"bmg",
-								"protocol",
-								"openid-connect",
-								"token"
+								"rest",
+								"entity"
 							]
 						}
 					},
@@ -98,7 +49,7 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"pm.request.url=\"http://localhost:8090\" + pm.request.url;"
+							""
 						]
 					}
 				},
@@ -114,237 +65,64 @@
 			]
 		},
 		{
-			"name": "Resource server",
+			"name": "Authorized",
 			"item": [
 				{
-					"name": "Unauthorized",
-					"item": [
-						{
-							"name": "Get data",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Unauthorized request\",()=>{\r",
-											"    pm.expect(pm.response.code).to.eql(401);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "/rest/entity",
-									"path": [
-										"rest",
-										"entity"
-									]
-								}
-							},
-							"response": []
-						}
-					],
+					"name": "Get data",
 					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						},
 						{
 							"listen": "test",
 							"script": {
-								"type": "text/javascript",
 								"exec": [
-									""
-								]
+									"pm.test(\"Authorized request\", () => {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The response contains the data\", () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson).to.have.property('content');\r",
+									"});"
+								],
+								"type": "text/javascript"
 							}
-						}
-					]
-				},
-				{
-					"name": "Authorized",
-					"item": [
-						{
-							"name": "Get data",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Authorized request\",()=>{\r",
-											"    pm.expect(pm.response.code).to.eql(200);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "/rest/entity",
-									"path": [
-										"rest",
-										"entity"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get users",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Authorized request\",()=>{\r",
-											"    pm.expect(pm.response.code).to.eql(200);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "/rest/user",
-									"path": [
-										"rest",
-										"user"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Login",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Authorized request\",()=>{\r",
-											"    pm.expect(pm.response.code).to.eql(200);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"username\":\"test-user\",\r\n    \"password\":\"1234\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "/auth/login",
-									"path": [
-										"auth",
-										"login"
-									]
-								}
-							},
-							"response": []
 						}
 					],
-					"auth": {
-						"type": "oauth2",
-						"oauth2": [
-							{
-								"key": "tokenName",
-								"value": "test-token",
-								"type": "string"
-							},
-							{
-								"key": "challengeAlgorithm",
-								"value": "S256",
-								"type": "string"
-							},
-							{
-								"key": "username",
-								"value": "test-user",
-								"type": "string"
-							},
-							{
-								"key": "password",
-								"value": "1234",
-								"type": "string"
-							},
-							{
-								"key": "grant_type",
-								"value": "password_credentials",
-								"type": "string"
-							},
-							{
-								"key": "clientId",
-								"value": "testClient",
-								"type": "string"
-							},
-							{
-								"key": "addTokenTo",
-								"value": "header",
-								"type": "string"
-							},
-							{
-								"key": "client_authentication",
-								"value": "header",
-								"type": "string"
-							},
-							{
-								"key": "accessTokenUrl",
-								"value": "http://localhost:8090/auth/realms/bmg/protocol/openid-connect/token",
-								"type": "string"
-							}
-						]
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/rest/entity",
+							"path": [
+								"rest",
+								"entity"
+							]
+						}
 					},
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					]
+					"response": []
 				}
 			],
+			"auth": {
+				"type": "basic",
+				"basic": [
+					{
+						"key": "username",
+						"value": "admin",
+						"type": "string"
+					},
+					{
+						"key": "password",
+						"value": "1234",
+						"type": "string"
+					}
+				]
+			},
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"pm.request.url=\"http://localhost:8080\" + pm.request.url;"
+							""
 						]
 					}
 				},
@@ -358,6 +136,43 @@
 					}
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.url= pm.collectionVariables.get('url') + pm.request.url;"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost",
+			"type": "default"
+		},
+		{
+			"key": "port",
+			"value": "8080",
+			"type": "default"
+		},
+		{
+			"key": "url",
+			"value": "{{host}}:{{port}}",
+			"type": "default"
 		}
 	]
 }
