@@ -22,8 +22,19 @@
  * SOFTWARE.
  */
 
-/**
- * Response classes.
- */
-
 package com.bernardomg.example.ws.security.oauth.resource.mvc.response.model;
+
+import java.util.Collection;
+
+import com.bernardomg.example.ws.security.oauth.resource.mvc.error.model.Failure;
+
+/**
+ * Error response to the frontend.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ */
+public interface ErrorResponse {
+
+    public Collection<? extends Failure> getErrors();
+
+}

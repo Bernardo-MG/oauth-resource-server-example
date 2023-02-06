@@ -22,8 +22,25 @@
  * SOFTWARE.
  */
 
-/**
- * Response classes.
- */
+package com.bernardomg.example.ws.security.oauth.resource.mvc.error.model;
 
-package com.bernardomg.example.ws.security.oauth.resource.mvc.response.model;
+/**
+ * Failure object. Containing a message to tell which error ocurred.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ */
+public interface Failure {
+
+    public static Failure of(final String code) {
+        return new ImmutableFailure(code);
+    }
+
+    /**
+     * Returns the error message.
+     *
+     * @return the error message.
+     */
+    public String getMessage();
+
+}

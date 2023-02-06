@@ -22,8 +22,42 @@
  * SOFTWARE.
  */
 
-/**
- * Response classes.
- */
-
 package com.bernardomg.example.ws.security.oauth.resource.mvc.response.model;
+
+import java.util.Collection;
+import java.util.Collections;
+
+import com.bernardomg.example.ws.security.oauth.resource.mvc.error.model.Failure;
+
+import lombok.Data;
+import lombok.NonNull;
+
+/**
+ * Immutable implementation of the error response.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ * @param <T>
+ *            response content type
+ */
+@Data
+public class ImmutableErrorResponse<T> implements ErrorResponse {
+
+    /**
+     * Response errors.
+     */
+    private final Collection<? extends Failure> errors;
+
+    /**
+     * Constructs a response with the specified errors.
+     *
+     * @param errs
+     *            errors
+     */
+    public ImmutableErrorResponse(@NonNull final Collection<? extends Failure> errs) {
+        super();
+
+        errors = Collections.unmodifiableCollection(errs);
+    }
+
+}

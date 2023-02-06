@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2021 the original author or authors.
+ * Copyright (c) 2022 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,11 @@
 
 package com.bernardomg.example.ws.security.oauth.resource.mvc.response.model;
 
+import java.util.Arrays;
+import java.util.Collection;
+
+import com.bernardomg.example.ws.security.oauth.resource.mvc.error.model.Failure;
+
 /**
  * Response to the frontend.
  *
@@ -43,6 +48,28 @@ public interface Response<T> {
      */
     public static <T> Response<T> empty() {
         return new ImmutableResponse<>();
+    }
+
+    /**
+     * Creates an error response.
+     *
+     * @param failures
+     *            failures which caused the error
+     * @return an error response
+     */
+    public static ErrorResponse error(final Collection<? extends Failure> failures) {
+        return new ImmutableErrorResponse<>(failures);
+    }
+
+    /**
+     * Creates an error response.
+     *
+     * @param failure
+     *            failure which caused the error
+     * @return an error response
+     */
+    public static ErrorResponse error(final Failure failure) {
+        return new ImmutableErrorResponse<>(Arrays.asList(failure));
     }
 
     /**

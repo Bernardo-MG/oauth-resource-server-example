@@ -23,7 +23,7 @@
  */
 
 /**
- * Response classes.
+ * Error handling.
  */
 
-package com.bernardomg.example.ws.security.oauth.resource.mvc.response.model;
+package com.bernardomg.example.ws.security.oauth.resource.mvc.error.handler;

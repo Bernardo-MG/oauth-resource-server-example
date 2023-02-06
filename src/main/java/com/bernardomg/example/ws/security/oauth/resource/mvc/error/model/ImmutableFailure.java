@@ -22,8 +22,24 @@
  * SOFTWARE.
  */
 
-/**
- * Response classes.
- */
+package com.bernardomg.example.ws.security.oauth.resource.mvc.error.model;
 
-package com.bernardomg.example.ws.security.oauth.resource.mvc.response.model;
+import lombok.Data;
+import lombok.NonNull;
+
+/**
+ * Immutable failure object.
+ *
+ * @author Bernardo Mart&iacute;nez Garrido
+ *
+ */
+@Data
+public class ImmutableFailure implements Failure {
+
+    /**
+     * Failure message.
+     */
+    @NonNull
+    private final String message;
+
+}
