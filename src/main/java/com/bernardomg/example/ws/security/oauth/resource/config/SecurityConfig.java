@@ -28,6 +28,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
+import com.bernardomg.example.ws.security.oauth.resource.security.property.OauthProperties;
+import com.bernardomg.example.ws.security.oauth.resource.security.user.repository.KeycloakUserRepository;
 import com.bernardomg.example.ws.security.oauth.resource.security.user.repository.UserRepository;
 import com.bernardomg.example.ws.security.oauth.resource.security.user.service.DefaultUserService;
 import com.bernardomg.example.ws.security.oauth.resource.security.user.service.UserService;
@@ -47,6 +49,11 @@ public class SecurityConfig {
      */
     public SecurityConfig() {
         super();
+    }
+
+    @Bean("userRepository")
+    public UserRepository getUserRepository(final OauthProperties properties) {
+        return new KeycloakUserRepository(properties);
     }
 
     @Bean("userService")

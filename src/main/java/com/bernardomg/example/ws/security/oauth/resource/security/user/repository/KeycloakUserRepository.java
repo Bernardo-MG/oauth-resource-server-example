@@ -11,13 +11,11 @@ import org.keycloak.admin.client.KeycloakBuilder;
 import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.UserRepresentation;
-import org.springframework.stereotype.Component;
 
 import com.bernardomg.example.ws.security.oauth.resource.security.property.OauthProperties;
 import com.bernardomg.example.ws.security.oauth.resource.security.user.model.DefaultUser;
 import com.bernardomg.example.ws.security.oauth.resource.security.user.model.User;
 
-@Component
 public final class KeycloakUserRepository implements UserRepository {
 
     private final String clientId;
