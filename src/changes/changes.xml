@@ -62,5 +62,7 @@
             Cleaned up code to make all the security examples more similar.
          </action>
       </release>
+      <release version="1.4.0" date="2023-02-06" description="">
+      </release>
    </body>
 </document>
