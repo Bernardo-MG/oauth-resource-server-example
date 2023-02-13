@@ -21,3 +21,11 @@ To make things easier import `src/test/resources/Oauth.postman_collection.json` 
 | User      | Password | Permissions |
 |-----------|----------|-------------|
 | test-user | 1234     | all         |
+
+## Keycloak
+
+To access the Keycloak admin app go to [http://localhost:8090/](http://localhost:8090/).
+
+| User  | Password | Permissions |
+|-------|----------|-------------|
+| admin | admin    | all         |
