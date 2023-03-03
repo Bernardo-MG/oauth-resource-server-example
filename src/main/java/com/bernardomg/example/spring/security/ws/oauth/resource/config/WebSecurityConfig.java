@@ -128,7 +128,7 @@ public class WebSecurityConfig {
                     .and()
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 // TODO Handle exception
                 throw new RuntimeException(e);
             }

@@ -40,6 +40,6 @@ public interface ErrorResponse {
      *
      * @return request errors
      */
-    public Collection<? extends Error> getErrors();
+    public Collection<Error> getErrors();
 
 }

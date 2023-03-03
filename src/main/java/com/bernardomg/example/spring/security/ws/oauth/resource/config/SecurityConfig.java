@@ -55,7 +55,7 @@ public class SecurityConfig {
 
     /**
      * Returns the user repository.
-     * 
+     *
      * @param properties
      *            OAuth configuration properties
      * @return the user repository
@@ -67,7 +67,7 @@ public class SecurityConfig {
 
     /**
      * Returns the user service.
-     * 
+     *
      * @param repo
      *            user repository
      * @return the user service
