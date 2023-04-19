@@ -29,7 +29,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
@@ -64,10 +64,10 @@ public class WebSecurityConfig {
      */
     @Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
-        final Customizer<ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry> authorizeRequestsCustomizer;
-        final Customizer<OAuth2ResourceServerConfigurer<HttpSecurity>>                                      oauth2ResourceServerCustomizer;
-        final Customizer<FormLoginConfigurer<HttpSecurity>>                                                 formLoginCustomizer;
-        final Customizer<LogoutConfigurer<HttpSecurity>>                                                    logoutCustomizer;
+        final Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> authorizeRequestsCustomizer;
+        final Customizer<OAuth2ResourceServerConfigurer<HttpSecurity>>                                             oauth2ResourceServerCustomizer;
+        final Customizer<FormLoginConfigurer<HttpSecurity>>                                                        formLoginCustomizer;
+        final Customizer<LogoutConfigurer<HttpSecurity>>                                                           logoutCustomizer;
 
         // Request authorisations
         authorizeRequestsCustomizer = getAuthorizeRequestsCustomizer();
@@ -85,7 +85,7 @@ public class WebSecurityConfig {
 
         http.anonymous()
             .and()
-            .authorizeRequests(authorizeRequestsCustomizer)
+            .authorizeHttpRequests(authorizeRequestsCustomizer)
             // OAUTH 2 with JWT
             .oauth2ResourceServer(oauth2ResourceServerCustomizer)
             // Login / logout
@@ -103,22 +103,22 @@ public class WebSecurityConfig {
      *
      * @return the request authorisation configuration
      */
-    private final Customizer<ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry>
+    private final Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>
             getAuthorizeRequestsCustomizer() {
         return c -> {
             try {
                 c
                     // Actuators are always available
-                    .antMatchers("/actuator/**", "/auth/login")
+                    .requestMatchers("/actuator/**", "/auth/login")
                     .permitAll()
                     // Sets authority required for GET requests
-                    .antMatchers(HttpMethod.GET, "/rest/**")
+                    .requestMatchers(HttpMethod.GET, "/rest/**")
                     .hasAuthority("read")
                     // Sets authority required for POST requests
-                    .antMatchers(HttpMethod.POST, "/rest/**")
+                    .requestMatchers(HttpMethod.POST, "/rest/**")
                     .hasAuthority("write")
                     // By default all requests require authentication
-                    .antMatchers("/rest/**")
+                    .requestMatchers("/rest/**")
                     .authenticated()
                     // Authentication error handling
                     .and()

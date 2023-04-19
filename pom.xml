@@ -121,11 +121,10 @@
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
-      <hibernate.validator.version>5.4.3.Final</hibernate.validator.version>
       <keycloak.version>19.0.2</keycloak.version>
-      <slf4j.version>1.7.36</slf4j.version>
-      <spring.boot.version>2.7.4</spring.boot.version>
-      <spring.version>5.3.23</spring.version>
+      <micrometer.version>1.10.6</micrometer.version>
+      <spring.boot.version>3.0.5</spring.boot.version>
+      <spring.version>6.0.8</spring.version>
       <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
       <!-- ============================================== -->
@@ -138,7 +137,7 @@
       <!-- ============================================== -->
       <!-- ================= MAVEN SITE ================= -->
       <!-- ============================================== -->
-      <site.skin.version>2.3.1</site.skin.version>
+      <site.skin.version>2.3.2</site.skin.version>
    </properties>
 
    <!-- ********************************************** -->
@@ -288,27 +287,16 @@
       <!-- ============================================== -->
       <dependency>
          <!-- JPA API -->
-         <groupId>javax.persistence</groupId>
-         <artifactId>javax.persistence-api</artifactId>
+         <groupId>jakarta.persistence</groupId>
+         <artifactId>jakarta.persistence-api</artifactId>
       </dependency>
       <!-- ============================================== -->
       <!-- ================ HIBERNATE =================== -->
       <!-- ============================================== -->
       <dependency>
          <!-- Hibernate Core -->
-         <groupId>org.hibernate</groupId>
+         <groupId>org.hibernate.orm</groupId>
          <artifactId>hibernate-core</artifactId>
-      </dependency>
-      <dependency>
-         <!-- Hibernate Ehcache -->
-         <groupId>org.hibernate</groupId>
-         <artifactId>hibernate-ehcache</artifactId>
-      </dependency>
-      <dependency>
-         <!-- Hibernate validator -->
-         <groupId>org.hibernate</groupId>
-         <artifactId>hibernate-validator</artifactId>
-         <version>${hibernate.validator.version}</version>
       </dependency>
       <dependency>
          <!-- Hikari CP -->
@@ -398,6 +386,21 @@
          <!-- Jackson annotations -->
          <groupId>com.fasterxml.jackson.core</groupId>
          <artifactId>jackson-annotations</artifactId>
+      </dependency>
+      <!-- ============================================== -->
+      <!-- ========== DEPENDENCY CONVERGENCE ============ -->
+      <!-- ============================================== -->
+      <dependency>
+         <!-- Micrometer Commons -->
+         <groupId>io.micrometer</groupId>
+         <artifactId>micrometer-commons</artifactId>
+         <version>${micrometer.version}</version>
+      </dependency>
+      <dependency>
+         <!-- Micrometer Observation -->
+         <groupId>io.micrometer</groupId>
+         <artifactId>micrometer-observation</artifactId>
+         <version>${micrometer.version}</version>
       </dependency>
       <!-- ============================================== -->
       <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->
