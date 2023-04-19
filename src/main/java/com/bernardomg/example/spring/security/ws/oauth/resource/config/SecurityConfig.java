@@ -27,7 +27,7 @@ package com.bernardomg.example.spring.security.ws.oauth.resource.config;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.property.OauthProperties;
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.repository.KeycloakUserRepository;
@@ -42,7 +42,7 @@ import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.se
  *
  */
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
+@EnableMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 @EnableConfigurationProperties(OauthProperties.class)
 public class SecurityConfig {
 
@@ -55,7 +55,7 @@ public class SecurityConfig {
 
     /**
      * Returns the user repository.
-     * 
+     *
      * @param properties
      *            OAuth configuration properties
      * @return the user repository
@@ -67,7 +67,7 @@ public class SecurityConfig {
 
     /**
      * Returns the user service.
-     * 
+     *
      * @param repo
      *            user repository
      * @return the user service

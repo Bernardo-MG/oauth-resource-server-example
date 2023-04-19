@@ -57,7 +57,7 @@ public interface Response<T> {
      *            failures which caused the error
      * @return an error response
      */
-    public static ErrorResponse error(final Collection<? extends Error> failures) {
+    public static ErrorResponse error(final Collection<Error> failures) {
         return new ImmutableErrorResponse(failures);
     }
 

@@ -26,7 +26,9 @@ package com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.handl
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -89,8 +91,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @Override
-    protected ResponseEntity<Object> handleExceptionInternal(final Exception ex, final Object body,
-            final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
+    protected ResponseEntity<Object> handleExceptionInternal(final Exception ex, @Nullable final Object body,
+            final HttpHeaders headers, final HttpStatusCode statusCode, final WebRequest request) {
         final ErrorResponse response;
         final String        message;
         final Error         failure;
@@ -106,7 +108,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         failure = Error.of(message);
         response = Response.error(failure);
 
-        return super.handleExceptionInternal(ex, response, headers, status, request);
+        return super.handleExceptionInternal(ex, response, headers, statusCode, request);
     }
 
 }

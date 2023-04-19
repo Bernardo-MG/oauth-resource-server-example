@@ -43,7 +43,7 @@ public class ImmutableErrorResponse implements ErrorResponse {
     /**
      * Response errors.
      */
-    private final Collection<? extends Error> errors;
+    private final Collection<Error> errors;
 
     /**
      * Constructs a response with the specified errors.
@@ -51,7 +51,7 @@ public class ImmutableErrorResponse implements ErrorResponse {
      * @param errs
      *            errors
      */
-    public ImmutableErrorResponse(@NonNull final Collection<? extends Error> errs) {
+    public ImmutableErrorResponse(@NonNull final Collection<Error> errs) {
         super();
 
         errors = Collections.unmodifiableCollection(errs);

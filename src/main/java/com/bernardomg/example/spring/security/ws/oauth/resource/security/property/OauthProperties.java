@@ -40,7 +40,7 @@ public final class OauthProperties {
 
     /**
      * Admin user properties.
-     * 
+     *
      * @author Bernardo
      *
      */
@@ -71,7 +71,7 @@ public final class OauthProperties {
 
     /**
      * Server properties.
-     * 
+     *
      * @author Bernardo
      *
      */
