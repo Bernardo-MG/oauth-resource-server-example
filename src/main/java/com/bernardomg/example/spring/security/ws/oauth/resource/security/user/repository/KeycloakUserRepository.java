@@ -4,7 +4,7 @@ package com.bernardomg.example.spring.security.ws.oauth.resource.security.user.r
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
 import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
@@ -59,7 +59,7 @@ public final class KeycloakUserRepository implements UserRepository {
             .username(userName)
             .password(password)
             .clientId(clientId)
-            .resteasyClient(new ResteasyClientBuilder().connectionPoolSize(10)
+            .resteasyClient(new ResteasyClientBuilderImpl().connectionPoolSize(10)
                 .build())
             .build();
 
