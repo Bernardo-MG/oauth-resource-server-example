@@ -12,14 +12,13 @@ services:
             - KEYCLOAK_ADMIN=admin
             - KEYCLOAK_ADMIN_PASSWORD=admin
             - KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/realm-export.json
+            - KC_HEALTH_ENABLED=true
         command: 
             - start-dev 
             - --import-realm
         healthcheck:
-            test: ["CMD", "curl", "-f", "http://localhost:8080/auth/"]
-            interval: 30s
-            timeout: 10s
-            retries: 5
+            test: ["CMD", "curl", "--head", "-fsS", "http://localhost:8080/health/ready"]
+            start_period: 30s
     resource-server:
         depends_on:
             auth-server:
