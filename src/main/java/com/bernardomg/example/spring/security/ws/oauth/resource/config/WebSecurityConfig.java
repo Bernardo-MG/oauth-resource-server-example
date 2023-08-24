@@ -32,8 +32,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
-import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration.ScopeJwtAuthenticationConverter;
@@ -86,8 +84,8 @@ public class WebSecurityConfig {
                 .requestMatchers("/rest/**")
                 .authenticated())
             // OAUTH2 resource server
-            .oauth2ResourceServer(server -> server.jwt()
-                .jwtAuthenticationConverter(new ScopeJwtAuthenticationConverter()))
+            .oauth2ResourceServer(
+                server -> server.jwt(jwt -> jwt.jwtAuthenticationConverter(new ScopeJwtAuthenticationConverter())))
             // CSRF and CORS
             .csrf(csrf -> csrf.disable())
             .cors(cors -> {})
