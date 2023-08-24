@@ -36,6 +36,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration.ScopeJwtAuthenticationConverter;
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration.WhitelistRequestCustomizer;
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.entrypoint.ErrorResponseAuthenticationEntryPoint;
 
@@ -86,7 +87,7 @@ public class WebSecurityConfig {
                 .authenticated())
             // OAUTH2 resource server
             .oauth2ResourceServer(server -> server.jwt()
-                .jwtAuthenticationConverter(scopeAuthenticationConverter()))
+                .jwtAuthenticationConverter(new ScopeJwtAuthenticationConverter()))
             // CSRF and CORS
             .csrf(csrf -> csrf.disable())
             .cors(cors -> {})
@@ -99,27 +100,6 @@ public class WebSecurityConfig {
             .logout(c -> c.disable());
 
         return http.build();
-    }
-
-    /**
-     * Automatically handles the scope prefix. So the application does not require it on the authority name.
-     *
-     * @return authentication provider set up for the scope
-     */
-    private final JwtAuthenticationConverter scopeAuthenticationConverter() {
-        final JwtAuthenticationConverter     converter;
-        final JwtGrantedAuthoritiesConverter authoritiesConverter;
-
-        converter = new JwtAuthenticationConverter();
-        authoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        // Remove scope_ Prefix of
-        authoritiesConverter.setAuthorityPrefix("");
-        // Obtain permission from the field in JWT claim, and the mode is
-        // obtained from the scope or SCP field
-        authoritiesConverter.setAuthoritiesClaimName("scope");
-        converter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
-
-        return converter;
     }
 
 }
