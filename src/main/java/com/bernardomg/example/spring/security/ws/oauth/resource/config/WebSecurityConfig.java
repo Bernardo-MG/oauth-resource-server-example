@@ -56,10 +56,6 @@ public class WebSecurityConfig {
      *
      * @param http
      *            HTTP security component
-     * @param decoder
-     *            token decoder
-     * @param tokenValidator
-     *            token validator
      * @param userDetailsService
      *            user details service
      * @return web security filter chain with all authentication requirements
