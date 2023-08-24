@@ -24,20 +24,19 @@
 
 package com.bernardomg.example.spring.security.ws.oauth.resource.config;
 
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
-import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration.WhitelistRequestCustomizer;
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.entrypoint.ErrorResponseAuthenticationEntryPoint;
 
 /**
@@ -58,81 +57,48 @@ public class WebSecurityConfig {
      *
      * @param http
      *            HTTP security component
+     * @param decoder
+     *            token decoder
+     * @param tokenValidator
+     *            token validator
+     * @param userDetailsService
+     *            user details service
      * @return web security filter chain with all authentication requirements
      * @throws Exception
      *             if the setup fails
      */
-    @Bean
-    public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
-        final Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry> authorizeRequestsCustomizer;
-        final Customizer<OAuth2ResourceServerConfigurer<HttpSecurity>>                                             oauth2ResourceServerCustomizer;
-        final Customizer<FormLoginConfigurer<HttpSecurity>>                                                        formLoginCustomizer;
-        final Customizer<LogoutConfigurer<HttpSecurity>>                                                           logoutCustomizer;
+    @Bean("webSecurityFilterChain")
+    public SecurityFilterChain getWebSecurityFilterChain(final HttpSecurity http,
+            final UserDetailsService userDetailsService) throws Exception {
 
-        // Request authorisations
-        authorizeRequestsCustomizer = getAuthorizeRequestsCustomizer();
-
-        // Login form
-        // Disabled
-        formLoginCustomizer = c -> c.disable();
-
-        // Logout form
-        // Disabled
-        logoutCustomizer = c -> c.disable();
-
-        oauth2ResourceServerCustomizer = oauth2 -> oauth2.jwt()
-            .jwtAuthenticationConverter(scopeAuthenticationConverter());
-
-        http.anonymous()
-            .and()
-            .authorizeHttpRequests(authorizeRequestsCustomizer)
-            // OAUTH 2 with JWT
-            .oauth2ResourceServer(oauth2ResourceServerCustomizer)
-            // Login / logout
-            .formLogin(formLoginCustomizer)
-            .logout(logoutCustomizer)
-            // Stateless session
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http
+            // Whitelist access
+            .authorizeHttpRequests(new WhitelistRequestCustomizer(Arrays.asList("/actuator/**", "/auth/login")))
+            .authorizeHttpRequests(customizer -> customizer
+                // Sets authority required for GET requests
+                .requestMatchers(HttpMethod.GET, "/rest/**")
+                .hasAuthority("read")
+                // Sets authority required for POST requests
+                .requestMatchers(HttpMethod.POST, "/rest/**")
+                .hasAuthority("write")
+                // By default all requests require authentication
+                .requestMatchers("/rest/**")
+                .authenticated())
+            // OAUTH2 resource server
+            .oauth2ResourceServer(server -> server.jwt()
+                .jwtAuthenticationConverter(scopeAuthenticationConverter()))
+            // CSRF and CORS
+            .csrf(csrf -> csrf.disable())
+            .cors(cors -> {})
+            // Authentication error handling
+            .exceptionHandling(handler -> handler.authenticationEntryPoint(new ErrorResponseAuthenticationEntryPoint()))
+            // Stateless
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            // Disable login and logout forms
+            .formLogin(c -> c.disable())
+            .logout(c -> c.disable());
 
         return http.build();
-    }
-
-    /**
-     * Returns the request authorisation configuration.
-     *
-     * @return the request authorisation configuration
-     */
-    private final Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>
-            getAuthorizeRequestsCustomizer() {
-        return c -> {
-            try {
-                c
-                    // Actuators are always available
-                    .requestMatchers("/actuator/**", "/auth/login")
-                    .permitAll()
-                    // Sets authority required for GET requests
-                    .requestMatchers(HttpMethod.GET, "/rest/**")
-                    .hasAuthority("read")
-                    // Sets authority required for POST requests
-                    .requestMatchers(HttpMethod.POST, "/rest/**")
-                    .hasAuthority("write")
-                    // By default all requests require authentication
-                    .requestMatchers("/rest/**")
-                    .authenticated()
-                    // Authentication error handling
-                    .and()
-                    .exceptionHandling()
-                    .authenticationEntryPoint(new ErrorResponseAuthenticationEntryPoint())
-                    // Stateless
-                    .and()
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-            } catch (final Exception e) {
-                // TODO Handle exception
-                throw new RuntimeException(e);
-            }
-        };
     }
 
     /**

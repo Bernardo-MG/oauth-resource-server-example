@@ -10,7 +10,7 @@
    <parent>
       <groupId>com.bernardomg.maven</groupId>
       <artifactId>base-pom</artifactId>
-      <version>1.5.3</version>
+      <version>1.5.4</version>
    </parent>
 
    <!-- ********************************************** -->
@@ -43,17 +43,17 @@
       <connection>scm:git:https://github.com/bernardo-mg/oauth-resource-server-example.git</connection>
       <developerConnection>scm:git:https://github.com/bernardo-mg/oauth-resource-server-example.git</developerConnection>
       <tag>head</tag>
-      <url>https://www.github.com/bernardo-mg/oauth-resource-server-example</url>
+      <url>https://github.com/bernardo-mg/oauth-resource-server-example</url>
    </scm>
 
    <issueManagement>
       <system>GitHub</system>
-      <url>https://www.github.com/bernardo-mg/oauth-resource-server-example/issues</url>
+      <url>https://github.com/bernardo-mg/oauth-resource-server-example/issues</url>
    </issueManagement>
 
    <ciManagement>
       <system>Github</system>
-      <url>https://www.github.com/bernardo-mg/oauth-resource-server-example/actions</url>
+      <url>https://github.com/bernardo-mg/oauth-resource-server-example/actions</url>
       <notifiers />
    </ciManagement>
 
@@ -121,10 +121,9 @@
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
-      <keycloak.version>19.0.2</keycloak.version>
-      <micrometer.version>1.10.6</micrometer.version>
-      <spring.boot.version>3.0.5</spring.boot.version>
-      <spring.version>6.0.8</spring.version>
+      <keycloak.version>22.0.1</keycloak.version>
+      <spring.boot.version>3.1.2</spring.boot.version>
+      <spring.version>6.0.11</spring.version>
       <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
       <!-- ============================================== -->
@@ -155,7 +154,7 @@
             <scope>import</scope>
          </dependency>
          <dependency>
-            <!-- Spring Boot BOM -->
+            <!-- Spring Boot Dependencies BOM -->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-dependencies</artifactId>
             <version>${spring.boot.version}</version>
@@ -386,21 +385,6 @@
          <!-- Jackson annotations -->
          <groupId>com.fasterxml.jackson.core</groupId>
          <artifactId>jackson-annotations</artifactId>
-      </dependency>
-      <!-- ============================================== -->
-      <!-- ========== DEPENDENCY CONVERGENCE ============ -->
-      <!-- ============================================== -->
-      <dependency>
-         <!-- Micrometer Commons -->
-         <groupId>io.micrometer</groupId>
-         <artifactId>micrometer-commons</artifactId>
-         <version>${micrometer.version}</version>
-      </dependency>
-      <dependency>
-         <!-- Micrometer Observation -->
-         <groupId>io.micrometer</groupId>
-         <artifactId>micrometer-observation</artifactId>
-         <version>${micrometer.version}</version>
       </dependency>
       <!-- ============================================== -->
       <!-- ======= TEST ENVIRONMENT DEPENDENCIES ======== -->
