@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c8fd0ddd-5818-4357-80dd-c35a60cb5ba3",
+		"_postman_id": "f386df28-8aad-4e80-adc5-32c56eea7a28",
 		"name": "Resource Server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -96,108 +96,10 @@
 				"type": "oauth2",
 				"oauth2": [
 					{
-						"key": "tokenName",
-						"value": "test-token",
-						"type": "string"
-					},
-					{
-						"key": "challengeAlgorithm",
-						"value": "S256",
-						"type": "string"
-					},
-					{
-						"key": "username",
-						"value": "test-user",
-						"type": "string"
-					},
-					{
-						"key": "password",
-						"value": "1234",
-						"type": "string"
-					},
-					{
-						"key": "grant_type",
-						"value": "password_credentials",
-						"type": "string"
-					},
-					{
-						"key": "clientId",
-						"value": "testClient",
-						"type": "string"
-					},
-					{
-						"key": "addTokenTo",
-						"value": "header",
-						"type": "string"
-					},
-					{
-						"key": "client_authentication",
-						"value": "header",
-						"type": "string"
-					},
-					{
 						"key": "accessTokenUrl",
-						"value": "http://localhost:8090/auth/realms/bmg/protocol/openid-connect/token",
+						"value": "http://localhost:8090/realms/bmg/protocol/openid-connect/token",
 						"type": "string"
-					}
-				]
-			},
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			]
-		},
-		{
-			"name": "Users",
-			"item": [
-				{
-					"name": "Get users",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Authorized request\",()=>{\r",
-									"    pm.expect(pm.response.code).to.eql(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "/rest/user",
-							"path": [
-								"rest",
-								"user"
-							]
-						}
 					},
-					"response": []
-				}
-			],
-			"auth": {
-				"type": "oauth2",
-				"oauth2": [
 					{
 						"key": "tokenName",
 						"value": "test-token",
@@ -236,11 +138,6 @@
 					{
 						"key": "client_authentication",
 						"value": "header",
-						"type": "string"
-					},
-					{
-						"key": "accessTokenUrl",
-						"value": "http://localhost:8090/auth/realms/bmg/protocol/openid-connect/token",
 						"type": "string"
 					}
 				]
