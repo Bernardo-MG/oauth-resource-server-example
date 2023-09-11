@@ -1,26 +1,28 @@
 version: '3'
 services:
     auth-server:
-        image: quay.io/keycloak/keycloak:15.0.2
+        image: quay.io/keycloak/keycloak:22.0.1
         container_name: oauth2-auth-server
         volumes:
-          - ./imports:/opt/jboss/keycloak/imports
+          - ./imports:/opt/keycloak/data/import/
         ports:
             - "8090:8080"
             - "9990:9990"
         environment:
-            - KEYCLOAK_USER=admin
-            - KEYCLOAK_PASSWORD=admin
+            - KEYCLOAK_ADMIN=admin
+            - KEYCLOAK_ADMIN_PASSWORD=admin
             - KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/realm-export.json
-        healthcheck:
-            test: ["CMD", "curl", "-f", "http://localhost:8080/auth/"]
-            interval: 30s
-            timeout: 10s
-            retries: 5
+            - KC_HEALTH_ENABLED=true
+        command: 
+            - start-dev 
+            - --import-realm
+        # healthcheck:
+        #     test: ["CMD", "curl", "--head", "-fsS", "http://localhost:8080/health/ready"]
+        #     start_period: 1m
     resource-server:
-        depends_on:
-            auth-server:
-                condition: service_healthy
+        # depends_on:
+        #     auth-server:
+        #         condition: service_healthy
         build:
             context: ../
             dockerfile: ./docker/Dockerfile
@@ -30,8 +32,8 @@ services:
             - "8000:8000"
         environment:
             # Auth server
-            - spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8090/auth/realms/bmg
-            - spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://host.docker.internal:8090/auth/realms/bmg/protocol/openid-connect/certs
+            - spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:8090/realms/bmg
+            - spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://host.docker.internal:8090/realms/bmg/protocol/openid-connect/certs
             # Auth server
             - security.oauth.server.url=http://host.docker.internal:8090/auth/
             - security.oauth.admin.username=admin
