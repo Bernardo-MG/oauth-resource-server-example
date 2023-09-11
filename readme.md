@@ -14,7 +14,7 @@ And the web service be available at [http://localhost:8080/](http://localhost:80
 
 ## Requests with Postman
 
-To make things easier import `src/test/resources/Oauth.postman_collection.json` into Postman. It includes all the queries needed to test the project.
+To make things easier import `src/test/resources/resource_server.postman_collection.json` into Postman. It includes all the queries needed to test the project.
 
 ## Users
 
