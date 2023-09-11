@@ -24,8 +24,6 @@
 
 package com.bernardomg.example.spring.security.ws.oauth.resource.config;
 
-import java.util.Arrays;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -34,7 +32,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration.ScopeJwtAuthenticationConverter;
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration.WhitelistRequestCustomizer;
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.entrypoint.ErrorResponseAuthenticationEntryPoint;
 
 /**
@@ -64,7 +61,9 @@ public class WebSecurityConfig {
 
         http
             // Whitelist access
-            .authorizeHttpRequests(new WhitelistRequestCustomizer(Arrays.asList("/actuator/**", "/auth/login")))
+            .authorizeHttpRequests(c -> c.requestMatchers("/actuator/**", "/auth/login")
+                .permitAll())
+            // Route authentication
             .authorizeHttpRequests(customizer -> customizer
                 // Sets authority required for GET requests
                 .requestMatchers(HttpMethod.GET, "/rest/**")
