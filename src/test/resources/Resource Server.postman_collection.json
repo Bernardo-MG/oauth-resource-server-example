@@ -27,9 +27,8 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "/rest/entity",
+							"raw": "/entity",
 							"path": [
-								"rest",
 								"entity"
 							]
 						}
@@ -81,9 +80,8 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "/rest/entity",
+							"raw": "/entity",
 							"path": [
-								"rest",
 								"entity"
 							]
 						}

@@ -66,13 +66,13 @@ public class WebSecurityConfig {
             // Route authentication
             .authorizeHttpRequests(customizer -> customizer
                 // Sets authority required for GET requests
-                .requestMatchers(HttpMethod.GET, "/rest/**")
+                .requestMatchers(HttpMethod.GET, "/**")
                 .hasAuthority("read")
                 // Sets authority required for POST requests
-                .requestMatchers(HttpMethod.POST, "/rest/**")
+                .requestMatchers(HttpMethod.POST, "/**")
                 .hasAuthority("write")
                 // By default all requests require authentication
-                .requestMatchers("/rest/**")
+                .requestMatchers("/**")
                 .authenticated())
             // OAUTH2 resource server
             .oauth2ResourceServer(
