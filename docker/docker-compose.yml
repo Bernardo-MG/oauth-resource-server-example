@@ -16,13 +16,13 @@ services:
         command: 
             - start-dev 
             - --import-realm
-        healthcheck:
-            test: ["CMD", "curl", "--head", "-fsS", "http://localhost:8080/health/ready"]
-            start_period: 1m
+        # healthcheck:
+        #     test: ["CMD", "curl", "--head", "-fsS", "http://localhost:8080/health/ready"]
+        #     start_period: 1m
     resource-server:
-        depends_on:
-            auth-server:
-                condition: service_healthy
+        # depends_on:
+        #     auth-server:
+        #         condition: service_healthy
         build:
             context: ../
             dockerfile: ./docker/Dockerfile
