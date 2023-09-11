@@ -31,7 +31,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration.ScopeJwtAuthenticationConverter;
@@ -56,15 +55,12 @@ public class WebSecurityConfig {
      *
      * @param http
      *            HTTP security component
-     * @param userDetailsService
-     *            user details service
      * @return web security filter chain with all authentication requirements
      * @throws Exception
      *             if the setup fails
      */
     @Bean("webSecurityFilterChain")
-    public SecurityFilterChain getWebSecurityFilterChain(final HttpSecurity http,
-            final UserDetailsService userDetailsService) throws Exception {
+    public SecurityFilterChain getWebSecurityFilterChain(final HttpSecurity http) throws Exception {
 
         http
             // Whitelist access
