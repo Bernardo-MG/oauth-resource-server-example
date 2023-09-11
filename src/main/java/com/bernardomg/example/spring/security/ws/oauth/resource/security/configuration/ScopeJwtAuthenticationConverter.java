@@ -1,7 +1,8 @@
+
 package com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration;
+
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
-
 
 public final class ScopeJwtAuthenticationConverter extends JwtAuthenticationConverter {
 
@@ -9,7 +10,7 @@ public final class ScopeJwtAuthenticationConverter extends JwtAuthenticationConv
         super();
 
         final JwtGrantedAuthoritiesConverter authoritiesConverter;
-        
+
         authoritiesConverter = new JwtGrantedAuthoritiesConverter();
         // Remove scope_ Prefix of
         authoritiesConverter.setAuthorityPrefix("");
@@ -18,5 +19,5 @@ public final class ScopeJwtAuthenticationConverter extends JwtAuthenticationConv
         authoritiesConverter.setAuthoritiesClaimName("scope");
         setJwtGrantedAuthoritiesConverter(authoritiesConverter);
     }
-    
+
 }
