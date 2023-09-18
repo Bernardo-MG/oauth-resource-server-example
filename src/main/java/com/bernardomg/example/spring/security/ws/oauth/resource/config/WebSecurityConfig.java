@@ -61,18 +61,18 @@ public class WebSecurityConfig {
 
         http
             // Whitelist access
-            .authorizeHttpRequests(c -> c.requestMatchers("/actuator/**", "/auth/login")
+            .authorizeHttpRequests(c -> c.requestMatchers("/actuator/**")
                 .permitAll())
             // Route authentication
             .authorizeHttpRequests(customizer -> customizer
                 // Sets authority required for GET requests
-                .requestMatchers(HttpMethod.GET, "/**")
+                .requestMatchers(HttpMethod.GET, "/entity/**")
                 .hasAuthority("read")
                 // Sets authority required for POST requests
-                .requestMatchers(HttpMethod.POST, "/**")
+                .requestMatchers(HttpMethod.POST, "/entity/**")
                 .hasAuthority("write")
                 // By default all requests require authentication
-                .requestMatchers("/**")
+                .requestMatchers("/entity/**")
                 .authenticated())
             // OAUTH2 resource server
             .oauth2ResourceServer(
