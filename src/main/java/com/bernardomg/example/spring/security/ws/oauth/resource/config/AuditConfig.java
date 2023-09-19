@@ -29,6 +29,8 @@ import org.springframework.boot.actuate.audit.InMemoryAuditEventRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.audit.AuditEventLogger;
+
 /**
  * Audit configuration.
  *
@@ -43,6 +45,16 @@ public class AuditConfig {
      */
     public AuditConfig() {
         super();
+    }
+
+    /**
+     * Audit event logger.
+     *
+     * @return audit event logger
+     */
+    @Bean("auditEventLogger")
+    public AuditEventLogger getAuditEventLogger() {
+        return new AuditEventLogger();
     }
 
     /**
