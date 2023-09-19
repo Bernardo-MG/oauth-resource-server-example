@@ -1,0 +1,280 @@
+{
+	"info": {
+		"_postman_id": "17edc43a-d12d-4b9a-ab0d-74cb63d63553",
+		"name": "Resource Server",
+		"description": "Requests for the resource server example. Check it at [https://github.com/Bernardo-MG/oauth-resource-server-example](https://github.com/Bernardo-MG/oauth-resource-server-example)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29322077",
+		"_collection_link": "https://martian-astronaut-39097.postman.co/workspace/3c194cbc-99d2-481a-a2d3-07aae427b74c/collection/29322077-17edc43a-d12d-4b9a-ab0d-74cb63d63553?action=share&creator=29322077&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Unauthorized",
+			"item": [
+				{
+					"name": "Unauthorized request (authentication error)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Unauthorized request\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(401);\r",
+									"    pm.expect(pm.response.json().errors[0].message).to.equal(\"Unauthorized\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/entity",
+							"path": [
+								"entity"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Unauthorized requests. These are using no authentication, and are meanth to generate authentication errors.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Authorized",
+			"item": [
+				{
+					"name": "Authorized request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Authorized request\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"    pm.expect(pm.response.json().content).to.not.lengthOf(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/entity",
+							"path": [
+								"entity"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Authorized requests. They handle OAuth 2 requests, and come ready to generate tokens.",
+			"auth": {
+				"type": "oauth2",
+				"oauth2": [
+					{
+						"key": "accessTokenUrl",
+						"value": "{{securityTokenUrl}}",
+						"type": "string"
+					},
+					{
+						"key": "password",
+						"value": "{{securityPassword}}",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "{{securityUsername}}",
+						"type": "string"
+					},
+					{
+						"key": "clientId",
+						"value": "{{securityClient}}",
+						"type": "string"
+					},
+					{
+						"key": "tokenName",
+						"value": "test-token",
+						"type": "string"
+					},
+					{
+						"key": "challengeAlgorithm",
+						"value": "S256",
+						"type": "string"
+					},
+					{
+						"key": "grant_type",
+						"value": "password_credentials",
+						"type": "string"
+					},
+					{
+						"key": "addTokenTo",
+						"value": "header",
+						"type": "string"
+					},
+					{
+						"key": "client_authentication",
+						"value": "header",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Alive",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Liveness check\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"    pm.expect(pm.response.json().status).to.equal(\"UP\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/actuator/health/liveness",
+							"path": [
+								"actuator",
+								"health",
+								"liveness"
+							]
+						},
+						"description": "Liveness endpoint."
+					},
+					"response": []
+				},
+				{
+					"name": "Security events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/actuator/auditevents",
+							"path": [
+								"actuator",
+								"auditevents"
+							]
+						},
+						"description": "Security audit endpoing. Good for checking authentication attempts and their result."
+					},
+					"response": []
+				}
+			],
+			"description": "Requests which tell the status of the web service."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.url= pm.collectionVariables.get('url') + pm.request.url;"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost",
+			"type": "default"
+		},
+		{
+			"key": "port",
+			"value": "8080",
+			"type": "default"
+		},
+		{
+			"key": "url",
+			"value": "{{host}}:{{port}}",
+			"type": "default"
+		},
+		{
+			"key": "securityClient",
+			"value": "testClient",
+			"type": "string"
+		},
+		{
+			"key": "securityUsername",
+			"value": "test-user",
+			"type": "string"
+		},
+		{
+			"key": "securityPassword",
+			"value": "1234",
+			"type": "string"
+		},
+		{
+			"key": "securityTokenUrl",
+			"value": "http://localhost:8090/realms/bmg/protocol/openid-connect/token",
+			"type": "string"
+		}
+	]
+}

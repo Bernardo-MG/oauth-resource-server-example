@@ -39,7 +39,7 @@ import lombok.AllArgsConstructor;
  * @author Bernardo Mart&iacute;nez Garrido
  */
 @RestController
-@RequestMapping("/rest/user")
+@RequestMapping("/user")
 @AllArgsConstructor
 public class UserController {
 

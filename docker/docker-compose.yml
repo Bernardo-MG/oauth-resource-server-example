@@ -41,3 +41,5 @@ services:
             - security.oauth.admin.realm=master
             - security.oauth.admin.clientId=admin-cli
             - security.oauth.realm=bmg
+            # Logs
+            - logging.level.org.springframework.security=DEBUG

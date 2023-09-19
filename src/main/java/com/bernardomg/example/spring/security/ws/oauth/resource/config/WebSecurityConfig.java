@@ -32,7 +32,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration.ScopeJwtAuthenticationConverter;
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.entrypoint.ErrorResponseAuthenticationEntryPoint;
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.error.ErrorResponseAuthenticationEntryPoint;
 
 /**
  * Web security configuration.
@@ -61,18 +61,18 @@ public class WebSecurityConfig {
 
         http
             // Whitelist access
-            .authorizeHttpRequests(c -> c.requestMatchers("/actuator/**", "/auth/login")
+            .authorizeHttpRequests(c -> c.requestMatchers("/actuator/**")
                 .permitAll())
             // Route authentication
             .authorizeHttpRequests(customizer -> customizer
                 // Sets authority required for GET requests
-                .requestMatchers(HttpMethod.GET, "/rest/**")
+                .requestMatchers(HttpMethod.GET, "/entity/**")
                 .hasAuthority("read")
                 // Sets authority required for POST requests
-                .requestMatchers(HttpMethod.POST, "/rest/**")
+                .requestMatchers(HttpMethod.POST, "/entity/**")
                 .hasAuthority("write")
                 // By default all requests require authentication
-                .requestMatchers("/rest/**")
+                .requestMatchers("/entity/**")
                 .authenticated())
             // OAUTH2 resource server
             .oauth2ResourceServer(

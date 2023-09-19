@@ -23,7 +23,7 @@
  */
 
 /**
- * JWT entry points.
+ * Security error components.
  */
 
-package com.bernardomg.example.spring.security.ws.oauth.resource.security.entrypoint;
+package com.bernardomg.example.spring.security.ws.oauth.resource.security.error;

@@ -39,7 +39,7 @@ import lombok.AllArgsConstructor;
  * @author Bernardo Mart&iacute;nez Garrido
  */
 @RestController
-@RequestMapping("/rest/entity")
+@RequestMapping("/entity")
 @AllArgsConstructor
 public class ExampleEntityController {
 
