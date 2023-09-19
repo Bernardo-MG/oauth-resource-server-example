@@ -38,6 +38,7 @@
          <item name="Users" href="./users.html" />
          <item name="Authorisation" href="./authorisation.html" />
          <item name="Errors" href="./errors.html" />
+         <item name="Audit" href="./audit.html" />
       </menu>
       <menu name="Info and reports" inherit="bottom">
          <item name="Info" href="./info.html" />
