@@ -15,6 +15,7 @@
          <descriptionUrl>Check the documentation for ${projectName}</descriptionUrl>
          <twitterSite>@bmg</twitterSite>
          <topNav>
+            <menu>Docs</menu>
             <menu>Info and reports</menu>
          </topNav>
          <bottomNav>
@@ -32,6 +33,11 @@
       <menu name="General Info" inherit="top">
          <item name="Changes Log" href="./changes-report.html" />
          <item name="JavaDocs" href="./apidocs/" />
+      </menu>
+      <menu name="Docs" inherit="top">
+         <item name="Users" href="./users.html" />
+         <item name="Authorisation" href="./authorisation.html" />
+         <item name="Errors" href="./errors.html" />
       </menu>
       <menu name="Info and reports" inherit="bottom">
          <item name="Info" href="./info.html" />

@@ -15,21 +15,3 @@ Once started, the web service be available at [http://localhost:8080/](http://lo
 ## Requests with Postman
 
 To make things easier import `src/test/resources/resource_server.postman_collection.json` into Postman. This file includes all the queries needed to test the project.
-
-## Users
-
-For testing, any of these will work.
-
-| User      | Password | Permissions |
-|-----------|----------|-------------|
-| test-user | 1234     | all         |
-
-Note that this web service requires secure tokens. The Postman requests includes an authenticated one, which takes care of this.
-
-## Keycloak
-
-To access the Keycloak admin app go to [http://localhost:8090/](http://localhost:8090/). A default admin user is ready for any setup which may be required.
-
-| User  | Password | Permissions |
-|-------|----------|-------------|
-| admin | admin    | all         |

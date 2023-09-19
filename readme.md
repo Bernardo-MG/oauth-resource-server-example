@@ -18,11 +18,9 @@ To make things easier import `src/test/resources/resource_server.postman_collect
 
 ## Users
 
-For testing, any of these will work.
-
 | User      | Password | Permissions |
 |-----------|----------|-------------|
-| test-user | 1234     | all         |
+| test-user | 1234     | read, edit  |
 
 Note that this web service requires secure tokens. The Postman requests includes an authenticated one, which takes care of this.
 
