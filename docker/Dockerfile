@@ -40,7 +40,7 @@ EXPOSE 8080
 EXPOSE 8000
 
 # Health check
-HEALTHCHECK --interval=30s --retries=5 --timeout=10s CMD curl --fail --silent localhost:8080/actuator/health | grep UP || exit 1
+HEALTHCHECK --interval=30s --retries=5 --timeout=10s CMD curl --fail --silent localhost:8080/actuator/health/liveness | grep UP || exit 1
 
 # Change user
 USER runner

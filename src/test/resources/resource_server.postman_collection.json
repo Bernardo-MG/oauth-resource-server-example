@@ -187,10 +187,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "/actuator/health",
+							"raw": "/actuator/health/liveness",
 							"path": [
 								"actuator",
-								"health"
+								"health",
+								"liveness"
 							]
 						},
 						"description": "Liveness endpoint."
