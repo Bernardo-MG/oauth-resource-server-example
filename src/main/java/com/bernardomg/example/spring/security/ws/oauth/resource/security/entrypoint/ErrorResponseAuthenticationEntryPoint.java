@@ -41,7 +41,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Authentication entry point for authentication failures. Returns an {@link ErrorResponse} for an unauthorised error.
+ * Authentication entry point for authentication failures. Returns an {@link ErrorResponse} for an unauthorized error.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *

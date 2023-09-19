@@ -20,6 +20,7 @@
 								"exec": [
 									"pm.test(\"Unauthorized request\",()=>{\r",
 									"    pm.expect(pm.response.code).to.eql(401);\r",
+									"    pm.expect(pm.response.json().errors[0].message).to.equal(\"Unauthorized\");\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -73,6 +74,7 @@
 								"exec": [
 									"pm.test(\"Authorized request\",()=>{\r",
 									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"    pm.expect(pm.response.json().content).to.not.lengthOf(0);\r",
 									"});"
 								],
 								"type": "text/javascript"
