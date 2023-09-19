@@ -1,15 +1,18 @@
 {
 	"info": {
-		"_postman_id": "f386df28-8aad-4e80-adc5-32c56eea7a28",
+		"_postman_id": "17edc43a-d12d-4b9a-ab0d-74cb63d63553",
 		"name": "Resource Server",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"description": "Requests for the resource server example. Check it at [https://github.com/Bernardo-MG/oauth-resource-server-example](https://github.com/Bernardo-MG/oauth-resource-server-example)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29322077",
+		"_collection_link": "https://martian-astronaut-39097.postman.co/workspace/3c194cbc-99d2-481a-a2d3-07aae427b74c/collection/29322077-17edc43a-d12d-4b9a-ab0d-74cb63d63553?action=share&creator=29322077&source=collection_link"
 	},
 	"item": [
 		{
 			"name": "Unauthorized",
 			"item": [
 				{
-					"name": "Get data",
+					"name": "Unauthorized request (authentication error)",
 					"event": [
 						{
 							"listen": "test",
@@ -36,7 +39,7 @@
 					"response": []
 				}
 			],
-			"description": "Unauthorized requests. These are using no authentication.",
+			"description": "Unauthorized requests. These are using no authentication, and are meanth to generate authentication errors.",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -62,7 +65,7 @@
 			"name": "Authorized",
 			"item": [
 				{
-					"name": "Get data",
+					"name": "Authorized request",
 					"event": [
 						{
 							"listen": "test",
@@ -89,13 +92,28 @@
 					"response": []
 				}
 			],
-			"description": "Authorized requests. These check the server handles the authorization scheme.",
+			"description": "Authorized requests. They handle OAuth 2 requests, and come ready to generate tokens.",
 			"auth": {
 				"type": "oauth2",
 				"oauth2": [
 					{
 						"key": "accessTokenUrl",
-						"value": "http://localhost:8090/realms/bmg/protocol/openid-connect/token",
+						"value": "{{securityTokenUrl}}",
+						"type": "string"
+					},
+					{
+						"key": "password",
+						"value": "{{securityPassword}}",
+						"type": "string"
+					},
+					{
+						"key": "username",
+						"value": "{{securityUsername}}",
+						"type": "string"
+					},
+					{
+						"key": "clientId",
+						"value": "{{securityClient}}",
 						"type": "string"
 					},
 					{
@@ -109,23 +127,8 @@
 						"type": "string"
 					},
 					{
-						"key": "username",
-						"value": "test-user",
-						"type": "string"
-					},
-					{
-						"key": "password",
-						"value": "1234",
-						"type": "string"
-					},
-					{
 						"key": "grant_type",
 						"value": "password_credentials",
-						"type": "string"
-					},
-					{
-						"key": "clientId",
-						"value": "testClient",
 						"type": "string"
 					},
 					{
@@ -160,6 +163,58 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Alive",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Liveness check\",()=>{\r",
+									"    pm.expect(pm.response.code).to.eql(200);\r",
+									"    pm.expect(pm.response.json().status).to.equal(\"UP\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/actuator/health",
+							"path": [
+								"actuator",
+								"health"
+							]
+						},
+						"description": "Liveness endpoint."
+					},
+					"response": []
+				},
+				{
+					"name": "Security events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/actuator/auditevents",
+							"path": [
+								"actuator",
+								"auditevents"
+							]
+						},
+						"description": "Security audit endpoing. Good for checking authentication attempts and their result."
+					},
+					"response": []
+				}
+			],
+			"description": "Requests which tell the status of the web service."
 		}
 	],
 	"event": [
@@ -197,6 +252,26 @@
 			"key": "url",
 			"value": "{{host}}:{{port}}",
 			"type": "default"
+		},
+		{
+			"key": "securityClient",
+			"value": "testClient",
+			"type": "string"
+		},
+		{
+			"key": "securityUsername",
+			"value": "test-user",
+			"type": "string"
+		},
+		{
+			"key": "securityPassword",
+			"value": "1234",
+			"type": "string"
+		},
+		{
+			"key": "securityTokenUrl",
+			"value": "http://localhost:8090/realms/bmg/protocol/openid-connect/token",
+			"type": "string"
 		}
 	]
 }
