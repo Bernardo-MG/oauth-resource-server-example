@@ -32,7 +32,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration.ScopeJwtAuthenticationConverter;
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.entrypoint.ErrorResponseAuthenticationEntryPoint;
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.error.ErrorResponseAuthenticationEntryPoint;
 
 /**
  * Web security configuration.

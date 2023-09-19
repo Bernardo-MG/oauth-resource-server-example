@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.spring.security.ws.oauth.resource.security.entrypoint;
+package com.bernardomg.example.spring.security.ws.oauth.resource.security.error;
 
 import java.io.IOException;
 
@@ -62,8 +62,14 @@ public final class ErrorResponseAuthenticationEntryPoint implements Authenticati
         final ErrorResponse resp;
         final Error         error;
         final ObjectMapper  mapper;
+        final String        serverUrl;
+        final String        clientUrl;
 
-        log.debug("Authentication failure for path {}: {}", request.getServletPath(), authException.getMessage());
+        serverUrl = getServerUrl(request);
+        clientUrl = getClientUrl(request);
+
+        log.debug("Authentication failure for {} {} from {}: {}", request.getMethod(), serverUrl, clientUrl,
+            authException.getLocalizedMessage());
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -73,6 +79,32 @@ public final class ErrorResponseAuthenticationEntryPoint implements Authenticati
 
         mapper = new ObjectMapper();
         mapper.writeValue(response.getOutputStream(), resp);
+    }
+
+    private final String getClientUrl(final HttpServletRequest request) {
+        final StringBuilder serverAddressBuilder;
+
+        serverAddressBuilder = new StringBuilder();
+        serverAddressBuilder.append(request.getRemoteHost());
+        serverAddressBuilder.append(":");
+        serverAddressBuilder.append(request.getRemotePort());
+
+        return serverAddressBuilder.toString();
+    }
+
+    private final String getServerUrl(final HttpServletRequest request) {
+        final StringBuilder serverAddressBuilder;
+
+        serverAddressBuilder = new StringBuilder();
+        serverAddressBuilder.append(request.getScheme());
+        serverAddressBuilder.append(":");
+        serverAddressBuilder.append(request.getLocalAddr());
+        serverAddressBuilder.append(request.getContextPath());
+        serverAddressBuilder.append(":");
+        serverAddressBuilder.append(request.getLocalPort());
+        serverAddressBuilder.append(request.getServletPath());
+
+        return serverAddressBuilder.toString();
     }
 
 }
