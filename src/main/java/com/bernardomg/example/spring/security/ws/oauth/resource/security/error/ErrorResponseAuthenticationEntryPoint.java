@@ -84,10 +84,9 @@ public final class ErrorResponseAuthenticationEntryPoint implements Authenticati
     private final String getClientUrl(final HttpServletRequest request) {
         final StringBuilder serverAddressBuilder;
 
-        serverAddressBuilder = new StringBuilder();
-        serverAddressBuilder.append(request.getRemoteHost());
-        serverAddressBuilder.append(":");
-        serverAddressBuilder.append(request.getRemotePort());
+        serverAddressBuilder = new StringBuilder().append(request.getRemoteHost())
+            .append(":")
+            .append(request.getRemotePort());
 
         return serverAddressBuilder.toString();
     }
@@ -95,14 +94,13 @@ public final class ErrorResponseAuthenticationEntryPoint implements Authenticati
     private final String getServerUrl(final HttpServletRequest request) {
         final StringBuilder serverAddressBuilder;
 
-        serverAddressBuilder = new StringBuilder();
-        serverAddressBuilder.append(request.getScheme());
-        serverAddressBuilder.append(":");
-        serverAddressBuilder.append(request.getLocalAddr());
-        serverAddressBuilder.append(request.getContextPath());
-        serverAddressBuilder.append(":");
-        serverAddressBuilder.append(request.getLocalPort());
-        serverAddressBuilder.append(request.getServletPath());
+        serverAddressBuilder = new StringBuilder().append(request.getScheme())
+            .append(":")
+            .append(request.getLocalAddr())
+            .append(request.getContextPath())
+            .append(":")
+            .append(request.getLocalPort())
+            .append(request.getServletPath());
 
         return serverAddressBuilder.toString();
     }
