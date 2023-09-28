@@ -27,9 +27,12 @@ package com.bernardomg.example.spring.security.ws.oauth.resource.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration.ScopeJwtAuthenticationConverter;
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.error.ErrorResponseAuthenticationEntryPoint;
@@ -57,26 +60,31 @@ public class WebSecurityConfig {
      *             if the setup fails
      */
     @Bean("webSecurityFilterChain")
-    public SecurityFilterChain getWebSecurityFilterChain(final HttpSecurity http) throws Exception {
+    public SecurityFilterChain getWebSecurityFilterChain(final HttpSecurity http,
+            final HandlerMappingIntrospector introspector) throws Exception {
+        final MvcRequestMatcher.Builder mvc;
 
+        mvc = new MvcRequestMatcher.Builder(introspector);
         http
             // Whitelist access
-            .authorizeHttpRequests(c -> c.requestMatchers("/actuator/**")
+            .authorizeHttpRequests(customizer -> customizer.requestMatchers(mvc.pattern("/actuator/**"))
                 .permitAll())
             // Route authentication
             .authorizeHttpRequests(customizer -> customizer
                 // Sets authority required for GET requests
-                .requestMatchers(HttpMethod.GET, "/entity/**")
+                .requestMatchers(mvc.pattern(HttpMethod.GET, "/entity/**"))
                 .hasAuthority("read")
                 // Sets authority required for POST requests
-                .requestMatchers(HttpMethod.POST, "/entity/**")
+                .requestMatchers(mvc.pattern(HttpMethod.POST, "/entity/**"))
                 .hasAuthority("write")
                 // By default all requests require authentication
-                .requestMatchers("/entity/**")
+                .requestMatchers(mvc.pattern("/entity/**"))
                 .authenticated())
             // OAUTH2 resource server
             .oauth2ResourceServer(
                 server -> server.jwt(jwt -> jwt.jwtAuthenticationConverter(new ScopeJwtAuthenticationConverter())))
+            // CSRF and CORS
+            .cors(Customizer.withDefaults())
             // Authentication error handling
             .exceptionHandling(handler -> handler.authenticationEntryPoint(new ErrorResponseAuthenticationEntryPoint()))
             // Stateless
