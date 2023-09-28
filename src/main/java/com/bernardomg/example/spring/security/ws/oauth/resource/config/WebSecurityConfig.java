@@ -24,14 +24,18 @@
 
 package com.bernardomg.example.spring.security.ws.oauth.resource.config;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration.ScopeJwtAuthenticationConverter;
@@ -83,8 +87,8 @@ public class WebSecurityConfig {
             // OAUTH2 resource server
             .oauth2ResourceServer(
                 server -> server.jwt(jwt -> jwt.jwtAuthenticationConverter(new ScopeJwtAuthenticationConverter())))
-            // CSRF and CORS
-            .cors(Customizer.withDefaults())
+            // CORS
+            .cors(customizer -> customizer.configurationSource(getCorsConfigurationSource()))
             // Authentication error handling
             .exceptionHandling(handler -> handler.authenticationEntryPoint(new ErrorResponseAuthenticationEntryPoint()))
             // Stateless
@@ -94,6 +98,18 @@ public class WebSecurityConfig {
             .logout(c -> c.disable());
 
         return http.build();
+    }
+
+    private final CorsConfigurationSource getCorsConfigurationSource() {
+        final CorsConfiguration               configuration;
+        final UrlBasedCorsConfigurationSource source;
+
+        configuration = new CorsConfiguration().applyPermitDefaultValues();
+
+        source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
     }
 
 }
