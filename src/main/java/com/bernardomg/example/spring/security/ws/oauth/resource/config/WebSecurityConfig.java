@@ -77,9 +77,6 @@ public class WebSecurityConfig {
             // OAUTH2 resource server
             .oauth2ResourceServer(
                 server -> server.jwt(jwt -> jwt.jwtAuthenticationConverter(new ScopeJwtAuthenticationConverter())))
-            // CSRF and CORS
-            .csrf(csrf -> csrf.disable())
-            .cors(cors -> {})
             // Authentication error handling
             .exceptionHandling(handler -> handler.authenticationEntryPoint(new ErrorResponseAuthenticationEntryPoint()))
             // Stateless
