@@ -173,6 +173,16 @@
       <!-- ================== SPRING ==================== -->
       <!-- ============================================== -->
       <dependency>
+         <!-- Spring Web -->
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-web</artifactId>
+      </dependency>
+      <dependency>
+         <!-- Spring Web MVC -->
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-webmvc</artifactId>
+      </dependency>
+      <dependency>
          <!-- Spring AOP -->
          <groupId>org.springframework</groupId>
          <artifactId>spring-aop</artifactId>
@@ -203,11 +213,6 @@
          <artifactId>spring-jdbc</artifactId>
       </dependency>
       <dependency>
-         <!-- Spring Data JPA -->
-         <groupId>org.springframework.data</groupId>
-         <artifactId>spring-data-jpa</artifactId>
-      </dependency>
-      <dependency>
          <!-- Spring OXM -->
          <groupId>org.springframework</groupId>
          <artifactId>spring-oxm</artifactId>
@@ -218,17 +223,73 @@
          <artifactId>spring-tx</artifactId>
       </dependency>
       <dependency>
-         <!-- Spring Web -->
-         <groupId>org.springframework</groupId>
-         <artifactId>spring-web</artifactId>
-      </dependency>
-      <dependency>
          <!-- Spring ORM -->
          <groupId>org.springframework</groupId>
          <artifactId>spring-orm</artifactId>
       </dependency>
       <!-- ============================================== -->
+      <!-- =============== SPRING DATA ================== -->
+      <!-- ============================================== -->
+      <dependency>
+         <!-- Spring Data JPA -->
+         <groupId>org.springframework.data</groupId>
+         <artifactId>spring-data-jpa</artifactId>
+      </dependency>
+      <dependency>
+         <!-- Spring Data Commons -->
+         <groupId>org.springframework.data</groupId>
+         <artifactId>spring-data-commons</artifactId>
+      </dependency>
+      <!-- ============================================== -->
+      <!-- ============= SPRING SECURITY ================ -->
+      <!-- ============================================== -->
+      <dependency>
+         <!-- Spring Security Core -->
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-core</artifactId>
+      </dependency>
+      <dependency>
+         <!-- Spring Security Config -->
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-config</artifactId>
+      </dependency>
+      <dependency>
+         <!-- Spring Security Web -->
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-web</artifactId>
+      </dependency>
+      <dependency>
+         <!-- Spring Security OAuth 2 Resource Server -->
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-oauth2-resource-server</artifactId>
+      </dependency>
+      <!-- ============================================== -->
       <!-- =============== SPRING BOOT ================== -->
+      <!-- ============================================== -->
+      <dependency>
+         <!-- Spring Boot -->
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot</artifactId>
+      </dependency>
+      <dependency>
+         <!-- Spring Boot Starter: Devtools -->
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-devtools</artifactId>
+         <scope>runtime</scope>
+         <optional>true</optional>
+      </dependency>
+      <dependency>
+         <!-- Spring Boot Actuator -->
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-actuator</artifactId>
+      </dependency>
+      <dependency>
+         <!-- Spring Boot Autoconfigure -->
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-autoconfigure</artifactId>
+      </dependency>
+      <!-- ============================================== -->
+      <!-- =========== SPRING BOOT STARTER ============== -->
       <!-- ============================================== -->
       <dependency>
          <!-- Spring Boot Starter: Web -->
@@ -264,13 +325,6 @@
          <!-- Spring Boot Starter: OAuth2 Resource Server -->
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-      </dependency>
-      <dependency>
-         <!-- Spring Boot Starter: Devtools -->
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-devtools</artifactId>
-         <scope>runtime</scope>
-         <optional>true</optional>
       </dependency>
       <dependency>
          <!-- Spring Boot Starter: Actuator -->
