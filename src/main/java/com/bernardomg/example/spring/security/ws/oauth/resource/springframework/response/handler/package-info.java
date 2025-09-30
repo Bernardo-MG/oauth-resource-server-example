@@ -22,32 +22,8 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.spring.security.ws.oauth.resource.springframework.error.model;
-
 /**
- * Error object. Containing a message with the failure description.
- *
- * @author Bernardo Mart&iacute;nez Garrido
- *
+ * Response controller advices.
  */
-public interface Error {
 
-    /**
-     * Builds an error.
-     *
-     * @param message
-     *            error message
-     * @return error with the message
-     */
-    public static Error of(final String message) {
-        return new ImmutableError(message);
-    }
-
-    /**
-     * Returns the error message.
-     *
-     * @return the error message.
-     */
-    public String getMessage();
-
-}
+package com.bernardomg.example.spring.security.ws.oauth.resource.springframework.response.handler;

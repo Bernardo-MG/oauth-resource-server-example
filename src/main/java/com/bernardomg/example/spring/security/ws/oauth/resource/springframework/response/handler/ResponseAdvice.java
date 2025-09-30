@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.spring.security.ws.oauth.resource.response.controller;
+package com.bernardomg.example.spring.security.ws.oauth.resource.springframework.response.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
