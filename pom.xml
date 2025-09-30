@@ -10,7 +10,7 @@
    <parent>
       <groupId>com.bernardomg.maven</groupId>
       <artifactId>base-pom</artifactId>
-      <version>1.5.6</version>
+      <version>1.5.11</version>
    </parent>
 
    <!-- ********************************************** -->
@@ -115,19 +115,19 @@
 
    <properties>
       <!-- ============================================== -->
-      <!-- ================ JAVA VERSION ================ -->
-      <!-- ============================================== -->
-      <java.version>17</java.version>
-      <!-- ============================================== -->
       <!-- =============== MANIFEST DATA ================ -->
       <!-- ============================================== -->
       <manifest.name>com/bernardomg/example/oauth</manifest.name>
       <!-- ============================================== -->
+      <!-- ================ JAVA VERSION ================ -->
+      <!-- ============================================== -->
+      <java.version>21</java.version>
+      <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
-      <keycloak.version>22.0.1</keycloak.version>
-      <spring.boot.version>3.1.2</spring.boot.version>
-      <spring.version>6.0.11</spring.version>
+      <keycloak.version>26.0.6</keycloak.version>
+      <spring.boot.version>3.5.6</spring.boot.version>
+      <spring.version>6.2.11</spring.version>
       <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
       <!-- ============================================== -->
@@ -140,7 +140,7 @@
       <!-- ============================================== -->
       <!-- ================= MAVEN SITE ================= -->
       <!-- ============================================== -->
-      <site.skin.version>2.3.2</site.skin.version>
+      <site.skin.version>2.4.1</site.skin.version>
    </properties>
 
    <!-- ********************************************** -->
@@ -390,15 +390,6 @@
          </exclusions>
       </dependency>
       <!-- ============================================== -->
-      <!-- ================== LOMBOK ==================== -->
-      <!-- ============================================== -->
-      <dependency>
-         <!-- Lombok -->
-         <groupId>org.projectlombok</groupId>
-         <artifactId>lombok</artifactId>
-         <scope>provided</scope>
-      </dependency>
-      <!-- ============================================== -->
       <!-- ================== LOGGING =================== -->
       <!-- ============================================== -->
       <dependency>
@@ -409,7 +400,7 @@
       <dependency>
          <!-- Log4j SLF4J Bridge -->
          <groupId>org.apache.logging.log4j</groupId>
-         <artifactId>log4j-slf4j-impl</artifactId>
+         <artifactId>log4j-slf4j2-impl</artifactId>
       </dependency>
       <dependency>
          <!-- Log4j core -->
@@ -420,6 +411,12 @@
          <!-- Log4j Commons Logging Bridge -->
          <groupId>org.apache.logging.log4j</groupId>
          <artifactId>log4j-jcl</artifactId>
+         <exclusions>
+            <exclusion>
+               <groupId>commons-logging</groupId>
+               <artifactId>commons-logging</artifactId>
+            </exclusion>
+         </exclusions>
       </dependency>
       <dependency>
          <!-- Log4j Web -->

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2021-2023 the original author or authors.
+ * Copyright (c) 2021-2025 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,17 +26,14 @@ package com.bernardomg.example.spring.security.ws.oauth.resource.security.proper
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import lombok.Data;
-
 /**
  * OAuth configuration properties.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
-@Data
 @ConfigurationProperties(prefix = "security.oauth")
-public final class OauthProperties {
+public final record OauthProperties(Admin admin, Server server, String realm) {
 
     /**
      * Admin user properties.
@@ -44,28 +41,7 @@ public final class OauthProperties {
      * @author Bernardo
      *
      */
-    @Data
-    public static final class Admin {
-
-        /**
-         * Admin client id.
-         */
-        private String clientId;
-
-        /**
-         * Admin password.
-         */
-        private String password;
-
-        /**
-         * Admin realm.
-         */
-        private String realm;
-
-        /**
-         * Admin username.
-         */
-        private String username;
+    public static final record Admin(String clientId, String realm, String username, String password) {
 
     }
 
@@ -75,29 +51,8 @@ public final class OauthProperties {
      * @author Bernardo
      *
      */
-    @Data
-    public static final class Server {
-
-        /**
-         * Server URL.
-         */
-        private String url;
+    public static final record Server(String url) {
 
     }
-
-    /**
-     * Admin user properties.
-     */
-    private Admin  admin;
-
-    /**
-     * Oauth realm.
-     */
-    private String realm;
-
-    /**
-     * Oauth server properties.
-     */
-    private Server server;
 
 }

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2021-2023 the original author or authors.
+ * Copyright (c) 2021-2025 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,13 +28,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration.ScopeJwtAuthenticationConverter;
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.error.ErrorResponseAuthenticationEntryPoint;
@@ -57,32 +58,30 @@ public class WebSecurityConfig {
      *
      * @param http
      *            HTTP security component
-     * @param introspector
-     *            mapping introspector
      * @return web security filter chain with all authentication requirements
      * @throws Exception
      *             if the setup fails
      */
     @Bean("webSecurityFilterChain")
-    public SecurityFilterChain getWebSecurityFilterChain(final HttpSecurity http,
-            final HandlerMappingIntrospector introspector) throws Exception {
-        final MvcRequestMatcher.Builder mvc;
+    public SecurityFilterChain getWebSecurityFilterChain(final HttpSecurity http) throws Exception {
 
-        mvc = new MvcRequestMatcher.Builder(introspector);
         http
             // Whitelist access
-            .authorizeHttpRequests(customizer -> customizer.requestMatchers(mvc.pattern("/actuator/**"))
+            .authorizeHttpRequests(customizer -> customizer.requestMatchers("/actuator/**")
                 .permitAll())
             // Route authentication
             .authorizeHttpRequests(customizer -> customizer
                 // Sets authority required for GET requests
-                .requestMatchers(mvc.pattern(HttpMethod.GET, "/entity/**"))
+                .requestMatchers(PathPatternRequestMatcher.withDefaults()
+                    .matcher(HttpMethod.GET, "/entity/**"))
                 .hasAuthority("read")
                 // Sets authority required for POST requests
-                .requestMatchers(mvc.pattern(HttpMethod.POST, "/entity/**"))
+                .requestMatchers(PathPatternRequestMatcher.withDefaults()
+                    .matcher(HttpMethod.POST, "/entity/**"))
                 .hasAuthority("write")
                 // By default all requests require authentication
-                .requestMatchers(mvc.pattern("/entity/**"))
+                .requestMatchers(PathPatternRequestMatcher.withDefaults()
+                    .matcher("/entity/**"))
                 .authenticated())
             // OAUTH2 resource server
             .oauth2ResourceServer(
@@ -94,8 +93,8 @@ public class WebSecurityConfig {
             // Stateless
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             // Disable login and logout forms
-            .formLogin(c -> c.disable())
-            .logout(c -> c.disable());
+            .formLogin(FormLoginConfigurer::disable)
+            .logout(LogoutConfigurer::disable);
 
         return http.build();
     }
