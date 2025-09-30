@@ -58,8 +58,6 @@ public class WebSecurityConfig {
      *
      * @param http
      *            HTTP security component
-     * @param introspector
-     *            mapping introspector
      * @return web security filter chain with all authentication requirements
      * @throws Exception
      *             if the setup fails
