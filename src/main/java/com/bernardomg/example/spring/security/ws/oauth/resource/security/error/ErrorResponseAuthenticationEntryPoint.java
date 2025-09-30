@@ -32,9 +32,9 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
-import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model.Error;
-import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.model.ErrorResponse;
-import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.model.Response;
+import com.bernardomg.example.spring.security.ws.oauth.resource.response.domain.model.ErrorResponse;
+import com.bernardomg.example.spring.security.ws.oauth.resource.response.domain.model.Response;
+import com.bernardomg.example.spring.security.ws.oauth.resource.springframework.error.model.Error;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.ServletException;
