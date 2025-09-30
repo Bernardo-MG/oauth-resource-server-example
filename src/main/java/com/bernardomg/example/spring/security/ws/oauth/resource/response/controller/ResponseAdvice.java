@@ -76,7 +76,7 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
             log.debug("Received null as response body");
             result = Response.empty();
         } else {
-            result = Response.of(body);
+            result = new Response<>(body);
         }
 
         return result;

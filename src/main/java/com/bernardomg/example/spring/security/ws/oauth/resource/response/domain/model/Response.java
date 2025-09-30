@@ -24,11 +24,6 @@
 
 package com.bernardomg.example.spring.security.ws.oauth.resource.response.domain.model;
 
-import java.util.Arrays;
-import java.util.Collection;
-
-import com.bernardomg.example.spring.security.ws.oauth.resource.springframework.error.model.Error;
-
 /**
  * Response to the frontend.
  *
@@ -37,59 +32,10 @@ import com.bernardomg.example.spring.security.ws.oauth.resource.springframework.
  * @param <T>
  *            response content type
  */
-public interface Response<T> {
+public record Response<T>(T content) {
 
-    /**
-     * Creates an empty response.
-     *
-     * @param <T>
-     *            response content type
-     * @return an empty response
-     */
-    public static <T> Response<T> empty() {
-        return new ImmutableResponse<>();
+    public static final <T> Response<T> empty() {
+        return new Response<>(null);
     }
-
-    /**
-     * Creates an error response.
-     *
-     * @param failures
-     *            failures which caused the error
-     * @return an error response
-     */
-    public static ErrorResponse error(final Collection<Error> failures) {
-        return new ImmutableErrorResponse(failures);
-    }
-
-    /**
-     * Creates an error response.
-     *
-     * @param failure
-     *            failure which caused the error
-     * @return an error response
-     */
-    public static ErrorResponse error(final Error failure) {
-        return new ImmutableErrorResponse(Arrays.asList(failure));
-    }
-
-    /**
-     * Creates a response with the specified content.
-     *
-     * @param <T>
-     *            response content type
-     * @param content
-     *            response content
-     * @return response with the received content
-     */
-    public static <T> Response<T> of(final T content) {
-        return new ImmutableResponse<>(content);
-    }
-
-    /**
-     * Returns the response content.
-     *
-     * @return the response content
-     */
-    public T getContent();
 
 }

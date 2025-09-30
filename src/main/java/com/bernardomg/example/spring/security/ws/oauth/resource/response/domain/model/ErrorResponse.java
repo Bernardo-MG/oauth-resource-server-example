@@ -24,22 +24,18 @@
 
 package com.bernardomg.example.spring.security.ws.oauth.resource.response.domain.model;
 
-import java.util.Collection;
-
-import com.bernardomg.example.spring.security.ws.oauth.resource.springframework.error.model.Error;
+import java.util.Objects;
 
 /**
  * Error response to the frontend.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  */
-public interface ErrorResponse {
+public record ErrorResponse(String code, String message) {
 
-    /**
-     * Returns all the errors caused by the request.
-     *
-     * @return request errors
-     */
-    public Collection<Error> getErrors();
+    public ErrorResponse {
+        Objects.requireNonNull(code, "Received null code");
+        Objects.requireNonNull(message, "Received null message");
+    }
 
 }

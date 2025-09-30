@@ -39,8 +39,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.response.domain.model.ErrorResponse;
-import com.bernardomg.example.spring.security.ws.oauth.resource.response.domain.model.Response;
-import com.bernardomg.example.spring.security.ws.oauth.resource.springframework.error.model.Error;
 
 /**
  * Captures and handles exceptions for all the controllers.
@@ -99,7 +97,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             final HttpHeaders headers, final HttpStatusCode statusCode, final WebRequest request) {
         final ErrorResponse response;
         final String        message;
-        final Error         failure;
 
         log.error(ex.getMessage());
 
@@ -109,8 +106,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             message = ex.getMessage();
         }
 
-        failure = Error.of(message);
-        response = Response.error(failure);
+        response = new ErrorResponse(String.valueOf(statusCode.value()), message);
 
         return super.handleExceptionInternal(ex, response, headers, statusCode, request);
     }
