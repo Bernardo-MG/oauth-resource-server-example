@@ -12,6 +12,8 @@ docker-compose -f docker/docker-compose.yml --project-name oauth2-resource-serve
 
 Once started, the web service be available at [http://localhost:8080/](http://localhost:8080/).
 
+The auth service is available at [http://localhost:8090/](http://localhost:8090/). The username and password are both admin.
+
 ## Requests with Postman
 
 To make things easier import `src/test/resources/resource_server.postman_collection.json` into Postman. This file includes all the queries needed to test the project.
