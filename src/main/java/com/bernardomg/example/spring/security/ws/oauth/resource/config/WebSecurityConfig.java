@@ -32,11 +32,10 @@ import org.springframework.security.config.annotation.web.configurers.FormLoginC
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration.ScopeJwtAuthenticationConverter;
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.error.ErrorResponseAuthenticationEntryPoint;
@@ -66,25 +65,25 @@ public class WebSecurityConfig {
      *             if the setup fails
      */
     @Bean("webSecurityFilterChain")
-    public SecurityFilterChain getWebSecurityFilterChain(final HttpSecurity http,
-            final HandlerMappingIntrospector introspector) throws Exception {
-        final MvcRequestMatcher.Builder mvc;
+    public SecurityFilterChain getWebSecurityFilterChain(final HttpSecurity http) throws Exception {
 
-        mvc = new MvcRequestMatcher.Builder(introspector);
         http
             // Whitelist access
-            .authorizeHttpRequests(customizer -> customizer.requestMatchers(mvc.pattern("/actuator/**"))
+            .authorizeHttpRequests(customizer -> customizer.requestMatchers("/actuator/**")
                 .permitAll())
             // Route authentication
             .authorizeHttpRequests(customizer -> customizer
                 // Sets authority required for GET requests
-                .requestMatchers(mvc.pattern(HttpMethod.GET, "/entity/**"))
+                .requestMatchers(PathPatternRequestMatcher.withDefaults()
+                    .matcher(HttpMethod.GET, "/entity/**"))
                 .hasAuthority("read")
                 // Sets authority required for POST requests
-                .requestMatchers(mvc.pattern(HttpMethod.POST, "/entity/**"))
+                .requestMatchers(PathPatternRequestMatcher.withDefaults()
+                    .matcher(HttpMethod.POST, "/entity/**"))
                 .hasAuthority("write")
                 // By default all requests require authentication
-                .requestMatchers(mvc.pattern("/entity/**"))
+                .requestMatchers(PathPatternRequestMatcher.withDefaults()
+                    .matcher("/entity/**"))
                 .authenticated())
             // OAUTH2 resource server
             .oauth2ResourceServer(
