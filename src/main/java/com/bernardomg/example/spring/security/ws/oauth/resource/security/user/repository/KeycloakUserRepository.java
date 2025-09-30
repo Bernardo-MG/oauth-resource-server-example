@@ -33,17 +33,17 @@ public final class KeycloakUserRepository implements UserRepository {
     public KeycloakUserRepository(final OauthProperties properties) {
         super();
 
-        serverURL = Objects.requireNonNull(properties.getServer()
-            .getUrl());
-        realm = Objects.requireNonNull(properties.getRealm());
-        clientId = Objects.requireNonNull(properties.getAdmin()
-            .getClientId());
-        userName = Objects.requireNonNull(properties.getAdmin()
-            .getUsername());
-        password = Objects.requireNonNull(properties.getAdmin()
-            .getPassword());
-        userRealm = Objects.requireNonNull(properties.getAdmin()
-            .getRealm());
+        serverURL = Objects.requireNonNull(properties.server()
+            .url());
+        realm = Objects.requireNonNull(properties.realm());
+        clientId = Objects.requireNonNull(properties.admin()
+            .clientId());
+        userName = Objects.requireNonNull(properties.admin()
+            .username());
+        password = Objects.requireNonNull(properties.admin()
+            .password());
+        userRealm = Objects.requireNonNull(properties.admin()
+            .realm());
     }
 
     @Override

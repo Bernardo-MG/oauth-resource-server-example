@@ -33,7 +33,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  */
 @ConfigurationProperties(prefix = "security.oauth")
-public final class OauthProperties {
+public final record OauthProperties(Admin admin, Server server, String realm) {
 
     /**
      * Admin user properties.
@@ -41,59 +41,7 @@ public final class OauthProperties {
      * @author Bernardo
      *
      */
-    public static final class Admin {
-
-        /**
-         * Admin client id.
-         */
-        private String clientId;
-
-        /**
-         * Admin password.
-         */
-        private String password;
-
-        /**
-         * Admin realm.
-         */
-        private String realm;
-
-        /**
-         * Admin username.
-         */
-        private String username;
-
-        public String getClientId() {
-            return clientId;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public String getRealm() {
-            return realm;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setClientId(final String clientId) {
-            this.clientId = clientId;
-        }
-
-        public void setPassword(final String password) {
-            this.password = password;
-        }
-
-        public void setRealm(final String realm) {
-            this.realm = realm;
-        }
-
-        public void setUsername(final String username) {
-            this.username = username;
-        }
+    public static final record Admin(String clientId, String realm, String username, String password) {
 
     }
 
@@ -103,60 +51,8 @@ public final class OauthProperties {
      * @author Bernardo
      *
      */
-    public static final class Server {
+    public static final record Server(String url) {
 
-        /**
-         * Server URL.
-         */
-        private String url;
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(final String url) {
-            this.url = url;
-        }
-
-    }
-
-    /**
-     * Admin user properties.
-     */
-    private Admin  admin;
-
-    /**
-     * Oauth realm.
-     */
-    private String realm;
-
-    /**
-     * Oauth server properties.
-     */
-    private Server server;
-
-    public Admin getAdmin() {
-        return admin;
-    }
-
-    public String getRealm() {
-        return realm;
-    }
-
-    public Server getServer() {
-        return server;
-    }
-
-    public void setAdmin(final Admin admin) {
-        this.admin = admin;
-    }
-
-    public void setRealm(final String realm) {
-        this.realm = realm;
-    }
-
-    public void setServer(final Server server) {
-        this.server = server;
     }
 
 }
