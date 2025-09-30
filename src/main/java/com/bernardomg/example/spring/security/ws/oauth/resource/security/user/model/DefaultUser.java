@@ -24,9 +24,6 @@
 
 package com.bernardomg.example.spring.security.ws.oauth.resource.security.user.model;
 
-import lombok.Data;
-
-@Data
 public class DefaultUser implements User {
 
     /**
@@ -39,6 +36,16 @@ public class DefaultUser implements User {
      */
     public DefaultUser() {
         super();
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public void setUsername(final String username) {
+        this.username = username;
     }
 
 }

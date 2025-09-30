@@ -24,6 +24,8 @@
 
 package com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.handler;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -40,16 +42,18 @@ import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model.
 import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.model.ErrorResponse;
 import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.model.Response;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * Captures and handles exceptions for all the controllers.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  */
 @ControllerAdvice
-@Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+
+    /**
+     * Class logger.
+     */
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
      * Default constructor.

@@ -24,6 +24,8 @@
 
 package com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +38,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.model.ErrorResponse;
 import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.model.Response;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * Advice to wrap all the responses into the response object.
  * <p>
@@ -48,8 +48,12 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @ControllerAdvice("com.bernardomg.example.spring.security.ws")
-@Slf4j
 public class ResponseAdvice implements ResponseBodyAdvice<Object> {
+
+    /**
+     * Class logger.
+     */
+    private static final Logger log = LoggerFactory.getLogger(ResponseAdvice.class);
 
     /**
      * Default constructor.
@@ -65,14 +69,8 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
         final Object result;
 
         log.trace("Received {} as response body", body);
-        if (body instanceof ResponseEntity<?>) {
+        if ((body instanceof ResponseEntity<?>) || (body instanceof Response) || (body instanceof ErrorResponse)) {
             // Avoid wrapping Spring responses
-            result = body;
-        } else if (body instanceof Response) {
-            // Avoid wrapping responses
-            result = body;
-        } else if (body instanceof ErrorResponse) {
-            // Avoid wrapping error responses
             result = body;
         } else if (body == null) {
             log.debug("Received null as response body");

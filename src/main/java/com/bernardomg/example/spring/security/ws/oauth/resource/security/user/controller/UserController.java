@@ -31,8 +31,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.model.User;
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.service.UserService;
 
-import lombok.AllArgsConstructor;
-
 /**
  * Rest controller for the users.
  *
@@ -40,13 +38,18 @@ import lombok.AllArgsConstructor;
  */
 @RestController
 @RequestMapping("/user")
-@AllArgsConstructor
 public class UserController {
 
     /**
      * Example entity service.
      */
     private final UserService service;
+
+    public UserController(final UserService service) {
+        super();
+
+        this.service = service;
+    }
 
     @GetMapping
     public Iterable<? extends User> read() {

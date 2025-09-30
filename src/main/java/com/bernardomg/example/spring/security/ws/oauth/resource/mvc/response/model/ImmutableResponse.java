@@ -24,9 +24,6 @@
 
 package com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.model;
 
-import lombok.Data;
-import lombok.NonNull;
-
 /**
  * Immutable implementation of the response.
  *
@@ -35,7 +32,6 @@ import lombok.NonNull;
  * @param <T>
  *            response content type
  */
-@Data
 public class ImmutableResponse<T> implements Response<T> {
 
     /**
@@ -58,10 +54,15 @@ public class ImmutableResponse<T> implements Response<T> {
      * @param cont
      *            content
      */
-    public ImmutableResponse(@NonNull final T cont) {
+    public ImmutableResponse(final T cont) {
         super();
 
         content = cont;
+    }
+
+    @Override
+    public T getContent() {
+        return content;
     }
 
 }

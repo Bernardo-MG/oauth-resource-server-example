@@ -29,8 +29,6 @@ import org.springframework.stereotype.Service;
 import com.bernardomg.example.spring.security.ws.oauth.resource.domain.entity.model.PersistentExampleEntity;
 import com.bernardomg.example.spring.security.ws.oauth.resource.domain.entity.persistence.repository.ExampleEntityRepository;
 
-import lombok.AllArgsConstructor;
-
 /**
  * Default implementation of the example entity service.
  *
@@ -38,13 +36,18 @@ import lombok.AllArgsConstructor;
  *
  */
 @Service
-@AllArgsConstructor
 public class DefaultExampleEntityService implements ExampleEntityService {
 
     /**
      * Repository for the domain entities handled by the service.
      */
     private final ExampleEntityRepository entityRepository;
+
+    public DefaultExampleEntityService(final ExampleEntityRepository repository) {
+        super();
+
+        entityRepository = repository;
+    }
 
     @Override
     public final Iterable<PersistentExampleEntity> getAllEntities() {

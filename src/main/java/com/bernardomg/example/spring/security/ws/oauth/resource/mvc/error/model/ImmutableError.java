@@ -24,22 +24,28 @@
 
 package com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model;
 
-import lombok.Data;
-import lombok.NonNull;
-
 /**
  * Immutable error.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
-@Data
 public class ImmutableError implements Error {
 
     /**
      * Failure message.
      */
-    @NonNull
     private final String message;
+
+    public ImmutableError(final String message) {
+        super();
+
+        this.message = message;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
 
 }

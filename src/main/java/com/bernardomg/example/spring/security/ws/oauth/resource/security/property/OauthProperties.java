@@ -26,15 +26,12 @@ package com.bernardomg.example.spring.security.ws.oauth.resource.security.proper
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import lombok.Data;
-
 /**
  * OAuth configuration properties.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
-@Data
 @ConfigurationProperties(prefix = "security.oauth")
 public final class OauthProperties {
 
@@ -44,7 +41,6 @@ public final class OauthProperties {
      * @author Bernardo
      *
      */
-    @Data
     public static final class Admin {
 
         /**
@@ -67,6 +63,38 @@ public final class OauthProperties {
          */
         private String username;
 
+        public String getClientId() {
+            return clientId;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public String getRealm() {
+            return realm;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setClientId(final String clientId) {
+            this.clientId = clientId;
+        }
+
+        public void setPassword(final String password) {
+            this.password = password;
+        }
+
+        public void setRealm(final String realm) {
+            this.realm = realm;
+        }
+
+        public void setUsername(final String username) {
+            this.username = username;
+        }
+
     }
 
     /**
@@ -75,13 +103,20 @@ public final class OauthProperties {
      * @author Bernardo
      *
      */
-    @Data
     public static final class Server {
 
         /**
          * Server URL.
          */
         private String url;
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(final String url) {
+            this.url = url;
+        }
 
     }
 
@@ -99,5 +134,29 @@ public final class OauthProperties {
      * Oauth server properties.
      */
     private Server server;
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public String getRealm() {
+        return realm;
+    }
+
+    public Server getServer() {
+        return server;
+    }
+
+    public void setAdmin(final Admin admin) {
+        this.admin = admin;
+    }
+
+    public void setRealm(final String realm) {
+        this.realm = realm;
+    }
+
+    public void setServer(final Server server) {
+        this.server = server;
+    }
 
 }

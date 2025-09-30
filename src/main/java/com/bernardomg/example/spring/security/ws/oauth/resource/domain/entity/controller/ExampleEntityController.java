@@ -31,8 +31,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bernardomg.example.spring.security.ws.oauth.resource.domain.entity.model.ExampleEntity;
 import com.bernardomg.example.spring.security.ws.oauth.resource.domain.entity.service.ExampleEntityService;
 
-import lombok.AllArgsConstructor;
-
 /**
  * Rest controller for the example entities.
  *
@@ -40,13 +38,18 @@ import lombok.AllArgsConstructor;
  */
 @RestController
 @RequestMapping("/entity")
-@AllArgsConstructor
 public class ExampleEntityController {
 
     /**
      * Example entity service.
      */
     private final ExampleEntityService exampleEntityService;
+
+    public ExampleEntityController(final ExampleEntityService service) {
+        super();
+
+        exampleEntityService = service;
+    }
 
     /**
      * Returns a collection of entities.

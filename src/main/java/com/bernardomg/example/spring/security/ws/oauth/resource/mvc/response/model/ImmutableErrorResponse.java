@@ -29,15 +29,11 @@ import java.util.Collections;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model.Error;
 
-import lombok.Data;
-import lombok.NonNull;
-
 /**
  * Immutable implementation of the error response.
  *
  * @author Bernardo Mart&iacute;nez Garrido
  */
-@Data
 public class ImmutableErrorResponse implements ErrorResponse {
 
     /**
@@ -51,10 +47,15 @@ public class ImmutableErrorResponse implements ErrorResponse {
      * @param errs
      *            errors
      */
-    public ImmutableErrorResponse(@NonNull final Collection<Error> errs) {
+    public ImmutableErrorResponse(final Collection<Error> errs) {
         super();
 
         errors = Collections.unmodifiableCollection(errs);
+    }
+
+    @Override
+    public Collection<Error> getErrors() {
+        return errors;
     }
 
 }

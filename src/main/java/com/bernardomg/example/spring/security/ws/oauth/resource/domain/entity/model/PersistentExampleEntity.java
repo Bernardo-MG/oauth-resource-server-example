@@ -31,7 +31,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import lombok.Data;
 
 /**
  * Persistent entity for the example application.
@@ -42,7 +41,6 @@ import lombok.Data;
  */
 @Entity(name = "ExampleEntity")
 @Table(name = "example_entities")
-@Data
 public class PersistentExampleEntity implements ExampleEntity {
 
     /**
@@ -66,5 +64,25 @@ public class PersistentExampleEntity implements ExampleEntity {
      */
     @Column(name = "name", nullable = false, unique = true)
     private String            name             = "";
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setId(final Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public void setName(final String name) {
+        this.name = name;
+    }
 
 }
