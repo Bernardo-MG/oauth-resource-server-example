@@ -1,5 +1,5 @@
 
-package com.bernardomg.example.spring.security.ws.oauth.resource.security.user.repository;
+package com.bernardomg.example.spring.security.ws.oauth.resource.security.user.adapter.inbound.keycloak.repository;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -13,8 +13,8 @@ import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.UserRepresentation;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.property.OauthProperties;
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.model.DefaultUser;
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.model.User;
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.domain.model.User;
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.domain.repository.UserRepository;
 
 public final class KeycloakUserRepository implements UserRepository {
 
@@ -73,12 +73,7 @@ public final class KeycloakUserRepository implements UserRepository {
     }
 
     private final User toUser(final UserRepresentation representation) {
-        final User user;
-
-        user = new DefaultUser();
-        user.setUsername(representation.getUsername());
-
-        return user;
+        return new User(representation.getUsername(), "");
     }
 
 }

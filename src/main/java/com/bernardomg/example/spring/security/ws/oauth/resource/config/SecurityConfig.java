@@ -30,10 +30,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.property.OauthProperties;
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.repository.KeycloakUserRepository;
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.repository.UserRepository;
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.service.DefaultUserService;
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.service.UserService;
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.adapter.inbound.keycloak.repository.KeycloakUserRepository;
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.domain.repository.UserRepository;
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.usecase.service.DefaultUserService;
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.usecase.service.UserService;
 
 /**
  * Security configuration.

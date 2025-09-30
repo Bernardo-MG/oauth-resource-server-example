@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.spring.security.ws.oauth.resource.security.user.controller;
+package com.bernardomg.example.spring.security.ws.oauth.resource.security.user.adapter.outbound.rest.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.model.User;
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.service.UserService;
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.domain.model.User;
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.usecase.service.UserService;
 
 /**
  * Rest controller for the users.
