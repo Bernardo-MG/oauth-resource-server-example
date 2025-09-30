@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2021-2023 the original author or authors.
+ * Copyright (c) 2021-2025 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,10 +30,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.property.OauthProperties;
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.repository.KeycloakUserRepository;
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.repository.UserRepository;
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.service.DefaultUserService;
-import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.service.UserService;
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.adapter.inbound.keycloak.repository.KeycloakUserRepository;
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.domain.repository.UserRepository;
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.usecase.service.DefaultUserService;
+import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.usecase.service.UserService;
 
 /**
  * Security configuration.

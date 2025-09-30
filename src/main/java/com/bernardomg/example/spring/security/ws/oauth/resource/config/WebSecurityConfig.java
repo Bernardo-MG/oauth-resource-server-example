@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2021-2023 the original author or authors.
+ * Copyright (c) 2021-2025 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,8 +28,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.configuration.ScopeJwtAuthenticationConverter;
 import com.bernardomg.example.spring.security.ws.oauth.resource.security.error.ErrorResponseAuthenticationEntryPoint;
@@ -61,34 +67,48 @@ public class WebSecurityConfig {
 
         http
             // Whitelist access
-            .authorizeHttpRequests(c -> c.requestMatchers("/actuator/**")
+            .authorizeHttpRequests(customizer -> customizer.requestMatchers("/actuator/**")
                 .permitAll())
             // Route authentication
             .authorizeHttpRequests(customizer -> customizer
                 // Sets authority required for GET requests
-                .requestMatchers(HttpMethod.GET, "/entity/**")
+                .requestMatchers(PathPatternRequestMatcher.withDefaults()
+                    .matcher(HttpMethod.GET, "/entity/**"))
                 .hasAuthority("read")
                 // Sets authority required for POST requests
-                .requestMatchers(HttpMethod.POST, "/entity/**")
+                .requestMatchers(PathPatternRequestMatcher.withDefaults()
+                    .matcher(HttpMethod.POST, "/entity/**"))
                 .hasAuthority("write")
                 // By default all requests require authentication
-                .requestMatchers("/entity/**")
+                .requestMatchers(PathPatternRequestMatcher.withDefaults()
+                    .matcher("/entity/**"))
                 .authenticated())
             // OAUTH2 resource server
             .oauth2ResourceServer(
                 server -> server.jwt(jwt -> jwt.jwtAuthenticationConverter(new ScopeJwtAuthenticationConverter())))
-            // CSRF and CORS
-            .csrf(csrf -> csrf.disable())
-            .cors(cors -> {})
+            // CORS
+            .cors(customizer -> customizer.configurationSource(getCorsConfigurationSource()))
             // Authentication error handling
             .exceptionHandling(handler -> handler.authenticationEntryPoint(new ErrorResponseAuthenticationEntryPoint()))
             // Stateless
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             // Disable login and logout forms
-            .formLogin(c -> c.disable())
-            .logout(c -> c.disable());
+            .formLogin(FormLoginConfigurer::disable)
+            .logout(LogoutConfigurer::disable);
 
         return http.build();
+    }
+
+    private final CorsConfigurationSource getCorsConfigurationSource() {
+        final CorsConfiguration               configuration;
+        final UrlBasedCorsConfigurationSource source;
+
+        configuration = new CorsConfiguration().applyPermitDefaultValues();
+
+        source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
     }
 
 }

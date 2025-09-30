@@ -1,7 +1,6 @@
-version: '3'
 services:
     auth-server:
-        image: quay.io/keycloak/keycloak:22.0.1
+        image: quay.io/keycloak/keycloak:26.3
         container_name: oauth2-auth-server
         volumes:
           - ./imports:/opt/keycloak/data/import/
@@ -9,8 +8,8 @@ services:
             - "8090:8080"
             - "9990:9990"
         environment:
-            - KEYCLOAK_ADMIN=admin
-            - KEYCLOAK_ADMIN_PASSWORD=admin
+            - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+            - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
             - KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/realm-export.json
             - KC_HEALTH_ENABLED=true
         command: 

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2021-2023 the original author or authors.
+ * Copyright (c) 2021-2025 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +26,12 @@ package com.bernardomg.example.spring.security.ws.oauth.resource.security.audit;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.boot.actuate.audit.listener.AuditApplicationEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Listens for audit events and logs them.
@@ -39,8 +39,12 @@ import lombok.extern.slf4j.Slf4j;
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
-@Slf4j
 public final class AuditEventLogger {
+
+    /**
+     * Class logger.
+     */
+    private static final Logger log = LoggerFactory.getLogger(AuditEventLogger.class);
 
     /**
      * Intercepts audit events and logs them.

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  * <p>
- * Copyright (c) 2021-2023 the original author or authors.
+ * Copyright (c) 2021-2025 the original author or authors.
  * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,19 +26,19 @@ package com.bernardomg.example.spring.security.ws.oauth.resource.security.error;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
-import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.error.model.Error;
-import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.model.ErrorResponse;
-import com.bernardomg.example.spring.security.ws.oauth.resource.mvc.response.model.Response;
+import com.bernardomg.example.spring.security.ws.oauth.resource.response.domain.model.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Authentication entry point for authentication failures. Returns an {@link ErrorResponse} for an unauthorized error.
@@ -46,8 +46,12 @@ import lombok.extern.slf4j.Slf4j;
  * @author Bernardo Mart&iacute;nez Garrido
  *
  */
-@Slf4j
 public final class ErrorResponseAuthenticationEntryPoint implements AuthenticationEntryPoint {
+
+    /**
+     * Class logger.
+     */
+    private static final Logger log = LoggerFactory.getLogger(ErrorResponseAuthenticationEntryPoint.class);
 
     /**
      * Default constructor.
@@ -60,7 +64,6 @@ public final class ErrorResponseAuthenticationEntryPoint implements Authenticati
     public final void commence(final HttpServletRequest request, final HttpServletResponse response,
             final AuthenticationException authException) throws IOException, ServletException {
         final ErrorResponse resp;
-        final Error         error;
         final ObjectMapper  mapper;
         final String        serverUrl;
         final String        clientUrl;
@@ -74,37 +77,28 @@ public final class ErrorResponseAuthenticationEntryPoint implements Authenticati
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
-        error = Error.of("Unauthorized");
-        resp = Response.error(error);
+        resp = new ErrorResponse(String.valueOf(HttpStatus.UNAUTHORIZED.value()), "Unauthorized");
 
         mapper = new ObjectMapper();
         mapper.writeValue(response.getOutputStream(), resp);
     }
 
     private final String getClientUrl(final HttpServletRequest request) {
-        final StringBuilder serverAddressBuilder;
-
-        serverAddressBuilder = new StringBuilder();
-        serverAddressBuilder.append(request.getRemoteHost());
-        serverAddressBuilder.append(":");
-        serverAddressBuilder.append(request.getRemotePort());
-
-        return serverAddressBuilder.toString();
+        return new StringBuilder().append(request.getRemoteHost())
+            .append(":")
+            .append(request.getRemotePort())
+            .toString();
     }
 
     private final String getServerUrl(final HttpServletRequest request) {
-        final StringBuilder serverAddressBuilder;
-
-        serverAddressBuilder = new StringBuilder();
-        serverAddressBuilder.append(request.getScheme());
-        serverAddressBuilder.append(":");
-        serverAddressBuilder.append(request.getLocalAddr());
-        serverAddressBuilder.append(request.getContextPath());
-        serverAddressBuilder.append(":");
-        serverAddressBuilder.append(request.getLocalPort());
-        serverAddressBuilder.append(request.getServletPath());
-
-        return serverAddressBuilder.toString();
+        return new StringBuilder().append(request.getScheme())
+            .append(":")
+            .append(request.getLocalAddr())
+            .append(request.getContextPath())
+            .append(":")
+            .append(request.getLocalPort())
+            .append(request.getServletPath())
+            .toString();
     }
 
 }
