@@ -2,18 +2,22 @@
 <!DOCTYPE xml>
 <Configuration status="WARN">
 
-   <Properties>
-      <Property name="filename">app.log</Property>
-   </Properties>
-
    <Appenders>
       <Console name="console" target="SYSTEM_OUT">
-         <PatternLayout pattern="%-5p | %d{ISO8601} | %c{1.} %M %L | %m%n" />
+         <PatternLayout pattern="%d{ISO8601} %highlight{%-5p}{FATAL=red blink, ERROR=red bold, WARN=yellow bold, INFO=green bold, DEBUG=cyan bold, TRACE=blue bold} [%style{%t}{bright,blue}] %style{%c{1.}.%M(%L)}{bright,yellow}: %m%n%throwable" />
       </Console>
 
-      <File name="file" fileName="${filename}">
-         <PatternLayout pattern="%-5p | %d{ISO8601} | %c{1.} %M %L | %m%n" />
-      </File>
+      <RollingFile name="file"
+            fileName="./logs/app.log"
+            filePattern="./logs/$${date:yyyy-MM}/app-%d{-dd-MMMM-yyyy}-%i.log.gz">
+         <PatternLayout pattern="%d{ISO8601} %-5p [%t] %c{1.}.%M(%L): %m%n%throwable" />
+         <Policies>
+            <!-- rollover on startup, daily and when the file reaches 10 MegaBytes -->
+            <OnStartupTriggeringPolicy />
+            <SizeBasedTriggeringPolicy size="10 MB" />
+            <TimeBasedTriggeringPolicy />
+         </Policies>
+      </RollingFile>
    </Appenders>
 
    <Loggers>
@@ -21,6 +25,7 @@
       <!-- Application log -->
       <Logger name="com.bernardomg.example" level="debug" additivity="false">
          <AppenderRef ref="console" />
+         <AppenderRef ref="file" />
       </Logger>
 
       <Root level="error">
