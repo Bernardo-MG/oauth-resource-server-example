@@ -23,7 +23,7 @@
  */
 
 /**
- * Controller classes.
+ * Model classes.
  */
 
-package com.bernardomg.example.spring.security.ws.oauth.resource.entity.adapter.outbound.controller;
+package com.bernardomg.example.spring.security.ws.oauth.resource.entity.adapter.inbound.jpa.model;

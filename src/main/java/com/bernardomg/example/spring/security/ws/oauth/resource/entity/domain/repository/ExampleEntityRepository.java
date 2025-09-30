@@ -22,38 +22,22 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.spring.security.ws.oauth.resource.entity.usecase.service;
+package com.bernardomg.example.spring.security.ws.oauth.resource.entity.domain.repository;
 
 import java.util.Collection;
 
-import org.springframework.stereotype.Service;
-
 import com.bernardomg.example.spring.security.ws.oauth.resource.entity.domain.model.ExampleEntity;
-import com.bernardomg.example.spring.security.ws.oauth.resource.entity.domain.repository.ExampleEntityRepository;
 
 /**
- * Default implementation of the example entity service.
+ * Entity repository
  *
  * @author Bernardo Mart&iacute;nez Garrido
- *
  */
-@Service
-public class DefaultExampleEntityService implements ExampleEntityService {
+public interface ExampleEntityRepository {
 
     /**
-     * Repository for the domain entities handled by the service.
+     * Returns all entities.
      */
-    private final ExampleEntityRepository entityRepository;
-
-    public DefaultExampleEntityService(final ExampleEntityRepository repository) {
-        super();
-
-        entityRepository = repository;
-    }
-
-    @Override
-    public final Collection<ExampleEntity> getAllEntities() {
-        return entityRepository.findAll();
-    }
+    public Collection<ExampleEntity> findAll();
 
 }

@@ -22,32 +22,8 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.spring.security.ws.oauth.resource.entity.adapter.inbound.repository;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.bernardomg.example.spring.security.ws.oauth.resource.entity.domain.model.PersistentExampleEntity;
-
 /**
- * Spring-JPA repository for {@link PersistentExampleEntity}.
- * <p>
- * This is a simple repository just to allow the endpoints querying the entities they are asked for.
- *
- * @author Bernardo Mart&iacute;nez Garrido
+ * Controller classes.
  */
-public interface ExampleEntityRepository extends JpaRepository<PersistentExampleEntity, Integer> {
 
-    /**
-     * Returns all entities with a partial match to the name.
-     *
-     * @param name
-     *            name for searching
-     * @param page
-     *            pagination to apply
-     * @return all entities at least partially matching the name
-     */
-    public Page<PersistentExampleEntity> findByNameContaining(final String name, final Pageable page);
-
-}
+package com.bernardomg.example.spring.security.ws.oauth.resource.entity.adapter.outbound.rest.controller;

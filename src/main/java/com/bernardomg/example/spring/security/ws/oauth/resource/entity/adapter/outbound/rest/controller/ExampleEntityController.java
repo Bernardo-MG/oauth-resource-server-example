@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.spring.security.ws.oauth.resource.entity.adapter.outbound.controller;
+package com.bernardomg.example.spring.security.ws.oauth.resource.entity.adapter.outbound.rest.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

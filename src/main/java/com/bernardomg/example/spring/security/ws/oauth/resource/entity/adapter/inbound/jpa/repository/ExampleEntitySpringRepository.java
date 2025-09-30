@@ -22,38 +22,32 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.spring.security.ws.oauth.resource.entity.usecase.service;
+package com.bernardomg.example.spring.security.ws.oauth.resource.entity.adapter.inbound.jpa.repository;
 
-import java.util.Collection;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import org.springframework.stereotype.Service;
-
-import com.bernardomg.example.spring.security.ws.oauth.resource.entity.domain.model.ExampleEntity;
-import com.bernardomg.example.spring.security.ws.oauth.resource.entity.domain.repository.ExampleEntityRepository;
+import com.bernardomg.example.spring.security.ws.oauth.resource.entity.adapter.inbound.jpa.model.PersistentExampleEntity;
 
 /**
- * Default implementation of the example entity service.
+ * Spring-JPA repository for {@link PersistentExampleEntity}.
+ * <p>
+ * This is a simple repository just to allow the endpoints querying the entities they are asked for.
  *
  * @author Bernardo Mart&iacute;nez Garrido
- *
  */
-@Service
-public class DefaultExampleEntityService implements ExampleEntityService {
+public interface ExampleEntitySpringRepository extends JpaRepository<PersistentExampleEntity, Integer> {
 
     /**
-     * Repository for the domain entities handled by the service.
+     * Returns all entities with a partial match to the name.
+     *
+     * @param name
+     *            name for searching
+     * @param page
+     *            pagination to apply
+     * @return all entities at least partially matching the name
      */
-    private final ExampleEntityRepository entityRepository;
-
-    public DefaultExampleEntityService(final ExampleEntityRepository repository) {
-        super();
-
-        entityRepository = repository;
-    }
-
-    @Override
-    public final Collection<ExampleEntity> getAllEntities() {
-        return entityRepository.findAll();
-    }
+    public Page<PersistentExampleEntity> findByNameContaining(final String name, final Pageable page);
 
 }

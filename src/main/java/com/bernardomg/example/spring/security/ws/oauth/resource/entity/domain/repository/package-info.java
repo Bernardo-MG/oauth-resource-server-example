@@ -21,11 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /**
- * Repositories.
- * <p>
- * Similar to a DAO, a repository is a pattern which allows handling the persistence layer as if it was a collection,
- * where entities are stored and read from.
+ * Domain repository.
  */
 
-package com.bernardomg.example.spring.security.ws.oauth.resource.entity.adapter.inbound.repository;
+package com.bernardomg.example.spring.security.ws.oauth.resource.entity.domain.repository;

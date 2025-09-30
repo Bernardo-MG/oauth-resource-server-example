@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package com.bernardomg.example.spring.security.ws.oauth.resource.entity.domain.model;
+package com.bernardomg.example.spring.security.ws.oauth.resource.entity.adapter.inbound.jpa.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,7 +41,7 @@ import jakarta.persistence.Transient;
  */
 @Entity(name = "ExampleEntity")
 @Table(name = "example_entities")
-public class PersistentExampleEntity implements ExampleEntity {
+public class PersistentExampleEntity {
 
     /**
      * Serialization ID.
@@ -65,22 +65,18 @@ public class PersistentExampleEntity implements ExampleEntity {
     @Column(name = "name", nullable = false, unique = true)
     private String            name             = "";
 
-    @Override
     public Integer getId() {
         return id;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public void setId(final Integer id) {
         this.id = id;
     }
 
-    @Override
     public void setName(final String name) {
         this.name = name;
     }

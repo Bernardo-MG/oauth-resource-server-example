@@ -21,39 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package com.bernardomg.example.spring.security.ws.oauth.resource.entity.usecase.service;
-
-import java.util.Collection;
-
-import org.springframework.stereotype.Service;
-
-import com.bernardomg.example.spring.security.ws.oauth.resource.entity.domain.model.ExampleEntity;
-import com.bernardomg.example.spring.security.ws.oauth.resource.entity.domain.repository.ExampleEntityRepository;
-
 /**
- * Default implementation of the example entity service.
- *
- * @author Bernardo Mart&iacute;nez Garrido
- *
+ * Repositories.
+ * <p>
+ * Similar to a DAO, a repository is a pattern which allows handling the persistence layer as if it was a collection,
+ * where entities are stored and read from.
  */
-@Service
-public class DefaultExampleEntityService implements ExampleEntityService {
 
-    /**
-     * Repository for the domain entities handled by the service.
-     */
-    private final ExampleEntityRepository entityRepository;
-
-    public DefaultExampleEntityService(final ExampleEntityRepository repository) {
-        super();
-
-        entityRepository = repository;
-    }
-
-    @Override
-    public final Collection<ExampleEntity> getAllEntities() {
-        return entityRepository.findAll();
-    }
-
-}
+package com.bernardomg.example.spring.security.ws.oauth.resource.entity.adapter.inbound.jpa.repository;

@@ -24,6 +24,8 @@
 
 package com.bernardomg.example.spring.security.ws.oauth.resource.entity.usecase.service;
 
+import java.util.Collection;
+
 import com.bernardomg.example.spring.security.ws.oauth.resource.entity.domain.model.ExampleEntity;
 
 /**
@@ -40,6 +42,6 @@ public interface ExampleEntityService {
      *
      * @return the persisted entities
      */
-    public Iterable<? extends ExampleEntity> getAllEntities();
+    public Collection<ExampleEntity> getAllEntities();
 
 }
