@@ -1,7 +1,7 @@
 version: '3'
 services:
     auth-server:
-        image: quay.io/keycloak/keycloak:22.0.1
+        image: quay.io/keycloak/keycloak:26.3
         container_name: oauth2-auth-server
         volumes:
           - ./imports:/opt/keycloak/data/import/
