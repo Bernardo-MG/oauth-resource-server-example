@@ -26,12 +26,6 @@ To make things easier import `src/test/resources/resource_server.postman_collect
 
 Note that this web service requires secure tokens. The Postman requests includes an authenticated one, which takes care of this.
 
-[![Release docs](https://img.shields.io/badge/docs-release-blue.svg)][site-release]
-[![Development docs](https://img.shields.io/badge/docs-develop-blue.svg)][site-develop]
-
-[![Release javadocs](https://img.shields.io/badge/javadocs-release-blue.svg)][javadoc-release]
-[![Development javadocs](https://img.shields.io/badge/javadocs-develop-blue.svg)][javadoc-develop]
-
 ## Features
 
 - [Spring MVC](https://spring.io/)
