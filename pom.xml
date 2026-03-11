@@ -125,15 +125,9 @@
       <!-- ============================================== -->
       <!-- =========== DEPENDENCIES VERSIONS ============ -->
       <!-- ============================================== -->
-<<<<<<< HEAD
       <keycloak.version>26.0.8</keycloak.version>
       <spring.boot.version>3.5.11</spring.boot.version>
       <spring.version>6.2.16</spring.version>
-=======
-      <keycloak.version>26.0.6</keycloak.version>
-      <spring.boot.version>3.5.6</spring.boot.version>
-      <spring.version>6.2.11</spring.version>
->>>>>>> refs/heads/master
       <!-- ============================================== -->
       <!-- ============== PLUGINS VERSIONS ============== -->
       <!-- ============================================== -->
