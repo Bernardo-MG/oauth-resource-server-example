@@ -28,6 +28,8 @@ import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
 import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,6 +53,11 @@ import com.bernardomg.example.spring.security.ws.oauth.resource.security.user.us
 public class SecurityConfig {
 
     /**
+     * Class logger.
+     */
+    private static final Logger log = LoggerFactory.getLogger(SecurityConfig.class);
+
+    /**
      * Default constructor.
      */
     public SecurityConfig() {
@@ -66,6 +73,14 @@ public class SecurityConfig {
      */
     @Bean("adminKeycloak")
     public Keycloak getAdminKeycloak(final OauthProperties properties) {
+        log.info("Admin Keycloak client connected to realm {} at {} using user {} and client {}", properties.admin()
+            .realm(),
+            properties.server()
+                .url(),
+            properties.admin()
+                .username(),
+            properties.admin()
+                .clientId());
         return KeycloakBuilder.builder()
             .serverUrl(properties.server()
                 .url())
