@@ -75,6 +75,9 @@ public class WebSecurityConfig {
                 .requestMatchers(PathPatternRequestMatcher.withDefaults()
                     .matcher(HttpMethod.GET, "/entity/**"))
                 .hasAuthority("read")
+                .requestMatchers(PathPatternRequestMatcher.withDefaults()
+                    .matcher(HttpMethod.GET, "/user/**"))
+                .hasAuthority("read")
                 // Sets authority required for POST requests
                 .requestMatchers(PathPatternRequestMatcher.withDefaults()
                     .matcher(HttpMethod.POST, "/entity/**"))
