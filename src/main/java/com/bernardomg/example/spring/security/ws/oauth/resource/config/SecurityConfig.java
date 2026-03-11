@@ -24,6 +24,10 @@
 
 package com.bernardomg.example.spring.security.ws.oauth.resource.config;
 
+import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
+import org.keycloak.OAuth2Constants;
+import org.keycloak.admin.client.Keycloak;
+import org.keycloak.admin.client.KeycloakBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -54,15 +58,43 @@ public class SecurityConfig {
     }
 
     /**
-     * Returns the user repository.
+     * Returns the admin keycloak client.
      *
      * @param properties
      *            OAuth configuration properties
      * @return the user repository
      */
+    @Bean("adminKeycloak")
+    public Keycloak getAdminKeycloak(final OauthProperties properties) {
+        return KeycloakBuilder.builder()
+            .serverUrl(properties.server()
+                .url())
+            .grantType(OAuth2Constants.PASSWORD)
+            .realm(properties.admin()
+                .realm())
+            .username(properties.admin()
+                .username())
+            .password(properties.admin()
+                .password())
+            .clientId(properties.admin()
+                .clientId())
+            .resteasyClient(new ResteasyClientBuilderImpl().connectionPoolSize(10)
+                .build())
+            .build();
+    }
+
+    /**
+     * Returns the user repository.
+     *
+     * @param keycloak
+     *            Keycloak client
+     * @param properties
+     *            OAuth configuration properties
+     * @return the user repository
+     */
     @Bean("userRepository")
-    public UserRepository getUserRepository(final OauthProperties properties) {
-        return new KeycloakUserRepository(properties);
+    public UserRepository getUserRepository(final Keycloak keycloak, final OauthProperties properties) {
+        return new KeycloakUserRepository(keycloak, properties.realm());
     }
 
     /**
